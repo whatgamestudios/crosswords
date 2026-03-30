@@ -46,14 +46,36 @@ namespace CrossWords {
 
         void Start()
         {
-            int gameDay = (int)Timeline.GameDay();
+            uint gameDay = Timeline.GameDay();
+            AuditLog.Log($"Game Play screen for day {gameDay}");
             string targetWord = TargetWords.GetTargetWord(gameDay);
             if (board != null)
                 board.SetTargetWord(targetWord);
 
             WireLetterButtons();
             DisableLetterButtonsForTargetWord(targetWord);
+
+            //startANewDay(gameDay);
+            setGameState(gameDay);
+            //await PassportLogin.InitAndLogin();
         }
+        
+        public void OnDisable()
+        {
+            GameState.Instance().SetPlayerState(GameState.PlayerState.Unknown);
+        }
+
+        private void setGameState(uint todaysGameDay) {
+            GameState gameState = GameState.Instance();
+            gameState.SetGameDayBeingPlayed(todaysGameDay);
+            //gameState.SetPointsEarnedTotal(pointsEarnedTotalToday());
+            if (gameState.IsPlayerStateUnknown())
+            {
+                gameState.SetPlayerState(GameState.PlayerState.Playing);
+            }
+        }
+
+
 
         void WireLetterButtons()
         {

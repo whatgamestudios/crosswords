@@ -14,9 +14,9 @@ namespace CrossWords {
             "IMAGE",
         };
 
-        public static string GetTargetWord(int gameDay)
+        public static string GetTargetWord(uint gameDay)
         {
-            int i = gameDay % Words.Length;
+            long i = gameDay % Words.Length;
             if (i < 0)
                 i += Words.Length;
 
