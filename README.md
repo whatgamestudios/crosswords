@@ -1,2 +1,3 @@
-# crosswords
-Word game codenames CrossWords
+# Worcadian 
+
+Worcadian is a daily play word game.
