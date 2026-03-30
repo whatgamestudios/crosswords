@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ namespace CrossWords {
     public class GamePlayScene : MonoBehaviour
     {
         [SerializeField] Board board;
+
+        public TextMeshProUGUI timeToNext;
+        public TextMeshProUGUI gameDay;
 
         public Button ButtonA;
         public Button ButtonB;
@@ -237,6 +241,9 @@ namespace CrossWords {
 
         void Update()
         {
+            gameDay.text = Timeline.GameDayStr();
+            timeToNext.text = Timeline.TimeToNextDayStr();
+
             if (board != null)
                 board.UpdateBoard();
         }
