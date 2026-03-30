@@ -1,0 +1,410 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class Board : MonoBehaviour
+{
+    public const int BOARD_SIZE = 11;
+
+    static readonly Color CellNormalColor = new Color(0.96f, 0.96f, 0.94f, 1f);
+    static readonly Color CellSelectedColor = new Color(0.28f, 0.28f, 0.28f, 1f);
+    static readonly Color CellBorderColor = Color.black;
+    const float CellBorderPx = 2f;
+    const float GridSpacingPx = 0f;
+
+    const float BorderWidthScreenPx = 5f;
+    const string BorderChildName = "BoardBorder";
+    const string FillChildName = "BoardFill";
+    const string GridChildName = "BoardGrid";
+
+    readonly char[,] _characters = new char[BOARD_SIZE, BOARD_SIZE];
+    CellView[,] _cellViews;
+
+    Image _borderImage;
+    Image _fillImage;
+    RectTransform _gridRect;
+    GridLayoutGroup _gridLayout;
+
+    int? _selectedX;
+    int? _selectedY;
+
+    RectTransform PanelRect => (RectTransform)transform;
+
+    void Awake()
+    {
+        EnsureClipMask();
+        EnsureBorderGraphic();
+        EnsureFillGraphic();
+        EnsureGrid();
+    }
+
+    void Start()
+    {
+        RefreshGridCellSizes();
+        SyncAllCellLabels();
+    }
+
+    void OnRectTransformDimensionsChange()
+    {
+        ApplyFillLayout();
+        RefreshGridCellSizes();
+    }
+
+    void EnsureClipMask()
+    {
+        if (GetComponent<RectMask2D>() == null)
+            gameObject.AddComponent<RectMask2D>();
+    }
+
+    void EnsureBorderGraphic()
+    {
+        Transform existing = transform.Find(BorderChildName);
+        GameObject borderGo;
+        if (existing != null)
+        {
+            borderGo = existing.gameObject;
+            _borderImage = borderGo.GetComponent<Image>();
+            if (_borderImage == null)
+                _borderImage = borderGo.AddComponent<Image>();
+        }
+        else
+        {
+            borderGo = new GameObject(BorderChildName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            borderGo.transform.SetParent(transform, false);
+            _borderImage = borderGo.GetComponent<Image>();
+        }
+
+        _borderImage.sprite = UiSpriteUtility.WhiteSprite;
+        _borderImage.type = Image.Type.Simple;
+        _borderImage.color = Color.black;
+
+        var borderRect = borderGo.GetComponent<RectTransform>();
+        borderRect.anchorMin = Vector2.zero;
+        borderRect.anchorMax = Vector2.one;
+        borderRect.offsetMin = Vector2.zero;
+        borderRect.offsetMax = Vector2.zero;
+        borderRect.pivot = new Vector2(0.5f, 0.5f);
+        borderRect.anchoredPosition = Vector2.zero;
+        borderRect.localScale = Vector3.one;
+
+        borderGo.transform.SetSiblingIndex(0);
+    }
+
+    void EnsureFillGraphic()
+    {
+        Transform existing = transform.Find(FillChildName);
+        GameObject fillGo;
+        if (existing != null)
+        {
+            fillGo = existing.gameObject;
+            _fillImage = fillGo.GetComponent<Image>();
+            if (_fillImage == null)
+                _fillImage = fillGo.AddComponent<Image>();
+        }
+        else
+        {
+            fillGo = new GameObject(FillChildName, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            fillGo.transform.SetParent(transform, false);
+            _fillImage = fillGo.GetComponent<Image>();
+        }
+
+        _fillImage.sprite = UiSpriteUtility.WhiteSprite;
+        _fillImage.type = Image.Type.Simple;
+        _fillImage.color = Color.white;
+
+        var fillRect = fillGo.GetComponent<RectTransform>();
+        fillRect.pivot = new Vector2(0.5f, 0.5f);
+        fillRect.anchoredPosition = Vector2.zero;
+        fillRect.localScale = Vector3.one;
+
+        fillGo.transform.SetSiblingIndex(1);
+        ApplyFillLayout();
+    }
+
+    void EnsureGrid()
+    {
+        if (_fillImage == null || _fillImage.transform.Find(GridChildName) != null)
+            return;
+
+        var gridGo = new GameObject(GridChildName, typeof(RectTransform));
+        gridGo.transform.SetParent(_fillImage.transform, false);
+        _gridRect = gridGo.GetComponent<RectTransform>();
+        _gridRect.anchorMin = Vector2.zero;
+        _gridRect.anchorMax = Vector2.one;
+        _gridRect.offsetMin = Vector2.zero;
+        _gridRect.offsetMax = Vector2.zero;
+        _gridRect.pivot = new Vector2(0.5f, 0.5f);
+        _gridRect.localScale = Vector3.one;
+
+        _gridLayout = gridGo.AddComponent<GridLayoutGroup>();
+        _gridLayout.childAlignment = TextAnchor.MiddleCenter;
+        _gridLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+        _gridLayout.startAxis = GridLayoutGroup.Axis.Horizontal;
+        //_gridLayout.childControlWidth = true;
+        //_gridLayout.childControlHeight = true;
+        //_gridLayout.childForceExpandWidth = true;
+        //_gridLayout.childForceExpandHeight = true;
+        _gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        _gridLayout.constraintCount = BOARD_SIZE;
+        _gridLayout.spacing = new Vector2(GridSpacingPx, GridSpacingPx);
+
+        _cellViews = new CellView[BOARD_SIZE, BOARD_SIZE];
+        var font = UiFontUtility.DefaultUIFont;
+
+        for (int y = 0; y < BOARD_SIZE; y++)
+        {
+            for (int x = 0; x < BOARD_SIZE; x++)
+            {
+                _cellViews[y, x] = CellView.Create(this, _gridRect, x, y, font);
+            }
+        }
+
+        gridGo.transform.SetAsLastSibling();
+    }
+
+    void RefreshGridCellSizes()
+    {
+        if (_gridLayout == null || _fillImage == null)
+            return;
+
+        Rect r = _fillImage.rectTransform.rect;
+        float spacing = GridSpacingPx;
+        float innerW = Mathf.Max(0f, r.width - spacing * (BOARD_SIZE - 1));
+        float innerH = Mathf.Max(0f, r.height - spacing * (BOARD_SIZE - 1));
+        float cw = innerW / BOARD_SIZE;
+        float ch = innerH / BOARD_SIZE;
+        _gridLayout.cellSize = new Vector2(cw, ch);
+    }
+
+    void ApplyFillLayout()
+    {
+        if (_fillImage == null)
+            return;
+
+        float inset = ComputeBorderInset();
+        var fillRect = _fillImage.rectTransform;
+        fillRect.anchorMin = Vector2.zero;
+        fillRect.anchorMax = Vector2.one;
+        fillRect.offsetMin = new Vector2(inset, inset);
+        fillRect.offsetMax = new Vector2(-inset, -inset);
+    }
+
+    float ComputeBorderInset()
+    {
+        float sx = transform.lossyScale.x;
+        if (sx < 1e-4f)
+            sx = 1f;
+        float inset = BorderWidthScreenPx / sx;
+
+        float w = PanelRect.rect.width;
+        float h = PanelRect.rect.height;
+        if (w > 1e-4f && h > 1e-4f)
+        {
+            float half = Mathf.Min(w, h) * 0.5f;
+            float maxInset = Mathf.Max(0f, half - 0.5f);
+            inset = Mathf.Min(inset, maxInset);
+        }
+
+        return Mathf.Max(0f, inset);
+    }
+
+    void SyncAllCellLabels()
+    {
+        if (_cellViews == null)
+            return;
+        for (int y = 0; y < BOARD_SIZE; y++)
+        {
+            for (int x = 0; x < BOARD_SIZE; x++)
+                _cellViews[y, x].SetDisplayedCharacter(_characters[y, x]);
+        }
+    }
+
+    internal void OnCellPointerDown(int x, int y)
+    {
+        if (IsCellOccupied(x, y))
+            return;
+
+        if (_selectedX.HasValue && _selectedY.HasValue)
+            _cellViews[_selectedY.Value, _selectedX.Value].SetBackgroundColor(CellNormalColor);
+
+        _selectedX = x;
+        _selectedY = y;
+        _cellViews[y, x].SetBackgroundColor(CellSelectedColor);
+    }
+
+    /// <summary>
+    /// Sets the character at grid position (x, y): x is column (0 = left), y is row (0 = top).
+    /// </summary>
+    public void SetCell(int x, int y, char value)
+    {
+        if ((uint)x >= BOARD_SIZE || (uint)y >= BOARD_SIZE)
+            return;
+
+        _characters[y, x] = value;
+        if (_cellViews != null)
+        {
+            _cellViews[y, x].SetDisplayedCharacter(value);
+
+            if (IsCellOccupied(x, y))
+            {
+                _cellViews[y, x].SetBackgroundColor(CellNormalColor);
+                if (_selectedX.HasValue && _selectedY.HasValue &&
+                    _selectedX.Value == x && _selectedY.Value == y)
+                {
+                    _selectedX = null;
+                    _selectedY = null;
+                }
+            }
+        }
+    }
+
+    static bool IsEmptyChar(char c) => c == '\0' || char.IsWhiteSpace(c);
+
+    bool IsCellOccupied(int x, int y)
+    {
+        return !IsEmptyChar(_characters[y, x]);
+    }
+
+    public char GetCell(int x, int y)
+    {
+        if ((uint)x >= BOARD_SIZE || (uint)y >= BOARD_SIZE)
+            return '\0';
+        return _characters[y, x];
+    }
+
+    public bool TryGetSelectedCell(out int x, out int y)
+    {
+        if (!_selectedX.HasValue || !_selectedY.HasValue)
+        {
+            x = 0;
+            y = 0;
+            return false;
+        }
+
+        x = _selectedX.Value;
+        y = _selectedY.Value;
+        return true;
+    }
+
+    public void UpdateBoard()
+    {
+    }
+
+    sealed class CellView : MonoBehaviour, IPointerDownHandler
+    {
+        Board _board;
+        int _gx;
+        int _gy;
+        Image _innerImage;
+        Text _text;
+
+        public static CellView Create(Board board, RectTransform gridParent, int x, int y, Font font)
+        {
+            var root = new GameObject($"Cell_{x}_{y}", typeof(RectTransform));
+            root.transform.SetParent(gridParent, false);
+
+            var borderImg = root.AddComponent<Image>();
+            borderImg.sprite = UiSpriteUtility.WhiteSprite;
+            borderImg.type = Image.Type.Simple;
+            borderImg.color = CellBorderColor;
+            borderImg.raycastTarget = true;
+
+            var outer = root.GetComponent<RectTransform>();
+
+            var innerGo = new GameObject("Inner", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            innerGo.transform.SetParent(root.transform, false);
+            var innerRt = innerGo.GetComponent<RectTransform>();
+            var innerImg = innerGo.GetComponent<Image>();
+            innerImg.sprite = UiSpriteUtility.WhiteSprite;
+            innerImg.type = Image.Type.Simple;
+            innerImg.color = CellNormalColor;
+            innerImg.raycastTarget = false;
+
+            float inset = CellBorderPx;
+            innerRt.anchorMin = Vector2.zero;
+            innerRt.anchorMax = Vector2.one;
+            innerRt.offsetMin = new Vector2(inset, inset);
+            innerRt.offsetMax = new Vector2(-inset, -inset);
+
+            var textGo = new GameObject("Char", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+            textGo.transform.SetParent(innerGo.transform, false);
+            var textRt = textGo.GetComponent<RectTransform>();
+            textRt.anchorMin = Vector2.zero;
+            textRt.anchorMax = Vector2.one;
+            textRt.offsetMin = Vector2.zero;
+            textRt.offsetMax = Vector2.zero;
+
+            var text = textGo.GetComponent<Text>();
+            text.font = font;
+            text.fontStyle = FontStyle.Bold;
+            text.resizeTextForBestFit = true;
+            text.resizeTextMinSize = 8;
+            text.resizeTextMaxSize = 64;
+            text.alignment = TextAnchor.MiddleCenter;
+            text.color = Color.black;
+            text.raycastTarget = false;
+
+            var cell = root.AddComponent<CellView>();
+            cell._board = board;
+            cell._gx = x;
+            cell._gy = y;
+            cell._innerImage = innerImg;
+            cell._text = text;
+            return cell;
+        }
+
+        public void SetDisplayedCharacter(char c)
+        {
+            _text.text = (c == '\0' || char.IsWhiteSpace(c)) ? string.Empty : c.ToString();
+        }
+
+        public void SetBackgroundColor(Color c)
+        {
+            _innerImage.color = c;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            _board.OnCellPointerDown(_gx, _gy);
+        }
+    }
+}
+
+static class UiSpriteUtility
+{
+    static Sprite _whiteSprite;
+
+    public static Sprite WhiteSprite
+    {
+        get
+        {
+            if (_whiteSprite == null)
+            {
+                var tex = Texture2D.whiteTexture;
+                _whiteSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100f, 0u, SpriteMeshType.FullRect);
+            }
+            return _whiteSprite;
+        }
+    }
+}
+
+static class UiFontUtility
+{
+    static Font _uiFont;
+
+    public static Font DefaultUIFont
+    {
+        get
+        {
+            if (_uiFont == null)
+            {
+                _uiFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+                if (_uiFont == null)
+                    _uiFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
+                if (_uiFont == null)
+                    _uiFont = Font.CreateDynamicFontFromOSFont("Arial", 24);
+            }
+            return _uiFont;
+        }
+    }
+}
