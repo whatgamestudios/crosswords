@@ -339,7 +339,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394979}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FourteenNumbers.PublishManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -1936,7 +1936,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -2069,7 +2069,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -2202,7 +2202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -2746,7 +2746,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -3016,7 +3016,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -4127,7 +4127,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -4534,7 +4534,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -5157,7 +5157,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -5290,7 +5290,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -5560,7 +5560,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394977}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BackButtonHandler, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -5693,7 +5693,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -6020,10 +6020,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
-        m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 5
+      - m_Target: {fileID: 2063394986}
+        m_TargetAssemblyTypeName: CrossWords.GamePlayScene, Assembly-CSharp
+        m_MethodName: OnClearButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6153,7 +6153,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -6286,7 +6286,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -6419,7 +6419,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -6689,7 +6689,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -7016,10 +7016,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
-        m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 5
+      - m_Target: {fileID: 2063394986}
+        m_TargetAssemblyTypeName: CrossWords.GamePlayScene, Assembly-CSharp
+        m_MethodName: OnBackSpaceButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7264,7 +7264,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -7534,7 +7534,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -7667,7 +7667,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -7800,7 +7800,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -8070,7 +8070,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394978}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FourteenNumbers.ShareManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -8203,7 +8203,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -8473,7 +8473,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -8606,7 +8606,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -9424,7 +9424,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2063394972}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Calculator, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
@@ -9835,16 +9835,6 @@ GameObject:
   - component: {fileID: 2063394971}
   - component: {fileID: 2063394974}
   - component: {fileID: 2063394973}
-  - component: {fileID: 2063394972}
-  - component: {fileID: 2063394976}
-  - component: {fileID: 2063394977}
-  - component: {fileID: 2063394978}
-  - component: {fileID: 2063394979}
-  - component: {fileID: 2063394980}
-  - component: {fileID: 2063394982}
-  - component: {fileID: 2063394983}
-  - component: {fileID: 2063394984}
-  - component: {fileID: 2063394985}
   - component: {fileID: 2063394986}
   m_Layer: 5
   m_Name: Panel
@@ -9880,18 +9870,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 2340}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2063394972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3344918166080501959, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
-  m_PrefabInstance: {fileID: 7602608789065407866}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87fb747428628445faedd5a1ad21a690, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2063394973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9930,114 +9908,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063394970}
   m_CullTransparentMesh: 1
---- !u!114 &2063394976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6dc630fa3e94478b35e4710103eb94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80ae247f79d2467e87c55e65aa4cf7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 058d574a9b2fe44d0b94cd1acb37ccca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0118351a85368485b80144e6d6e1553b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eac884a428584e36bc65af6e1cc9661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92364c9aafa234359ad1e4c2039c8190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 739a41dd2ac104292b2af072a344db42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bce720abde654226b2d2a0981750dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2063394985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e37059ae3d53474393ee15d24d14594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2063394986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10051,6 +9921,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1153342601}
+  ButtonA: {fileID: 1302877216}
+  ButtonB: {fileID: 17738734}
+  ButtonC: {fileID: 1259110711}
+  ButtonD: {fileID: 1619058578}
+  ButtonE: {fileID: 1970435113}
+  ButtonF: {fileID: 1769253006}
+  ButtonG: {fileID: 790531923}
+  ButtonH: {fileID: 365607689}
+  ButtonI: {fileID: 1547877904}
+  ButtonJ: {fileID: 1701123649}
+  ButtonK: {fileID: 359933254}
+  ButtonL: {fileID: 1244756584}
+  ButtonM: {fileID: 151915567}
+  ButtonN: {fileID: 844889092}
+  ButtonO: {fileID: 530390089}
+  ButtonP: {fileID: 505725021}
+  ButtonQ: {fileID: 1024584816}
+  ButtonR: {fileID: 1106210583}
+  ButtonS: {fileID: 1491566164}
+  ButtonT: {fileID: 364580788}
+  ButtonU: {fileID: 1043779446}
+  ButtonV: {fileID: 259657901}
+  ButtonW: {fileID: 640101442}
+  ButtonX: {fileID: 1256890313}
+  ButtonY: {fileID: 1739501315}
+  ButtonZ: {fileID: 1550615258}
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0
@@ -11168,15 +11064,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4071500912932679642, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4071500912932679642, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnButtonClick
+      value: OnBackSpaceButton
       objectReference: {fileID: 0}
     - target: {fileID: 4071500912932679642, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Calculator, Assembly-CSharp
+      value: CrossWords.GamePlayScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4071500912932679642, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -11392,15 +11288,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4880400420739093781, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4880400420739093781, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnButtonClick
+      value: OnClearButton
       objectReference: {fileID: 0}
     - target: {fileID: 4880400420739093781, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Calculator, Assembly-CSharp
+      value: CrossWords.GamePlayScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4880400420739093781, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -12210,7 +12106,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 600
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects:
     - {fileID: 0}
     - {fileID: 0}
