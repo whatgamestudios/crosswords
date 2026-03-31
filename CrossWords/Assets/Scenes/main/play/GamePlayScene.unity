@@ -9921,6 +9921,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1153342601}
+  TimeToNextText: {fileID: 126005948}
+  GameDayText: {fileID: 1297501372}
+  ScoreText: {fileID: 2081586893}
   ButtonA: {fileID: 1302877216}
   ButtonB: {fileID: 17738734}
   ButtonC: {fileID: 1259110711}

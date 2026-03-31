@@ -1,7 +1,10 @@
 namespace CrossWords {
 
-    public class TargetWords
+    public class StarterWords
     {
+        public const int STARTER_WORD_LENGTH = 5;
+
+
         static readonly string[] Words =
         {
             "MOUSE",
@@ -14,7 +17,7 @@ namespace CrossWords {
             "IMAGE",
         };
 
-        public static string GetTargetWord(uint gameDay)
+        public static string GetStarterWord(uint gameDay)
         {
             long i = gameDay % Words.Length;
             if (i < 0)

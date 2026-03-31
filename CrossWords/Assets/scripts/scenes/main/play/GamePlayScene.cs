@@ -10,8 +10,10 @@ namespace CrossWords {
     {
         [SerializeField] Board board;
 
-        public TextMeshProUGUI timeToNext;
-        public TextMeshProUGUI gameDay;
+        public TextMeshProUGUI TimeToNextText;
+        public TextMeshProUGUI GameDayText;
+
+        public TextMeshProUGUI ScoreText;
 
         public Button ButtonA;
         public Button ButtonB;
@@ -52,12 +54,12 @@ namespace CrossWords {
         {
             uint gameDay = Timeline.GameDay();
             AuditLog.Log($"Game Play screen for day {gameDay}");
-            string targetWord = TargetWords.GetTargetWord(gameDay);
+            string starterWord = StarterWords.GetStarterWord(gameDay);
             if (board != null)
-                board.SetTargetWord(targetWord);
+                board.SetStarterWord(starterWord);
 
             WireLetterButtons();
-            DisableLetterButtonsForTargetWord(targetWord);
+            DisableLetterButtonsForStarterWord(starterWord);
 
             //startANewDay(gameDay);
             setGameState(gameDay);
@@ -100,7 +102,7 @@ namespace CrossWords {
             }
         }
 
-        void DisableLetterButtonsForTargetWord(string word)
+        void DisableLetterButtonsForStarterWord(string word)
         {
             if (string.IsNullOrEmpty(word))
                 return;
@@ -136,9 +138,38 @@ namespace CrossWords {
             board.SetCell(x, y, letter);
             _moveStack.Add(letter, x, y);
             button.interactable = false;
+
+            analyseBoardAndUpdateScore();
         }
 
         public void OnBackSpaceButton()
+        {
+            backSpaceButtonInner();
+            analyseBoardAndUpdateScore();
+        }
+
+
+        public void OnClearButton()
+        {
+            int size = _moveStack.Count;
+            for (int i = 0; i < size; i++)
+            {
+                backSpaceButtonInner();
+            }
+            analyseBoardAndUpdateScore();
+        }        
+
+        void Update()
+        {
+            GameDayText.text = Timeline.GameDayStr();
+            TimeToNextText.text = Timeline.TimeToNextDayStr();
+
+            if (board != null)
+                board.UpdateBoard();
+        }
+
+
+        void backSpaceButtonInner()
         {
             bool successful = _moveStack.TryRemoveTop(out MoveEntry entry);
             if (successful)
@@ -226,26 +257,20 @@ namespace CrossWords {
                 }
                 board.ResetCell(entry.X, entry.Y);
             }
-
         }
 
-
-        public void OnClearButton()
+        void analyseBoardAndUpdateScore()
         {
-            int size = _moveStack.Count;
-            for (int i = 0; i < size; i++)
-            {
-                OnBackSpaceButton();
-            }
-        }        
-
-        void Update()
-        {
-            gameDay.text = Timeline.GameDayStr();
-            timeToNext.text = Timeline.TimeToNextDayStr();
-
-            if (board != null)
-                board.UpdateBoard();
+            List<WordOnBoard> words = AnalyseBoard.Analyse(board);
+            // AuditLog.Log("Words:");
+            // foreach (WordOnBoard word in words)
+            // {
+            //     AuditLog.Log(word.Word);
+            // }
+            int score = ScoreCalculator.Score(words);
+            ScoreText.text = score.ToString();
         }
+
     }
+
 }

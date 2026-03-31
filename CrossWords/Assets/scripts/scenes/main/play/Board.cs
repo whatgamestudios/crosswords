@@ -11,9 +11,9 @@ namespace CrossWords {
         static readonly Color CellNormalColor = new Color(0.96f, 0.96f, 0.94f, 1f);
         static readonly Color CellSelectedColor = new Color(0.28f, 0.28f, 0.28f, 1f);
         static readonly Color CellBorderColor = Color.black;
-        static readonly Color TargetCellInnerColor = Color.black;
-        static readonly Color TargetCellBorderColor = Color.white;
-        static readonly Color TargetCellTextColor = Color.white;
+        static readonly Color StarterCellInnerColor = Color.black;
+        static readonly Color StarterCellBorderColor = Color.white;
+        static readonly Color StarterCellTextColor = Color.white;
         const float CellBorderPx = 3f;
         const float GridSpacingPx = 0f;
 
@@ -23,7 +23,7 @@ namespace CrossWords {
         const string GridChildName = "BoardGrid";
 
         readonly char[,] _characters = new char[BOARD_SIZE, BOARD_SIZE];
-        readonly bool[,] _isTargetCell = new bool[BOARD_SIZE, BOARD_SIZE];
+        readonly bool[,] _isStarterCell = new bool[BOARD_SIZE, BOARD_SIZE];
         CellView[,] _cellViews;
 
         Image _borderImage;
@@ -223,8 +223,8 @@ namespace CrossWords {
                 for (int x = 0; x < BOARD_SIZE; x++)
                 {
                     _cellViews[y, x].SetDisplayedCharacter(_characters[y, x]);
-                    if (_isTargetCell[y, x])
-                        _cellViews[y, x].SetTargetWordAppearance();
+                    if (_isStarterCell[y, x])
+                        _cellViews[y, x].SetStarterWordAppearance();
                     else
                         _cellViews[y, x].SetNormalAppearance();
                 }
@@ -283,7 +283,7 @@ namespace CrossWords {
 
         static bool IsEmptyChar(char c) => c == '\0' || char.IsWhiteSpace(c);
 
-        bool IsCellOccupied(int x, int y)
+        public bool IsCellOccupied(int x, int y)
         {
             return !IsEmptyChar(_characters[y, x]);
         }
@@ -346,15 +346,15 @@ namespace CrossWords {
         }
 
         /// <summary>
-        /// Places the target word horizontally on the middle row, centered. Target cells use a black fill,
+        /// Places the starter word horizontally on the middle row, centered. Starter cells use a black fill,
         /// white text, and white grid borders.
         /// </summary>
-        public void SetTargetWord(string word)
+        public void SetStarterWord(string word)
         {
             if (_cellViews == null || string.IsNullOrEmpty(word))
                 return;
 
-            ClearTargetWordCells();
+            ClearStarterWordCells();
 
             word = word.Trim().ToUpperInvariant();
             int n = word.Length;
@@ -372,22 +372,22 @@ namespace CrossWords {
                     continue;
 
                 _characters[row, x] = c;
-                _isTargetCell[row, x] = true;
+                _isStarterCell[row, x] = true;
                 _cellViews[row, x].SetDisplayedCharacter(c);
-                _cellViews[row, x].SetTargetWordAppearance();
+                _cellViews[row, x].SetStarterWordAppearance();
             }
         }
 
-        void ClearTargetWordCells()
+        void ClearStarterWordCells()
         {
             for (int y = 0; y < BOARD_SIZE; y++)
             {
                 for (int x = 0; x < BOARD_SIZE; x++)
                 {
-                    if (!_isTargetCell[y, x])
+                    if (!_isStarterCell[y, x])
                         continue;
 
-                    _isTargetCell[y, x] = false;
+                    _isStarterCell[y, x] = false;
                     _characters[y, x] = '\0';
                     _cellViews[y, x].SetDisplayedCharacter('\0');
                     _cellViews[y, x].SetNormalAppearance();
@@ -395,15 +395,15 @@ namespace CrossWords {
             }
         }
 
-        internal bool IsTargetCell(int x, int y)
+        internal bool IsStarterCell(int x, int y)
         {
-            return _isTargetCell[y, x];
+            return _isStarterCell[y, x];
         }
 
         void RestoreCellVisual(int x, int y)
         {
-            if (_isTargetCell[y, x])
-                _cellViews[y, x].SetTargetWordAppearance();
+            if (_isStarterCell[y, x])
+                _cellViews[y, x].SetStarterWordAppearance();
             else
                 _cellViews[y, x].SetNormalAppearance();
         }
@@ -478,7 +478,7 @@ namespace CrossWords {
             public void SetDisplayedCharacter(char c)
             {
                 _text.text = (c == '\0' || char.IsWhiteSpace(c)) ? string.Empty : c.ToString();
-                _text.color = _board.IsTargetCell(_gx, _gy) ? TargetCellTextColor : Color.black;
+                _text.color = _board.IsStarterCell(_gx, _gy) ? StarterCellTextColor : Color.black;
             }
 
             public void SetBackgroundColor(Color c)
@@ -493,11 +493,11 @@ namespace CrossWords {
                 _text.color = Color.black;
             }
 
-            public void SetTargetWordAppearance()
+            public void SetStarterWordAppearance()
             {
-                _borderImage.color = TargetCellBorderColor;
-                _innerImage.color = TargetCellInnerColor;
-                _text.color = TargetCellTextColor;
+                _borderImage.color = StarterCellBorderColor;
+                _innerImage.color = StarterCellInnerColor;
+                _text.color = StarterCellTextColor;
             }
 
             public void OnPointerDown(PointerEventData eventData)
