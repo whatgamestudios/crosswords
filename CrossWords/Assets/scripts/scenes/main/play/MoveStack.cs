@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CrossWords {
@@ -24,6 +25,7 @@ namespace CrossWords {
         public void Add(char letter, int x, int y)
         {
             _stack.Push(new MoveEntry(letter, x, y));
+            StoreToStorage();
         }
 
         public bool TryRemoveTop(out MoveEntry entry)
@@ -35,6 +37,7 @@ namespace CrossWords {
             }
 
             entry = _stack.Pop();
+            StoreToStorage();
             return true;
         }
 
@@ -42,7 +45,47 @@ namespace CrossWords {
         {
             if (_stack.Count == 0)
                 return null;
-            return _stack.Pop();
+            MoveEntry? maybe = _stack.Pop();
+            StoreToStorage();
+            return maybe;
         }
+
+        public void LoadFromStorage()
+        {
+            _stack.Clear();
+
+            int size = 5;
+            string serialised = MoveStackStore.Load();
+            int len = serialised.Length / size;
+            for (int i = 0; i < len; i++)
+            {
+                int startOfs = i * size;
+                string xS = serialised.Substring(startOfs, 2);
+                string yS = serialised.Substring(startOfs + 2, 2);
+                string cS = serialised.Substring(startOfs + 4, 1);
+                int x = Int32.Parse(xS);
+                int y = Int32.Parse(yS);
+                char c = cS[0];
+                Add(c, x, y);              
+            }
+        }
+
+        private void StoreToStorage()
+        {
+            string all = "";
+            foreach (var item in _stack)
+            {
+                string s = String.Format("{0,2}{1,2}{1}", item.X, item.Y, item.Letter);
+                all += s;               
+            }
+            MoveStackStore.Store(all);
+        }
+
+        public void Clear()
+        {
+            _stack.Clear();
+            StoreToStorage();
+        }
+
     }
 }

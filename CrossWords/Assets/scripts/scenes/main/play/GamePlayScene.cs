@@ -8,7 +8,7 @@ namespace CrossWords {
 
     public class GamePlayScene : MonoBehaviour
     {
-        [SerializeField] Board board;
+        Board board;
 
         public TextMeshProUGUI TimeToNextText;
         public TextMeshProUGUI GameDayText;
@@ -54,12 +54,35 @@ namespace CrossWords {
         {
             uint gameDay = Timeline.GameDay();
             AuditLog.Log($"Game Play screen for day {gameDay}");
-            string starterWord = StarterWords.GetStarterWord(gameDay);
-            if (board != null)
-                board.SetStarterWord(starterWord);
+            uint lastPlayedGameDay = Stats.GetLastGameDay();
+            if (lastPlayedGameDay != gameDay)
+            {
+                AuditLog.Log($"Last game day {lastPlayedGameDay}");
+                string starterWord = StarterWords.GetStarterWord(gameDay);
+                if (board != null)
+                {
+                    board.ResetAllCells();
+                    board.SetStarterWord(starterWord);
+                }        
+                _moveStack.Clear();        
+            }
+            else
+            {
+                (bool exists, Solution sol) = Stats.GetSolution(gameDay);
+                if (!exists)
+                {
+                    AuditLog.Log($"Solution for today does not exist {gameDay}");
+                }
+                else
+                {
+                    board.SetCells(sol.BoardString);
+                    analyseBoardAndUpdateScore();
+                    _moveStack.LoadFromStorage();        
+                }
+            }
 
             WireLetterButtons();
-            DisableLetterButtonsForStarterWord(starterWord);
+            DisableLetterButtonsForUsedLetters();
 
             //startANewDay(gameDay);
             setGameState(gameDay);
@@ -102,31 +125,27 @@ namespace CrossWords {
             }
         }
 
-        void DisableLetterButtonsForStarterWord(string word)
+        void DisableLetterButtonsForUsedLetters()
         {
-            if (string.IsNullOrEmpty(word))
+            if (board == null)
                 return;
 
-            var letters = new HashSet<char>();
-            foreach (char c in word.ToUpperInvariant())
-            {
-                if (c >= 'A' && c <= 'Z')
-                    letters.Add(c);
-            }
-
-            if (letters.Count == 0)
-                return;
+            string letters = board.GetAllLetters();
 
             var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;
                 if (n.Length != 4 || !n.StartsWith("But", StringComparison.Ordinal))
+                {
                     continue;
+                }
 
                 char c = n[3];
                 if (c >= 'A' && c <= 'Z' && letters.Contains(c))
+                {
                     button.interactable = false;
+                }
             }
         }
 
@@ -267,8 +286,12 @@ namespace CrossWords {
             // {
             //     AuditLog.Log(word.Word);
             // }
-            int score = ScoreCalculator.Score(words);
+            uint score = ScoreCalculator.Score(words);
             ScoreText.text = score.ToString();
+
+            string b = board.GetCells();
+            uint gameDay = Timeline.GameDay();
+            Stats.SetCurrent(gameDay, score, b);
         }
 
     }

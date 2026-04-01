@@ -276,10 +276,34 @@ namespace CrossWords {
             }
         }
 
+        public void SetCells(string all)
+        {
+            int i = 0;
+            for (int x = 0; x < BOARD_SIZE; x++)
+            {
+                for (int y = 0; y < BOARD_SIZE; y++)
+                {
+                    SetCell(x, y, all[i++]);
+                }
+            }
+        }
+
         public void ResetCell(int x, int y)
         {
             SetCell(x, y, '\0');
         }
+
+        public void ResetAllCells()
+        {
+            for (int yy = 0; yy < BOARD_SIZE; yy++)
+            {
+                for (int xx = 0; xx < BOARD_SIZE; xx++)
+                {
+                    SetCell(xx, yy, '\0');
+                }
+            }
+        }
+
 
         static bool IsEmptyChar(char c) => c == '\0' || char.IsWhiteSpace(c);
 
@@ -294,14 +318,14 @@ namespace CrossWords {
                 return false;
 
             // If the board has no characters at all yet, allow selection anywhere.
-            if (!HasAnyCharacterOnBoard())
+            // if (!HasAnyCharacterOnBoard())
                 return true;
 
             // 4-neighborhood adjacency (up/down/left/right).
-            return IsNeighborOccupied(x - 1, y) ||
-                IsNeighborOccupied(x + 1, y) ||
-                IsNeighborOccupied(x, y - 1) ||
-                IsNeighborOccupied(x, y + 1);
+            // return IsNeighborOccupied(x - 1, y) ||
+            //     IsNeighborOccupied(x + 1, y) ||
+            //     IsNeighborOccupied(x, y - 1) ||
+            //     IsNeighborOccupied(x, y + 1);
         }
 
         bool HasAnyCharacterOnBoard()
@@ -329,6 +353,39 @@ namespace CrossWords {
             if ((uint)x >= BOARD_SIZE || (uint)y >= BOARD_SIZE)
                 return '\0';
             return _characters[y, x];
+        }
+
+        public string GetAllLetters()
+        {
+            string s = "";
+            for (int y = 0; y < BOARD_SIZE; y++)
+            {
+                for (int x = 0; x < BOARD_SIZE; x++)
+                {
+                    char c = _characters[y, x];
+                    if (c != '\0')
+                    {
+                        s += c;
+                    }
+                }
+            }
+            return s;
+        }
+
+
+        public string GetCells()
+        {
+            string s = "";
+            for (int x = 0; x < BOARD_SIZE; x++)
+            {
+                for (int y = 0; y < BOARD_SIZE; y++)
+                {
+                    char c = _characters[y, x];
+                    c = (c == '\0') ? ' ' : c;
+                    s += c;
+                }
+            }
+            return s;
         }
 
         public bool TryGetSelectedCell(out int x, out int y)
