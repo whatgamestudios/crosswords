@@ -58,13 +58,14 @@ namespace CrossWords {
             if (lastPlayedGameDay != gameDay)
             {
                 AuditLog.Log($"Last game day {lastPlayedGameDay}");
-                string starterWord = StarterWords.GetStarterWord(gameDay);
+                string starterWord = WordListTarget.GetTargetWord(gameDay);
+                AuditLog.Log($"Loaded word: {starterWord}");
                 if (board != null)
                 {
                     board.ResetAllCells();
                     board.SetStarterWord(starterWord);
                 }        
-                _moveStack.Clear();        
+                _moveStack.Clear();      
             }
             else
             {
@@ -280,14 +281,44 @@ namespace CrossWords {
 
         void analyseBoardAndUpdateScore()
         {
+            AuditLog.Log("analyseBoardAndUpdateScore 1");
+
             List<WordOnBoard> words = AnalyseBoard.Analyse(board);
-            // AuditLog.Log("Words:");
-            // foreach (WordOnBoard word in words)
-            // {
-            //     AuditLog.Log(word.Word);
-            // }
-            uint score = ScoreCalculator.Score(words);
-            ScoreText.text = score.ToString();
+            AuditLog.Log("Words:");
+            foreach (WordOnBoard word in words)
+            {
+                AuditLog.Log(word.Word);
+            }
+
+            AuditLog.Log("analyseBoardAndUpdateScore 2");
+            uint score = 26;
+            WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
+            if (wordListDictionary == null)
+            {
+                AuditLog.Log("ERROR: No dictionary");
+                ScoreText.text = "?";
+            }
+            else if (!wordListDictionary.DictionaryLoaded)
+            {
+                AuditLog.Log("ERROR: Dictionary not loaded");
+                ScoreText.text = "?";
+            }
+            else
+            {
+                AuditLog.Log("analyseBoardAndUpdateScore 3");
+                bool[] inDictionary = new bool[100];
+                int i = 0;
+                foreach (WordOnBoard word in words)
+                {
+                    bool inDic = wordListDictionary.IsInDictionary(word.Word);
+                    AuditLog.Log($"Words: {word.Word} in dic: {inDic}");
+                    inDictionary[i++] = inDic;
+                }
+                AuditLog.Log("analyseBoardAndUpdateScore 4");
+                score = ScoreCalculator.Score(inDictionary, words);
+                AuditLog.Log("analyseBoardAndUpdateScore 5");
+                ScoreText.text = score.ToString();
+            }
 
             string b = board.GetCells();
             uint gameDay = Timeline.GameDay();

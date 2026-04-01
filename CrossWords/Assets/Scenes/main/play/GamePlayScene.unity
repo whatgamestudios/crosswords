@@ -9837,6 +9837,7 @@ GameObject:
   - component: {fileID: 2063394973}
   - component: {fileID: 2063394986}
   - component: {fileID: 2063394987}
+  - component: {fileID: 2063394988}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -9921,8 +9922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5e3b2c0d1e5f9ab8c7d6e5f4021222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 1153342601}
-  perceivedGameDay: 0
   TimeToNextText: {fileID: 126005948}
   GameDayText: {fileID: 1297501372}
   ScoreText: {fileID: 2081586893}
@@ -9964,6 +9963,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a788a21060cf7451d8d9b98acc9e0989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandler
+--- !u!114 &2063394988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordLists
+  dictionaryFile: {fileID: 4900000, guid: f1998c163d70c49c8bf2e98e583bc4cb, type: 3}
+  DictionaryLoaded: 0
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0
