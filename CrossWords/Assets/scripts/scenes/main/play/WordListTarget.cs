@@ -7,6 +7,8 @@ namespace CrossWords {
 
     public class WordListTarget
     {
+        public const int STARTER_WORD_LENGTH = 5;
+
         private static string[] targetWords = {
             "gipsy",
             "piles",

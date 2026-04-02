@@ -36,7 +36,7 @@ namespace CrossWords {
     public class AnalyseBoard
     {
         const int BOARD_SIZE = Board.BOARD_SIZE;
-        const int STARTER_WORD_LENGTH = StarterWords.STARTER_WORD_LENGTH;
+        const int STARTER_WORD_LENGTH = WordListTarget.STARTER_WORD_LENGTH;
 
         Board _board;
 

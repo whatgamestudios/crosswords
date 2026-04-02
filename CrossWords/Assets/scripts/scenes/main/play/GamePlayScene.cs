@@ -44,6 +44,8 @@ namespace CrossWords {
 
         readonly MoveStack _moveStack = new MoveStack();
 
+        private bool dictionaryLoaded = false;
+
         void Awake()
         {
             if (board == null)
@@ -85,11 +87,22 @@ namespace CrossWords {
 
             setGameState(gameDay);
             //await PassportLogin.InitAndLogin();
+
+            Invoke("DelayedScoreUpdate", 0.1f);
         }
         
         public void OnDisable()
         {
             GameState.Instance().SetPlayerState(GameState.PlayerState.Unknown);
+        }
+
+        void DelayedScoreUpdate()
+        {
+            if (!dictionaryLoaded)
+            {
+                analyseBoardAndUpdateScore();
+                Invoke("DelayedScoreUpdate", 0.1f);
+            }
         }
 
         private void setGameState(uint todaysGameDay) {
@@ -305,7 +318,8 @@ namespace CrossWords {
             }
             else
             {
-                AuditLog.Log("analyseBoardAndUpdateScore 3");
+                dictionaryLoaded = true;
+
                 bool[] inDictionary = new bool[100];
                 int i = 0;
                 foreach (WordOnBoard word in words)
@@ -314,9 +328,7 @@ namespace CrossWords {
                     AuditLog.Log($"Words: {word.Word} in dic: {inDic}");
                     inDictionary[i++] = inDic;
                 }
-                AuditLog.Log("analyseBoardAndUpdateScore 4");
                 score = ScoreCalculator.Score(inDictionary, words);
-                AuditLog.Log("analyseBoardAndUpdateScore 5");
                 ScoreText.text = score.ToString();
             }
 
