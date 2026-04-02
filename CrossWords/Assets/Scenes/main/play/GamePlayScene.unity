@@ -6796,6 +6796,113 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1350489528
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2828561447831063263, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_Name
+      value: NativeShare
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 659.5212
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 191.98337
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828561447831063265, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2828561447831063263, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350489532}
+    - targetCorrespondingSourceObject: {fileID: 2828561447831063263, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350489531}
+    - targetCorrespondingSourceObject: {fileID: 2828561447831063263, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350489530}
+  m_SourcePrefab: {fileID: 100100000, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+--- !u!1 &1350489529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2828561447831063263, guid: 2294b3615060447a7a59dcc2a036c75f, type: 3}
+  m_PrefabInstance: {fileID: 1350489528}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1350489530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350489529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da710d5f17844b54fbec94fb4d3c1325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::SunShineNativeShare
+--- !u!114 &1350489531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350489529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712d2989da16449dbbcef00aa305cc1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::IosShare
+--- !u!114 &1350489532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350489529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7b2767eaeda4be4bbe99197e549491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::AndroidShare
 --- !u!1 &1410871669
 GameObject:
   m_ObjectHideFlags: 0
@@ -8070,8 +8177,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FourteenNumbers.ShareManager, Assembly-CSharp
+      - m_Target: {fileID: 2063394989}
+        m_TargetAssemblyTypeName: CrossWords.ShareManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -9838,6 +9945,7 @@ GameObject:
   - component: {fileID: 2063394986}
   - component: {fileID: 2063394987}
   - component: {fileID: 2063394988}
+  - component: {fileID: 2063394989}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -9925,32 +10033,6 @@ MonoBehaviour:
   TimeToNextText: {fileID: 126005948}
   GameDayText: {fileID: 1297501372}
   ScoreText: {fileID: 2081586893}
-  ButtonA: {fileID: 1302877216}
-  ButtonB: {fileID: 17738734}
-  ButtonC: {fileID: 1259110711}
-  ButtonD: {fileID: 1619058578}
-  ButtonE: {fileID: 1970435113}
-  ButtonF: {fileID: 1769253006}
-  ButtonG: {fileID: 790531923}
-  ButtonH: {fileID: 365607689}
-  ButtonI: {fileID: 1547877904}
-  ButtonJ: {fileID: 1701123649}
-  ButtonK: {fileID: 359933254}
-  ButtonL: {fileID: 1244756584}
-  ButtonM: {fileID: 151915567}
-  ButtonN: {fileID: 844889092}
-  ButtonO: {fileID: 530390089}
-  ButtonP: {fileID: 505725021}
-  ButtonQ: {fileID: 1024584816}
-  ButtonR: {fileID: 1106210583}
-  ButtonS: {fileID: 1491566164}
-  ButtonT: {fileID: 364580788}
-  ButtonU: {fileID: 1043779446}
-  ButtonV: {fileID: 259657901}
-  ButtonW: {fileID: 640101442}
-  ButtonX: {fileID: 1256890313}
-  ButtonY: {fileID: 1739501315}
-  ButtonZ: {fileID: 1550615258}
 --- !u!114 &2063394987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9977,6 +10059,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordLists
   dictionaryFile: {fileID: 4900000, guid: f1998c163d70c49c8bf2e98e583bc4cb, type: 3}
   DictionaryLoaded: 0
+--- !u!114 &2063394989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09a2b697962d475a948c6b3569e9f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ShareManager
+  panelShare: {fileID: 0}
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0
@@ -12156,3 +12251,4 @@ SceneRoots:
   - {fileID: 187544566}
   - {fileID: 1467518739}
   - {fileID: 1312922856}
+  - {fileID: 1350489528}

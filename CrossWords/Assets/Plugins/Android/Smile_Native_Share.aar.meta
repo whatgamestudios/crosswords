@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: 6950fb3e5651e40a18e0423f11a7a5a8
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+  - first:
+      Android: Android
+    second:
+      enabled: 1
+      settings: {}
+  - first:
+      Any: 
+    second:
+      enabled: 0
+      settings: {}
+  - first:
+      Editor: Editor
+    second:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 127249
+  packageName: Native Share For Android And iOS
+  packageVersion: 3.0
+  assetPath: Assets/Plugins/Android/Smile_Native_Share.aar
+  uploadId: 725019
