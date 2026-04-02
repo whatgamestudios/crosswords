@@ -57,7 +57,7 @@ namespace CrossWords {
             int size = 5;
             string serialised = MoveStackStore.Load();
             int len = serialised.Length / size;
-            for (int i = 0; i < len; i++)
+            for (int i = len - 1; i >= 0; i--)
             {
                 int startOfs = i * size;
                 string xS = serialised.Substring(startOfs, 2);

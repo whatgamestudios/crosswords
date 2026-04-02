@@ -16,14 +16,6 @@ namespace CrossWords {
         public TextMeshProUGUI lastDayPlayedText;
         public TextMeshProUGUI lastDatePlayedText;
 
-        public TextMeshProUGUI silverText;
-        public TextMeshProUGUI silverLongestText;
-        public TextMeshProUGUI goldText;
-        public TextMeshProUGUI goldLongestText;
-        public TextMeshProUGUI diamondText;
-        public TextMeshProUGUI diamondLongestText;
-        public TextMeshProUGUI blueDiamondText;
-        public TextMeshProUGUI blueDiamondLongestText;
 
         private string help = "" +
             "Streaks are sequential days played.";
@@ -60,23 +52,6 @@ namespace CrossWords {
             firstDatePlayedText.text = firstPlayedS;
             lastDayPlayedText.text = lastPlayed.ToString();
             lastDatePlayedText.text = lastPlayedS;
-
-
-            int silverLen;
-            int goldLen;
-            int diamondLen;
-            int bdiamondLen;
-            (silverLen, goldLen, diamondLen, bdiamondLen) = Stats.GetStreaksLengths();
-            silverText.text = silverLen.ToString();
-            goldText.text = goldLen.ToString();
-            diamondText.text = diamondLen.ToString();
-            blueDiamondText.text = bdiamondLen.ToString();
-
-            (silverLen, goldLen, diamondLen, bdiamondLen) = Stats.GetLongestStreaksLengths();
-            silverLongestText.text = silverLen.ToString();
-            goldLongestText.text = goldLen.ToString();
-            diamondLongestText.text = diamondLen.ToString();
-            blueDiamondLongestText.text = bdiamondLen.ToString();
         }
 
         public void OnButtonClick(string buttonText) {

@@ -15,33 +15,6 @@ namespace CrossWords {
 
         public TextMeshProUGUI ScoreText;
 
-        public Button ButtonA;
-        public Button ButtonB;
-        public Button ButtonC;
-        public Button ButtonD;
-        public Button ButtonE;
-        public Button ButtonF;
-        public Button ButtonG;
-        public Button ButtonH;
-        public Button ButtonI;
-        public Button ButtonJ;
-        public Button ButtonK;
-        public Button ButtonL;
-        public Button ButtonM;
-        public Button ButtonN;
-        public Button ButtonO;
-        public Button ButtonP;
-        public Button ButtonQ;
-        public Button ButtonR;
-        public Button ButtonS;
-        public Button ButtonT;
-        public Button ButtonU;
-        public Button ButtonV;
-        public Button ButtonW;
-        public Button ButtonX;
-        public Button ButtonY;
-        public Button ButtonZ;
-
         readonly MoveStack _moveStack = new MoveStack();
 
         private bool dictionaryLoaded = false;
@@ -69,7 +42,7 @@ namespace CrossWords {
             }
             else
             {
-                (bool exists, Solution sol) = Stats.GetSolution(gameDay);
+                (bool exists, Solution sol) = Stats.GetCurrent();
                 if (!exists)
                 {
                     AuditLog.Log($"Solution for today does not exist {gameDay}");
@@ -78,7 +51,10 @@ namespace CrossWords {
                 else
                 {
                     AuditLog.Log($"Loaded today's solution: {sol.BoardString}");
+                    board.ResetAllCells();
                     board.SetCells(sol.BoardString);
+                    string starterWord = WordListTarget.GetTargetWord(gameDay);
+                    board.SetStarterWord(starterWord);
                     analyseBoardAndUpdateScore();
                     _moveStack.LoadFromStorage();        
                     DisableLetterButtonsForUsedLetters();
@@ -141,7 +117,7 @@ namespace CrossWords {
             if (board == null)
                 return;
 
-            string letters = board.GetAllLetters();
+            string letters = board.GetCells();
 
             var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (var button in buttons)
@@ -153,9 +129,9 @@ namespace CrossWords {
                 }
 
                 char c = n[3];
-                if (c >= 'A' && c <= 'Z' && letters.Contains(c))
+                if (c >= 'A' && c <= 'Z')
                 {
-                    button.interactable = false;
+                    button.interactable = (letters.Contains(c) == false);
                 }
             }
         }
@@ -177,90 +153,10 @@ namespace CrossWords {
             bool successful = _moveStack.TryRemoveTop(out MoveEntry entry);
             if (successful)
             {
-                switch(entry.Letter)
-                {
-                    case 'A': 
-                        ButtonA.interactable = true;
-                        break;
-                    case 'B': 
-                        ButtonB.interactable = true;
-                        break;
-                    case 'C': 
-                        ButtonC.interactable = true;
-                        break;
-                    case 'D': 
-                        ButtonD.interactable = true;
-                        break;
-                    case 'E': 
-                        ButtonE.interactable = true;
-                        break;
-                    case 'F': 
-                        ButtonF.interactable = true;
-                        break;
-                    case 'G': 
-                        ButtonG.interactable = true;
-                        break;
-                    case 'H': 
-                        ButtonH.interactable = true;
-                        break;
-                    case 'I': 
-                        ButtonI.interactable = true;
-                        break;
-                    case 'J': 
-                        ButtonJ.interactable = true;
-                        break;
-                    case 'K': 
-                        ButtonK.interactable = true;
-                        break;
-                    case 'L': 
-                        ButtonL.interactable = true;
-                        break;
-                    case 'M': 
-                        ButtonM.interactable = true;
-                        break;
-                    case 'N': 
-                        ButtonN.interactable = true;
-                        break;
-                    case 'O': 
-                        ButtonO.interactable = true;
-                        break;
-                    case 'P': 
-                        ButtonP.interactable = true;
-                        break;
-                    case 'Q': 
-                        ButtonQ.interactable = true;
-                        break;
-                    case 'R': 
-                        ButtonR.interactable = true;
-                        break;
-                    case 'S': 
-                        ButtonS.interactable = true;
-                        break;
-                    case 'T': 
-                        ButtonT.interactable = true;
-                        break;
-                    case 'U': 
-                        ButtonU.interactable = true;
-                        break;
-                    case 'V': 
-                        ButtonV.interactable = true;
-                        break;
-                    case 'W': 
-                        ButtonW.interactable = true;
-                        break;
-                    case 'X': 
-                        ButtonX.interactable = true;
-                        break;
-                    case 'Y': 
-                        ButtonY.interactable = true;
-                        break;
-                    case 'Z': 
-                        ButtonZ.interactable = true;
-                        break;
-                }
                 board.ResetCell(entry.X, entry.Y);
             }
             analyseBoardAndUpdateScore();
+            DisableLetterButtonsForUsedLetters();
         }
 
 
@@ -295,8 +191,6 @@ namespace CrossWords {
 
         void analyseBoardAndUpdateScore()
         {
-            AuditLog.Log("analyseBoardAndUpdateScore 1");
-
             List<WordOnBoard> words = AnalyseBoard.Analyse(board);
             // AuditLog.Log("Words:");
             // foreach (WordOnBoard word in words)

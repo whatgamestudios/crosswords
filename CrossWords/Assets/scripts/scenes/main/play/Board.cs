@@ -279,9 +279,9 @@ namespace CrossWords {
         public void SetCells(string all)
         {
             int i = 0;
-            for (int x = 0; x < BOARD_SIZE; x++)
+            for (int y = 0; y < BOARD_SIZE; y++)
             {
-                for (int y = 0; y < BOARD_SIZE; y++)
+                for (int x = 0; x < BOARD_SIZE; x++)
                 {
                     SetCell(x, y, all[i++]);
                 }
@@ -355,30 +355,12 @@ namespace CrossWords {
             return _characters[y, x];
         }
 
-        public string GetAllLetters()
+        public string GetCells()
         {
             string s = "";
             for (int y = 0; y < BOARD_SIZE; y++)
             {
                 for (int x = 0; x < BOARD_SIZE; x++)
-                {
-                    char c = _characters[y, x];
-                    if (c != '\0')
-                    {
-                        s += c;
-                    }
-                }
-            }
-            return s;
-        }
-
-
-        public string GetCells()
-        {
-            string s = "";
-            for (int x = 0; x < BOARD_SIZE; x++)
-            {
-                for (int y = 0; y < BOARD_SIZE; y++)
                 {
                     char c = _characters[y, x];
                     c = (c == '\0') ? ' ' : c;

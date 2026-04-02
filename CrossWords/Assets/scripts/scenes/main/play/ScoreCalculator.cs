@@ -15,9 +15,7 @@ namespace CrossWords {
 
             int i = 0;
             foreach (WordOnBoard word in words) {
-                AuditLog.Log("Score1");
                 bool inDic = inDictionary[i++];
-                AuditLog.Log("Score2");
                 string wordStr = word.Word;
                 foreach (char ch in wordStr.ToCharArray())
                 {
