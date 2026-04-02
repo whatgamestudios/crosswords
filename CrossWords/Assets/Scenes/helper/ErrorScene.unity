@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -342,9 +343,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 289835290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11001ca706fd34407ba69d9de34bab70, type: 3}
+  m_Script: {fileID: 11500000, guid: 356729455248547e0a3597b89b96fad8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ErrorScreen
   errorText: {fileID: 2110840354}
   countDownText: {fileID: 77394418}
 --- !u!1 &1911319765
@@ -544,6 +545,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

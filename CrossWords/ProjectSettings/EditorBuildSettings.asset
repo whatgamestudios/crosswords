@@ -47,6 +47,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/extended/CreditsScene.unity
     guid: fb725f409fc0041d3860ac32ddaad8d4
+  - enabled: 1
+    path: Assets/Scenes/extended/SocialsScene.unity
+    guid: 9c8b28ec0ce8e400abcde5b4a2675a23
+  - enabled: 1
+    path: Assets/Scenes/extended/DeleteScene.unity
+    guid: cfc5db6d27843413885dacc40f6dc637
+  - enabled: 1
+    path: Assets/Scenes/extended/PassportScene.unity
+    guid: 8a694e2161ab746a0b094c70ba875fea
+  - enabled: 1
+    path: Assets/Scenes/extended/SettingsScene.unity
+    guid: d6c775dbef30b4034b56bf779424aef9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

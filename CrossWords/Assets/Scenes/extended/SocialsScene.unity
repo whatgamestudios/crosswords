@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -389,7 +390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4966732595609684114, guid: e0d4c4b1d8a2b2043a13fb3e6f382f0d, type: 3}
+  m_Sprite: {fileID: 4966732595609684114, guid: 2d6ab86a8f2544e11beebb0d33a1aedb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -418,10 +419,8 @@ GameObject:
   - component: {fileID: 289835291}
   - component: {fileID: 289835294}
   - component: {fileID: 289835293}
+  - component: {fileID: 289835295}
   - component: {fileID: 289835296}
-  - component: {fileID: 289835298}
-  - component: {fileID: 289835299}
-  - component: {fileID: 289835300}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -492,6 +491,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289835290}
   m_CullTransparentMesh: 1
+--- !u!114 &289835295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6159c6129304909a0672e5f15d0b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SocialsScreen
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,46 +512,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 289835290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6dc630fa3e94478b35e4710103eb94, type: 3}
+  m_Script: {fileID: 11500000, guid: a788a21060cf7451d8d9b98acc9e0989, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 289835290}
---- !u!114 &289835298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61140d2e8e8a54025948ddba71c3bb4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &289835299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80ae247f79d2467e87c55e65aa4cf7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &289835300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92364c9aafa234359ad1e4c2039c8190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandler
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +644,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -678,6 +651,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &565246598
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,8 +813,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: FourteenNumbers.SocialsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835295}
+        m_TargetAssemblyTypeName: CrossWords.SocialsScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -871,7 +845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5609307360589900044, guid: 69fd00246e7054eb090d6cfef4773e23, type: 3}
+  m_Sprite: {fileID: 5609307360589900044, guid: ccd4f01d55e254ea59897f300fa60d53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -971,8 +945,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: FourteenNumbers.SocialsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835295}
+        m_TargetAssemblyTypeName: CrossWords.SocialsScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1003,7 +977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 956748916486620929, guid: 6a142579db1844d39b560417b1f01fd0, type: 3}
+  m_Sprite: {fileID: 956748916486620929, guid: 2bb987bda92a54a648890790e62d933a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1079,7 +1053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4966732595609684114, guid: e0d4c4b1d8a2b2043a13fb3e6f382f0d, type: 3}
+  m_Sprite: {fileID: 4966732595609684114, guid: 2d6ab86a8f2544e11beebb0d33a1aedb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1180,8 +1154,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835299}
-        m_TargetAssemblyTypeName: FourteenNumbers.BackButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 289835296}
+        m_TargetAssemblyTypeName: CrossWords.BackButtonHandler, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1312,8 +1286,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: FourteenNumbers.SocialsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835295}
+        m_TargetAssemblyTypeName: CrossWords.SocialsScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1344,7 +1318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1218207585581608364, guid: 749b8ae6a81414531bf548e32dab2cd5, type: 3}
+  m_Sprite: {fileID: -1218207585581608364, guid: df2fa2d7c47944c2abe1991cb0b1ef28, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1533,6 +1507,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1656,8 +1631,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: FourteenNumbers.SocialsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835295}
+        m_TargetAssemblyTypeName: CrossWords.SocialsScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1688,7 +1663,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5028736056862254494, guid: 89c7d9174d591499ea5ad5c22e33be54, type: 3}
+  m_Sprite: {fileID: 5028736056862254494, guid: a43be2605463b4d68a7a098060de1788, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

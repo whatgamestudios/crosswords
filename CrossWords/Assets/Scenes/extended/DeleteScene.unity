@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -267,9 +268,7 @@ GameObject:
   - component: {fileID: 289835294}
   - component: {fileID: 289835293}
   - component: {fileID: 289835296}
-  - component: {fileID: 289835299}
-  - component: {fileID: 289835300}
-  - component: {fileID: 289835301}
+  - component: {fileID: 289835295}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -338,6 +337,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289835290}
   m_CullTransparentMesh: 1
+--- !u!114 &289835295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf3882f6da584412a511eb67c24de05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.DeleteScreen
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,46 +358,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 289835290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6dc630fa3e94478b35e4710103eb94, type: 3}
+  m_Script: {fileID: 11500000, guid: a788a21060cf7451d8d9b98acc9e0989, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 289835290}
---- !u!114 &289835299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80ae247f79d2467e87c55e65aa4cf7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &289835300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92364c9aafa234359ad1e4c2039c8190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &289835301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 249129907d1164edb8f1f2d2846ccf21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FourteenNumbers.DeleteScreen
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandler
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 14Numbers uses the Immutable Passport Wallet to hold all account information.
+  m_text: Worcadian uses the Immutable Passport Wallet to hold all account information.
     Touch on the Delete Passport button below for information on how to delete your
     Passport account
   m_isRightToLeft: 0
@@ -700,6 +674,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -799,7 +774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4470007512457644711, guid: 120b0647913064888adc9a14cf517585, type: 3}
+  m_Sprite: {fileID: -4419518618567211912, guid: eb3bfc57c7129410d8d9c56c3ce99716, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -900,8 +875,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835299}
-        m_TargetAssemblyTypeName: FourteenNumbers.BackButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 289835296}
+        m_TargetAssemblyTypeName: CrossWords.BackButtonHandler, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1033,8 +1008,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835301}
-        m_TargetAssemblyTypeName: FourteenNumbers.DeleteScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835295}
+        m_TargetAssemblyTypeName: CrossWords.DeleteScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1178,6 +1153,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1429,6 +1405,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
