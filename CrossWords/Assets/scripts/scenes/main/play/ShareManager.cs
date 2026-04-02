@@ -39,6 +39,7 @@ namespace CrossWords {
                 uint gameDay = sol.GameDay;
                 uint score = sol.Score;
                 string board = sol.BoardString;
+                board = translate(board);
 
                 string msg =
                     "Worcadian\n" +
@@ -48,10 +49,6 @@ namespace CrossWords {
                     msg += board.Substring(i * Board.BOARD_SIZE, Board.BOARD_SIZE) + "\n";
                 }
                 msg += "Score: " + score;
-                AuditLog.Log("Share: \n" + msg);
-
-                msg = translate(msg);
-                AuditLog.Log("Share2: \n" + msg);
                 SunShineNativeShare.instance.ShareText(msg, msg);
             }
             else
