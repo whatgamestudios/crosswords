@@ -47,25 +47,23 @@ namespace CrossWords {
         void Awake()
         {
             if (board == null)
+            {
                 board = FindFirstObjectByType<Board>();
+            }
         }
 
         void Start()
         {
             uint gameDay = Timeline.GameDay();
             AuditLog.Log($"Game Play screen for day {gameDay}");
+
+            WireLetterButtons();
+
             uint lastPlayedGameDay = Stats.GetLastGameDay();
             if (lastPlayedGameDay != gameDay)
             {
                 AuditLog.Log($"Last game day {lastPlayedGameDay}");
-                string starterWord = WordListTarget.GetTargetWord(gameDay);
-                AuditLog.Log($"Loaded word: {starterWord}");
-                if (board != null)
-                {
-                    board.ResetAllCells();
-                    board.SetStarterWord(starterWord);
-                }        
-                _moveStack.Clear();      
+                resetBoard();
             }
             else
             {
@@ -73,19 +71,18 @@ namespace CrossWords {
                 if (!exists)
                 {
                     AuditLog.Log($"Solution for today does not exist {gameDay}");
+                    resetBoard();
                 }
                 else
                 {
+                    AuditLog.Log($"Loaded today's solution: {sol.BoardString}");
                     board.SetCells(sol.BoardString);
                     analyseBoardAndUpdateScore();
                     _moveStack.LoadFromStorage();        
+                    DisableLetterButtonsForUsedLetters();
                 }
             }
 
-            WireLetterButtons();
-            DisableLetterButtonsForUsedLetters();
-
-            //startANewDay(gameDay);
             setGameState(gameDay);
             //await PassportLogin.InitAndLogin();
         }
@@ -163,33 +160,6 @@ namespace CrossWords {
         }
 
         public void OnBackSpaceButton()
-        {
-            backSpaceButtonInner();
-            analyseBoardAndUpdateScore();
-        }
-
-
-        public void OnClearButton()
-        {
-            int size = _moveStack.Count;
-            for (int i = 0; i < size; i++)
-            {
-                backSpaceButtonInner();
-            }
-            analyseBoardAndUpdateScore();
-        }        
-
-        void Update()
-        {
-            GameDayText.text = Timeline.GameDayStr();
-            TimeToNextText.text = Timeline.TimeToNextDayStr();
-
-            if (board != null)
-                board.UpdateBoard();
-        }
-
-
-        void backSpaceButtonInner()
         {
             bool successful = _moveStack.TryRemoveTop(out MoveEntry entry);
             if (successful)
@@ -277,6 +247,37 @@ namespace CrossWords {
                 }
                 board.ResetCell(entry.X, entry.Y);
             }
+            analyseBoardAndUpdateScore();
+        }
+
+
+        public void OnClearButton()
+        {
+            resetBoard();
+        }        
+
+        void Update()
+        {
+            GameDayText.text = Timeline.GameDayStr();
+            TimeToNextText.text = Timeline.TimeToNextDayStr();
+
+            if (board != null)
+                board.UpdateBoard();
+        }
+
+        private void resetBoard()
+        {
+            uint gameDay = Timeline.GameDay();
+            string starterWord = WordListTarget.GetTargetWord(gameDay);
+            AuditLog.Log($"Loaded word: {starterWord}");
+            if (board != null)
+            {
+                board.ResetAllCells();
+                board.SetStarterWord(starterWord);
+            }        
+            _moveStack.Clear();                  
+            analyseBoardAndUpdateScore();
+            DisableLetterButtonsForUsedLetters();
         }
 
         void analyseBoardAndUpdateScore()
@@ -284,13 +285,12 @@ namespace CrossWords {
             AuditLog.Log("analyseBoardAndUpdateScore 1");
 
             List<WordOnBoard> words = AnalyseBoard.Analyse(board);
-            AuditLog.Log("Words:");
-            foreach (WordOnBoard word in words)
-            {
-                AuditLog.Log(word.Word);
-            }
+            // AuditLog.Log("Words:");
+            // foreach (WordOnBoard word in words)
+            // {
+            //     AuditLog.Log(word.Word);
+            // }
 
-            AuditLog.Log("analyseBoardAndUpdateScore 2");
             uint score = 26;
             WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
             if (wordListDictionary == null)

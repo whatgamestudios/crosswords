@@ -20,7 +20,7 @@ namespace CrossWords {
         }
 
         public static DateTime GetRelativeDate(int gameDay) {
-            DateTime dawnOfTime = new DateTime(2024, 12, 1, 0, 0, 0);
+            DateTime dawnOfTime = new DateTime(2026, 3, 30, 0, 0, 0);
             return dawnOfTime.AddDays((double) gameDay);
         }
 

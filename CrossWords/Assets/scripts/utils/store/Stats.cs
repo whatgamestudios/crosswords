@@ -220,9 +220,9 @@ namespace CrossWords
         //     return GetLastGameDay() == GetMostRecentDayPublished();
         // }
 
-        // public static int GetNumTimesPublished()
-        // {
-        //     return PlayerPrefs.GetInt(STATS_NUM_TIMES_PUBLISHED, 0);
-        // }
+        public static int GetNumTimesPublished()
+        {
+            return PlayerPrefs.GetInt(STATS_NUM_TIMES_PUBLISHED, 0);
+        }
     }    
 }
