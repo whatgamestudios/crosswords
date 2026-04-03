@@ -33,6 +33,7 @@ namespace CrossWords {
 
         int? _selectedX;
         int? _selectedY;
+        bool interactionBlocked = false;
 
         RectTransform PanelRect => (RectTransform)transform;
 
@@ -314,8 +315,15 @@ namespace CrossWords {
 
         bool CanSelectEmptyCell(int x, int y)
         {
-            if (IsCellOccupied(x, y))
+            if (interactionBlocked)
+            {
                 return false;
+            }
+
+            if (IsCellOccupied(x, y))
+            {
+                return false;
+            }
 
             // If the board has no characters at all yet, allow selection anywhere.
             // if (!HasAnyCharacterOnBoard())
@@ -326,6 +334,11 @@ namespace CrossWords {
             //     IsNeighborOccupied(x + 1, y) ||
             //     IsNeighborOccupied(x, y - 1) ||
             //     IsNeighborOccupied(x, y + 1);
+        }
+
+        public void BlockInteraction()
+        {
+            interactionBlocked = true;
         }
 
         bool HasAnyCharacterOnBoard()

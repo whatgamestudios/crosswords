@@ -20,40 +20,14 @@ namespace CrossWords {
         public Button buttonLeft;
         public Button buttonRight;
 
-        // Output
-        public TextMeshProUGUI targetText;
-
-        public TextMeshProUGUI bestInput1Text;
-        public TextMeshProUGUI bestCalculated1Text;
-        public TextMeshProUGUI bestPoints1Text;
-        public TextMeshProUGUI bestInput2Text;
-        public TextMeshProUGUI bestCalculated2Text;
-        public TextMeshProUGUI bestPoints2Text;
-        public TextMeshProUGUI bestInput3Text;
-        public TextMeshProUGUI bestCalculated3Text;
-        public TextMeshProUGUI bestPoints3Text;
-        public TextMeshProUGUI bestPointsTotalText;
-        public TextMeshProUGUI bestPlayerText;
-
-
-        public TextMeshProUGUI playerInput1Text;
-        public TextMeshProUGUI playerCalculated1Text;
-        public TextMeshProUGUI playerPoints1Text;
-        public TextMeshProUGUI playerInput2Text;
-        public TextMeshProUGUI playerCalculated2Text;
-        public TextMeshProUGUI playerPoints2Text;
-        public TextMeshProUGUI playerInput3Text;
-        public TextMeshProUGUI playerCalculated3Text;
-        public TextMeshProUGUI playerPoints3Text;
-        public TextMeshProUGUI playerPointsTotalText;
-
-
 
         private uint gameDayToday = 0;
 
         private uint gameDayDisplaying = 0;
 
         private int indexDisplaying = 0;
+
+        public TextMeshProUGUI mySolutionScoreText;
 
 //TODO        private GetAllSolutionsOutputDTO todaysResult = null;
 
@@ -118,7 +92,6 @@ namespace CrossWords {
 
             gameDateText.text = Timeline.GetRelativeDateString((int) gameDay);
 
-            targetText.text = "TODO";
             DisplayMyResult(gameDay);
 
             StartCoroutine(GetResultRoutine());
@@ -228,61 +201,20 @@ namespace CrossWords {
         }
 
         void DisplayMyResult(uint gameDay) {
+            MyBoard board = FindFirstObjectByType<MyBoard>();
 
-            // var combinedSolution = Stats.GetCombinedSolution(gameDay);
-            // string sol1 = "";
-            // string sol2 = "";
-            // string sol3 = "";
-            // if (combinedSolution.Length != 0) {
-            //     int indexOfEquals = combinedSolution.IndexOf('=');
-            //     sol1 = combinedSolution.Substring(0, indexOfEquals);
-            //     combinedSolution = combinedSolution.Substring(indexOfEquals+1);
-            //     indexOfEquals = combinedSolution.IndexOf('=');
-            //     sol2 = combinedSolution.Substring(0, indexOfEquals);
-            //     sol3 = combinedSolution.Substring(indexOfEquals+1);
-            // }
-
-            // playerInput1Text.text = replace(sol1, true);
-            // playerInput2Text.text = replace(sol2, true);
-            // playerInput3Text.text = replace(sol3, true);
-
-            // uint points1 = 0;
-            // uint points2 = 0;
-            // uint points3 = 0;
-            // CalcProcessor processor = new CalcProcessor();
-            // uint targetValue = TargetValue.GetTarget(gameDay);
-            // int errorCode;
-            // int res1 = 0;
-            // int res2 = 0;
-            // int res3 = 0;
-            // if (sol1.Length != 0) {
-            //     (res1, errorCode) = processor.Calc(sol1);
-            //     if (errorCode == CalcProcessor.ERR_NO_ERROR) {
-            //         points1 = Points.CalcPoints((uint) res1, targetValue);
-            //     }
-
-            // }
-            // if (sol2.Length != 0) {
-            //     (res2, errorCode) = processor.Calc(sol2);
-            //     if (errorCode == CalcProcessor.ERR_NO_ERROR) {
-            //         points2 = Points.CalcPoints((uint) res2, targetValue);
-            //     }
-            // }
-            // if (sol3.Length != 0) {
-            //     (res3, errorCode) = processor.Calc(sol3);
-            //     if (errorCode == CalcProcessor.ERR_NO_ERROR) {
-            //         points3 = Points.CalcPoints((uint) res3, targetValue);
-            //     }
-            // }
-            // playerCalculated1Text.text = res1.ToString();
-            // playerCalculated2Text.text = res2.ToString();
-            // playerCalculated3Text.text = res3.ToString();
-
-            // playerPoints1Text.text = points1.ToString();
-            // playerPoints2Text.text = points2.ToString();
-            // playerPoints3Text.text = points3.ToString();
-
-            // playerPointsTotalText.text = (points1 + points2 + points3).ToString();
+            board.ResetAllCells();
+            (bool exists, Solution sol) = Stats.GetSolution(gameDay);
+            uint score = 21;
+            if (exists)
+            {
+                board.SetCells(sol.BoardString);
+                score = sol.Score;
+            }
+            string starterWord = WordListTarget.GetTargetWord(gameDay);
+            board.SetStarterWord(starterWord);
+            board.BlockInteraction();
+            mySolutionScoreText.text = $"My Score: {score}";
         }
     }
 }
