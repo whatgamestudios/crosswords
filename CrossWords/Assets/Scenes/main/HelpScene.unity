@@ -855,7 +855,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Worcadian is a puzzle game. Everyone in the world is '
+  m_text: Worcadian is a puzzle game. Everyone in the world is trying to solve the
+    same puzzle each day. Starting with a seed word, create as many words as you
+    can using only the letters A to Z.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}
   m_sharedMaterial: {fileID: -1750055789576322554, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}
@@ -1018,7 +1020,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 531484458}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.68000007
+  m_Size: 0.68
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
