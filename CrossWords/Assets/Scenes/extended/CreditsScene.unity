@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5b26da8ada64a67b1faee18c170185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.CreditsScreen
-  VersionText: {fileID: 0}
+  VersionText: {fileID: 1480906856}
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
