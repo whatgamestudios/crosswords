@@ -19,10 +19,10 @@ namespace CrossWords {
 
         public void OnButtonClick(string buttonText) {
             if (buttonText == "Website") {
-                Application.OpenURL("https://whatgamestudios.com/14numbers");
+                Application.OpenURL("https://whatgamestudios.com/worcadian");
             }
             else if (buttonText == "Privacy") {
-                Application.OpenURL("https://whatgamestudios.com/14numbers/privacy-policy/");
+                Application.OpenURL("https://whatgamestudios.com/worcadian/privacy-policy/");
             }
 
             else

@@ -62,7 +62,7 @@ namespace CrossWords {
                 // }
             }
             else if (buttonText == "Warning") {
-                Application.OpenURL("https://whatgamestudios.com/14numbers/investor-warning/");
+                Application.OpenURL("https://whatgamestudios.com/worcadian/investor-warning/");
             }
             else {
                 AuditLog.Log("Passport: Unknown button: " + buttonText);
