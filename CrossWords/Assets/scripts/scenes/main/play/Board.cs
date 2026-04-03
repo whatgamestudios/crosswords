@@ -19,6 +19,7 @@ namespace CrossWords {
 
         const float BorderWidthScreenPx = 5f;
         const string BorderChildName = "BoardBorder";
+        const string CorrectChildName = "BoardCorrect";
         const string FillChildName = "BoardFill";
         const string GridChildName = "BoardGrid";
 
@@ -27,6 +28,7 @@ namespace CrossWords {
         CellView[,] _cellViews;
 
         Image _borderImage;
+        Image _correctImage;
         Image _fillImage;
         RectTransform _gridRect;
         GridLayoutGroup _gridLayout;

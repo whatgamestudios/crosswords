@@ -15,9 +15,22 @@ namespace CrossWords {
 
         public TextMeshProUGUI ScoreText;
 
+        public TextMeshProUGUI StatusText1;
+        public TextMeshProUGUI StatusText2;
+        public TextMeshProUGUI StatusText3;
+        public TextMeshProUGUI StatusText4;
+
         readonly MoveStack _moveStack = new MoveStack();
 
+        private List<WordOnBoard> words = new List<WordOnBoard>();
+        private bool[] inDictionary = new bool[100];
+
         private bool dictionaryLoaded = false;
+
+        private const int TIME_STATUS_MOVE = 40;
+        private DateTime timeOfStatusMove = DateTime.Now;
+
+        private int statusWordOffset = 0;
 
         void Awake()
         {
@@ -172,6 +185,8 @@ namespace CrossWords {
 
             if (board != null)
                 board.UpdateBoard();
+
+            showStatus();
         }
 
         private void resetBoard()
@@ -191,7 +206,7 @@ namespace CrossWords {
 
         void analyseBoardAndUpdateScore()
         {
-            List<WordOnBoard> words = AnalyseBoard.Analyse(board);
+            words = AnalyseBoard.Analyse(board);
             // AuditLog.Log("Words:");
             // foreach (WordOnBoard word in words)
             // {
@@ -214,7 +229,6 @@ namespace CrossWords {
             {
                 dictionaryLoaded = true;
 
-                bool[] inDictionary = new bool[100];
                 int i = 0;
                 foreach (WordOnBoard word in words)
                 {
@@ -231,6 +245,50 @@ namespace CrossWords {
             Stats.SetCurrent(gameDay, score, b);
         }
 
-    }
 
+        void showStatus()
+        {
+            WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
+            if (wordListDictionary == null || !wordListDictionary.DictionaryLoaded)
+            {
+                StatusText1.text = "";
+                StatusText2.text = "";
+                StatusText3.text = "";
+                StatusText4.text = "";
+                return;
+            }
+
+            DateTime now = DateTime.Now;
+            if ((now - timeOfStatusMove).TotalMilliseconds > TIME_STATUS_MOVE) {
+                timeOfStatusMove = now;
+
+                updateStatusText(StatusText1);
+                updateStatusText(StatusText2);
+                updateStatusText(StatusText3);
+                updateStatusText(StatusText4);
+            }            
+        }
+
+        private void updateStatusText(TextMeshProUGUI tmp)
+        {
+            bool rollover = false;
+
+            Vector2 pos = tmp.rectTransform.anchoredPosition;
+            float ypos = pos.y + 1;
+            if (ypos > 20)
+            {
+                ypos = -120;
+                rollover = true;
+            }
+            pos.y = ypos;
+            tmp.rectTransform.anchoredPosition = pos;
+
+            if (rollover)
+            {
+                statusWordOffset = (statusWordOffset + 1) % words.Count;
+                tmp.text = words[statusWordOffset].Word;
+                tmp.color = inDictionary[statusWordOffset] ? new Color(0.13f, 0.55f, 0.13f) : Color.red;
+            }
+        }
+    }
 }
