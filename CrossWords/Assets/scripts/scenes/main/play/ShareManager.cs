@@ -9,22 +9,14 @@ using System.Text;
 namespace CrossWords {
 
     public class ShareManager : MonoBehaviour {
-        public GameObject panelShare;
+        public GameObject DebugPanel;
+        public TextMeshProUGUI DebugText;
 
         public void Start()
         {
-            panelShare.SetActive(true);
+            DebugPanel.SetActive(false);
         }
 
-
-        // public void Update()
-        // {
-        //     GameState gameState = GameState.Instance();
-        //     if (GameState.Instance().IsPlayerStateDone())
-        //     {
-        //         panelShare.SetActive(true);
-        //     }
-        // }
 
         public void OnButtonClick(string buttonText)
         {
@@ -39,6 +31,13 @@ namespace CrossWords {
                 uint gameDay = sol.GameDay;
                 uint score = sol.Score;
                 string board = sol.BoardString;
+                string[] rows = new string[Board.BOARD_SIZE];
+                for (int i = 0; i < Board.BOARD_SIZE; i++)
+                {
+                    rows[i] = board.Substring(i * Board.BOARD_SIZE, Board.BOARD_SIZE);
+                }
+
+
                 board = translate(board);
 
                 string msg =
@@ -46,9 +45,19 @@ namespace CrossWords {
                     "Game day " + gameDay + "\n";
                 for (int i = 0; i < Board.BOARD_SIZE; i++)
                 {
-                    msg += board.Substring(i * Board.BOARD_SIZE, Board.BOARD_SIZE) + "\n";
+                    string row = rows[i];
+                    if (row == "           ")
+                    {
+                        // Ignore
+                    }
+                    else
+                    {
+                        msg += translate(row) + "\n";    
+                    }
                 }
                 msg += "Score: " + score;
+                // DebugPanel.SetActive(true);
+                // DebugText.text = msg;
                 SunShineNativeShare.instance.ShareText(msg, msg);
             }
             else
@@ -58,22 +67,36 @@ namespace CrossWords {
         }
 
         private string translate(string solution) {
-            StringBuilder sb = new StringBuilder(solution);
-            char fullWidthA = '\uFF21';
+            StringBuilder sbi = new StringBuilder(solution);
+            StringBuilder sbo = new StringBuilder();
+            
+            // Implement Mathematical Monospace A (\U0001D670) as a Unicode Surrogate Pair.
+            // See: https://www.russellcottrell.com/greek/utilities/SurrogatePairCalculator.htm
+            // char mathematicalMonospaceAHigh = '\uD835';
+            // char mathematicalMonospaceALow = '\uDE70';
+            char smallSpace = '\u2009';
+            char figureSpace = '\u2007';
             for (int i = 0; i < solution.Length; i++)
             {
-                char c = sb[i];
+                char c = sbi[i];
                 if (c == ' ')
                 {
-                    c = '\u2005';
+                    sbo.Append(figureSpace);
                 }
                 else
                 {
-                    c = (char) (c - 'A' + fullWidthA);
+                    // int charVal = c - 'A';
+                    // char low = (char) (mathematicalMonospaceALow + charVal);
+                    // string mathematicalMonospace = new string(new char[] { mathematicalMonospaceAHigh, low });
+                    // sbo.Append(mathematicalMonospace);
+                    sbo.Append(c);
+                    if (c == 'I')
+                    {
+                        sbo.Append(smallSpace);
+                    }
                 }
-                sb[i] = c;
             }
-            return sb.ToString();
+            return sbo.ToString();
         }
     }
 }
