@@ -227,14 +227,21 @@ namespace CrossWords {
             }
             else
             {
+                board.RestoreAllCellsVisual();
+
                 dictionaryLoaded = true;
 
                 int i = 0;
                 foreach (WordOnBoard word in words)
                 {
                     bool inDic = wordListDictionary.IsInDictionary(word.Word);
-                    AuditLog.Log($"Words: {word.Word} in dic: {inDic}");
+                    //AuditLog.Log($"Words: {word.Word} in dic: {inDic}");
                     inDictionary[i++] = inDic;
+                    if (!inDic)
+                    {
+                        AuditLog.Log($"Not in dic: {word.Word}, x: {word.StartX}, y: {word.StartY}, len: {word.Length()}, h: {word.IsHorizontal()}");
+                        board.HighlightNotInDictionaryCells(word.StartX, word.StartY, word.Length(), word.IsHorizontal());
+                    }
                 }
                 score = ScoreCalculator.Score(inDictionary, words);
                 ScoreText.text = score.ToString();
@@ -285,7 +292,10 @@ namespace CrossWords {
 
             if (rollover)
             {
-                statusWordOffset = (statusWordOffset + 1) % words.Count;
+                if (words.Count != 0)
+                {
+                    statusWordOffset = (statusWordOffset + 1) % words.Count;
+                }
                 tmp.text = words[statusWordOffset].Word;
                 tmp.color = inDictionary[statusWordOffset] ? new Color(0.13f, 0.55f, 0.13f) : Color.red;
             }

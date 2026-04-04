@@ -14,6 +14,8 @@ namespace CrossWords {
         static readonly Color StarterCellInnerColor = Color.black;
         static readonly Color StarterCellBorderColor = Color.white;
         static readonly Color StarterCellTextColor = Color.white;
+        static readonly Color NotInDictionaryCellTextColor = Color.red;
+        static readonly Color NormalCellTextColor = Color.black;
         const float CellBorderPx = 3f;
         const float GridSpacingPx = 0f;
 
@@ -307,6 +309,24 @@ namespace CrossWords {
             }
         }
 
+        public void HighlightNotInDictionaryCells(int startX, int startY, int length, bool horizontal)
+        {
+            if (horizontal)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    _cellViews[startY, startX + i].SetDisplayedColourNotInDictionary();
+                }
+            }
+            else
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    _cellViews[startY + i, startX].SetDisplayedColourNotInDictionary();
+                }
+            }
+        }
+
 
         static bool IsEmptyChar(char c) => c == '\0' || char.IsWhiteSpace(c);
 
@@ -462,6 +482,17 @@ namespace CrossWords {
                 _cellViews[y, x].SetNormalAppearance();
         }
 
+        public void RestoreAllCellsVisual()
+        {
+            for (int y = 0; y < BOARD_SIZE; y++)
+            {
+                for (int x = 0; x < BOARD_SIZE; x++)
+                {
+                    RestoreCellVisual(x, y);
+                }
+            }
+        }
+
         public void UpdateBoard()
         {
         }
@@ -516,7 +547,7 @@ namespace CrossWords {
                 text.resizeTextMinSize = 8;
                 text.resizeTextMaxSize = 64;
                 text.alignment = TextAnchor.MiddleCenter;
-                text.color = Color.black;
+                text.color = NormalCellTextColor;
                 text.raycastTarget = false;
 
                 var cell = root.AddComponent<CellView>();
@@ -532,7 +563,12 @@ namespace CrossWords {
             public void SetDisplayedCharacter(char c)
             {
                 _text.text = (c == '\0' || char.IsWhiteSpace(c)) ? string.Empty : c.ToString();
-                _text.color = _board.IsStarterCell(_gx, _gy) ? StarterCellTextColor : Color.black;
+                _text.color = _board.IsStarterCell(_gx, _gy) ? StarterCellTextColor : NormalCellTextColor;
+            }
+
+            public void SetDisplayedColourNotInDictionary()
+            {
+                _text.color = NotInDictionaryCellTextColor;
             }
 
             public void SetBackgroundColor(Color c)
@@ -544,7 +580,7 @@ namespace CrossWords {
             {
                 _borderImage.color = CellBorderColor;
                 _innerImage.color = CellNormalColor;
-                _text.color = Color.black;
+                _text.color = NormalCellTextColor;
             }
 
             public void SetStarterWordAppearance()

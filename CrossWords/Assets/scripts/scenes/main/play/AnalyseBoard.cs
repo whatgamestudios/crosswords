@@ -23,7 +23,12 @@ namespace CrossWords {
 
         public int Length()
         {
-            return EndY - StartY + EndX - StartX;
+            return (EndY - StartY + EndX - StartX) + 1;
+        }
+
+        public bool IsHorizontal()
+        {
+            return StartY == EndY;
         }
 
         public override string ToString()
@@ -134,7 +139,7 @@ namespace CrossWords {
         {
             List<WordOnBoard> horizontalWordList = new List<WordOnBoard>();
 
-            for (int i = 0; i <= seedWord.Length(); i++)
+            for (int i = 0; i < seedWord.Length(); i++)
             {
                 bool exists = false;
                 int yofs = seedWord.StartY + i;
@@ -167,7 +172,7 @@ namespace CrossWords {
         {
             List<WordOnBoard> verticalWordList = new List<WordOnBoard>();
 
-            for (int i = 0; i <= seedWord.Length(); i++)
+            for (int i = 0; i < seedWord.Length(); i++)
             {
                 int xofs = seedWord.StartX + i;
                 bool exists = false;
