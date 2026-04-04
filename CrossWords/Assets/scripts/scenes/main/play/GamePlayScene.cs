@@ -22,10 +22,9 @@ namespace CrossWords {
 
         readonly MoveStack _moveStack = new MoveStack();
 
-        private List<WordOnBoard> words = new List<WordOnBoard>();
-        private bool[] inDictionary = new bool[100];
-
         private bool dictionaryLoaded = false;
+
+        public uint Score = 26;
 
         private const int TIME_STATUS_MOVE = 40;
         private DateTime timeOfStatusMove = DateTime.Now;
@@ -206,14 +205,15 @@ namespace CrossWords {
 
         void analyseBoardAndUpdateScore()
         {
-            words = AnalyseBoard.Analyse(board);
+
+            List<WordOnBoard> words = AnalyseBoard.Analyse(board);
             // AuditLog.Log("Words:");
             // foreach (WordOnBoard word in words)
             // {
             //     AuditLog.Log(word.Word);
             // }
 
-            uint score = 26;
+            Score = 26;
             WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
             if (wordListDictionary == null)
             {
@@ -227,11 +227,11 @@ namespace CrossWords {
             }
             else
             {
-                board.RestoreAllCellsVisual();
-
                 dictionaryLoaded = true;
 
+                board.RestoreAllCellsVisual();
                 int i = 0;
+                bool[] inDictionary = new bool[100];
                 foreach (WordOnBoard word in words)
                 {
                     bool inDic = wordListDictionary.IsInDictionary(word.Word);
@@ -239,66 +239,164 @@ namespace CrossWords {
                     inDictionary[i++] = inDic;
                     if (!inDic)
                     {
-                        AuditLog.Log($"Not in dic: {word.Word}, x: {word.StartX}, y: {word.StartY}, len: {word.Length()}, h: {word.IsHorizontal()}");
                         board.HighlightNotInDictionaryCells(word.StartX, word.StartY, word.Length(), word.IsHorizontal());
                     }
                 }
-                score = ScoreCalculator.Score(inDictionary, words);
-                ScoreText.text = score.ToString();
+                Score = ScoreCalculator.Score(inDictionary, words);
+                ScoreText.text = Score.ToString();
             }
 
             string b = board.GetCells();
             uint gameDay = Timeline.GameDay();
-            Stats.SetCurrent(gameDay, score, b);
+            Stats.SetCurrent(gameDay, Score, b);
         }
 
 
         void showStatus()
         {
-            WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
-            if (wordListDictionary == null || !wordListDictionary.DictionaryLoaded)
+            // if not scrolling
+
+            Vector2 pos = StatusText1.rectTransform.anchoredPosition;
+            pos.y = -35;
+            StatusText1.rectTransform.anchoredPosition = pos;
+            StatusText1.color = Color.black;
+
+            pos = StatusText2.rectTransform.anchoredPosition;
+            pos.y = -75;
+            StatusText2.rectTransform.anchoredPosition = pos;
+            StatusText2.color = Color.black;
+
+            StatusText3.gameObject.SetActive(false);
+            StatusText4.gameObject.SetActive(false);
+
+            string status1 = "";
+            string status2 = "";
+            if (Score >= 21)
             {
-                StatusText1.text = "";
-                StatusText2.text = "";
-                StatusText3.text = "";
-                StatusText4.text = "";
-                return;
+                status1 = "Start from the";
+                status2 = "seed word";
             }
-
-            DateTime now = DateTime.Now;
-            if ((now - timeOfStatusMove).TotalMilliseconds > TIME_STATUS_MOVE) {
-                timeOfStatusMove = now;
-
-                updateStatusText(StatusText1);
-                updateStatusText(StatusText2);
-                updateStatusText(StatusText3);
-                updateStatusText(StatusText4);
-            }            
-        }
-
-        private void updateStatusText(TextMeshProUGUI tmp)
-        {
-            bool rollover = false;
-
-            Vector2 pos = tmp.rectTransform.anchoredPosition;
-            float ypos = pos.y + 1;
-            if (ypos > 20)
+            else
             {
-                ypos = -120;
-                rollover = true;
-            }
-            pos.y = ypos;
-            tmp.rectTransform.anchoredPosition = pos;
-
-            if (rollover)
-            {
-                if (words.Count != 0)
+                switch (Score)
                 {
-                    statusWordOffset = (statusWordOffset + 1) % words.Count;
+                    case 20:
+                        status1 = "Good start";
+                        break;
+                    case 19:
+                        status1 = "Great start";
+                        break;
+                    case 18:
+                        status1 = "Doing well";
+                        break;
+                    case 17:
+                        status1 = "What next?";
+                        break;
+                    case 16:
+                        status1 = "Getting there";
+                        break;
+                    case 15:
+                        status1 = "Is khajur a";
+                        status2 = "word?";
+                        break;
+                    case 14:
+                        status1 = "You can do";
+                        status2 = "this";
+                        break;
+                    case 13:
+                        status1 = "Great";
+                        break;
+                    case 12:
+                        status1 = "You have got";
+                        status2 = "this";
+                        break;
+                    case 11:
+                        status1 = "What next";
+                        break;
+                    case 10:
+                        status1 = "Very good!";
+                        break;
+                    case 9:
+                        status1 = "How to use";
+                        status2 = "last letters?";
+                        break;
+                    case 8:
+                        status1 = "Doing well!";
+                        break;
+                    case 7:
+                        status1 = "Riding high";
+                        break;
+                    case 6:
+                        status1 = "Today is a good";
+                        status2 = "day";
+                        break;
+                    case 5:
+                        status1 = "Today is a great";
+                        status2 = "day";
+                        break;
+                    case 4:
+                        status1 = "Awesome";
+                        break;
+                    case 3:
+                        status1 = "Exceptional";
+                        break;
+                    case 2:
+                        status1 = "You are a";
+                        status2 = "star!";
+                        break;
+                    case 1:
+                        status1 = "You are a";
+                        status2 = "super star!";
+                        break;
+                    case 0:
+                        status1 = "You have";
+                        status2 = "arrived.";
+                        break;
                 }
-                tmp.text = words[statusWordOffset].Word;
-                tmp.color = inDictionary[statusWordOffset] ? new Color(0.13f, 0.55f, 0.13f) : Color.red;
             }
+
+
+            
+            StatusText1.text = status1;
+            StatusText2.text = status2;
         }
+
+
+        // Use code below for scrolling text
+
+            // DateTime now = DateTime.Now;
+            // if ((now - timeOfStatusMove).TotalMilliseconds > TIME_STATUS_MOVE) {
+            //     timeOfStatusMove = now;
+
+                // updateStatusText(StatusText1);
+                // updateStatusText(StatusText2);
+                // updateStatusText(StatusText3);
+                // updateStatusText(StatusText4);
+
+
+        // private void updateStatusText(TextMeshProUGUI tmp)
+        // {
+        //     bool rollover = false;
+
+        //     Vector2 pos = tmp.rectTransform.anchoredPosition;
+        //     float ypos = pos.y + 1;
+        //     if (ypos > 20)
+        //     {
+        //         ypos = -120;
+        //         rollover = true;
+        //     }
+        //     pos.y = ypos;
+        //     tmp.rectTransform.anchoredPosition = pos;
+
+        //     if (rollover)
+        //     {
+        //         if (words.Count != 0)
+        //         {
+        //             statusWordOffset = (statusWordOffset + 1) % words.Count;
+        //         }
+        //         tmp.text = words[statusWordOffset].Word;
+        //         tmp.color = inDictionary[statusWordOffset] ? new Color(0.13f, 0.55f, 0.13f) : Color.red;
+        //     }
+        // }
     }
 }
