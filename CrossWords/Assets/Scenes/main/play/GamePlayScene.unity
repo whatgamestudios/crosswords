@@ -10802,6 +10802,7 @@ GameObject:
   - component: {fileID: 2063394988}
   - component: {fileID: 2063394989}
   - component: {fileID: 2063394990}
+  - component: {fileID: 2063394991}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -10949,6 +10950,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
   panel: {fileID: 2063394970}
+--- !u!114 &2063394991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcc20bdfea22d4217b1927e2bb74f65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.NewDayManager
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0

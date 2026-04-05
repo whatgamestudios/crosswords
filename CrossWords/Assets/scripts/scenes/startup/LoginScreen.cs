@@ -69,19 +69,8 @@ namespace CrossWords {
                 // Ensure we have an Image component
                 buttonImage = loginButton.GetComponent<Image>();
                 if (buttonImage == null) {
-                    buttonImage = loginButton.gameObject.AddComponent<Image>();
-                }
-                
-                // Set initial sprite
-                string initialResource = $"buttons/animated_button5";
-                Texture2D initialTex = Resources.Load<Texture2D>(initialResource);
-                if (initialTex != null) {
-                    Rect size = new Rect(0.0f, 0.0f, initialTex.width, initialTex.height);
-                    Vector2 pivot = new Vector2(0.0f, 0.0f);
-                    Sprite s = Sprite.Create(initialTex, size, pivot);
-                    buttonImage.sprite = s;
-                } else {
-                    AuditLog.Log($"ERROR: Failed to load initial button texture: {initialResource}");
+                    // If we can't find the button image, then don't try to animate it.
+                    return;
                 }
 
                 buttonAnimationRoutine = StartCoroutine(ButtonAnimationRoutine());
@@ -100,27 +89,35 @@ namespace CrossWords {
             {
                 try
                 {
-                    // Load and set the next button frame
-                    string resource = $"buttons/animated_button{currentButtonFrame}";
-                    Texture2D tex = Resources.Load<Texture2D>(resource);
-                    if (tex != null)
-                    {
-                        Rect size = new Rect(0.0f, 0.0f, tex.width, tex.height);
-                        Vector2 pivot = new Vector2(0.0f, 0.0f);
-                        Sprite s = Sprite.Create(tex, size, pivot);
-                        buttonImage.sprite = s;
-                    }
-                    else
-                    {
-                        AuditLog.Log($"ERROR: Failed to load button texture: {resource}");
-                    }
+//. Maybe how to do it
+// RectTransform rt = GetComponent<RectTransform>();
+// // Increases current width and height by 10%
+// rt.sizeDelta = new Vector2(rt.sizeDelta.x * 1.1f, rt.sizeDelta.y * 1.1f);                    
 
-                    // Increment frame counter and reset if needed
-                    currentButtonFrame++;
-                    if (currentButtonFrame > 6)
-                    {
-                        currentButtonFrame = 1;
-                    }
+                    // buttonImage = loginButton.GetComponent<Image>();
+
+
+                    // // Load and set the next button frame
+                    // string resource = $"buttons/animated_button{currentButtonFrame}";
+                    // Texture2D tex = Resources.Load<Texture2D>(resource);
+                    // if (tex != null)
+                    // {
+                    //     Rect size = new Rect(0.0f, 0.0f, tex.width, tex.height);
+                    //     Vector2 pivot = new Vector2(0.0f, 0.0f);
+                    //     Sprite s = Sprite.Create(tex, size, pivot);
+                    //     buttonImage.sprite = s;
+                    // }
+                    // else
+                    // {
+                    //     AuditLog.Log($"ERROR: Failed to load button texture: {resource}");
+                    // }
+
+                    // // Increment frame counter and reset if needed
+                    // currentButtonFrame++;
+                    // if (currentButtonFrame > 6)
+                    // {
+                    //     currentButtonFrame = 1;
+                    // }
                 }
                 catch (Exception ex)
                 {
@@ -130,7 +127,7 @@ namespace CrossWords {
 
 
                 // Wait for 125ms before next frame
-                    yield return new WaitForSeconds(0.125f);
+                yield return new WaitForSeconds(0.125f);
             }
         }
 

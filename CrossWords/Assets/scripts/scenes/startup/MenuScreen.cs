@@ -68,10 +68,21 @@ namespace CrossWords {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("HelpScene", LoadSceneMode.Single);
             }
-            else if (buttonText == "Other")
-            {
+            if (buttonText == "Passport") {
                 SceneStack.Instance().PushScene();
-                SceneManager.LoadScene("OtherMenuScene", LoadSceneMode.Single);
+                SceneManager.LoadScene("PassportScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "Socials") {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("SocialsScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "Settings") {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("SettingsScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "Credits") {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single);
             }
             else
             {
