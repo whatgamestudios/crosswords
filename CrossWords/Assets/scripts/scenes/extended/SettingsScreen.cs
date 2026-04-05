@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-
+using Immutable.Passport;
 
 namespace CrossWords {
 
@@ -12,10 +12,7 @@ namespace CrossWords {
         public Button LocalTimezoneButton;
         public Button KiribatiTimezoneButton;
 
-        public GameObject DemoModePanel;
 
-        private int state = 0;
-        private const int DONE = 6;
 
         public void Start() {
             AuditLog.Log("Settings screen");
@@ -31,10 +28,9 @@ namespace CrossWords {
                 LocalTimezoneButton.interactable = true;
                 KiribatiTimezoneButton.interactable = false;
             }
-            DemoModePanel.SetActive(false);
         }
 
-        public void OnButtonClick(string buttonText) {
+        public async void OnButtonClick(string buttonText) {
             if (buttonText == "ShareLogs") {
                 string msg = AuditLog.GetLogs();
                 SunShineNativeShare.instance.ShareText(msg, msg);
@@ -43,35 +39,11 @@ namespace CrossWords {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("DeleteScene", LoadSceneMode.Single);
             }
-            else if (buttonText == "HiddenA")
+            else if (buttonText == "Logout")
             {
-                if ((state & 1) == 0)
-                {
-                    state++;
-                    AuditLog.Log($"Settings A: {state}");
-                }
-                else
-                {
-                    AuditLog.Log($"Settings A: Reseting");
-                    state = 0;
-                }
-            }
-            else if (buttonText == "HiddenB")
-            {
-                if ((state & 1) == 1)
-                {
-                    state++;
-                    AuditLog.Log($"Settings B: {state}");
-                    if (state > DONE)
-                    {
-                        DemoModePanel.SetActive(true);
-                    }
-                }
-                else
-                {
-                    AuditLog.Log($"Settings A: Reseting");
-                    state = 0;
-                }
+                PassportStore.SetLoggedIn(false);
+                await Passport.Instance.Logout();
+                SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
             }
             else if (buttonText == "Local" || buttonText == "Kiribati")
             {

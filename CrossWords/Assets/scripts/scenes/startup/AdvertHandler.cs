@@ -81,25 +81,25 @@ namespace CrossWords {
         }
 
         private void setImage() {
-            // if (state != lastImageState) {
-            //     lastImageState = state;
+            if (state != lastImageState) {
+                lastImageState = state;
 
-            //     uint gen1Id = state + (100 - 1);
-            //     SceneInfo sceneInfo = BackgroundsMetadata.GetInfo((int)gen1Id);
-            //     string resource = "scenes/gen1/gen1-type0-goldenfans";
-            //     if (sceneInfo.resource != null) {
-            //         resource = sceneInfo.resource;
-            //     }
+                uint gen1Id = state + (100 - 1);
+                SceneInfo sceneInfo = BackgroundsMetadata.GetInfo((int)gen1Id);
+                string resource = "scenes/gen1/gen1-type0-goldenfans";
+                if (sceneInfo.resource != null) {
+                    resource = sceneInfo.resource;
+                }
 
-            //     // Update the existing Image component
-            //     Texture2D tex = Resources.Load<Texture2D>(resource);
-            //     if (tex != null) {
-            //         Rect size = new Rect(0.0f, 0.0f, tex.width, tex.height);
-            //         Vector2 pivot = new Vector2(0.0f, 0.0f);
-            //         Sprite s = Sprite.Create(tex, size, pivot);
-            //         floatingImageComponent.sprite = s;
-            //     }
-            // }
+                // Update the existing Image component
+                Texture2D tex = Resources.Load<Texture2D>(resource);
+                if (tex != null) {
+                    Rect size = new Rect(0.0f, 0.0f, tex.width, tex.height);
+                    Vector2 pivot = new Vector2(0.0f, 0.0f);
+                    Sprite s = Sprite.Create(tex, size, pivot);
+                    floatingImageComponent.sprite = s;
+                }
+            }
         }
     }
 }

@@ -29,7 +29,8 @@ namespace CrossWords {
         private const int TIME_STATUS_MOVE = 40;
         private DateTime timeOfStatusMove = DateTime.Now;
 
-        private int statusWordOffset = 0;
+        // Needed for scrolling status
+        //private int statusWordOffset = 0;
 
         void Awake()
         {

@@ -21,7 +21,7 @@ namespace CrossWords {
             if (buttonText == "Skip")
             {
                 SceneStack.Instance().Reset();
-                //DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_SKIP;
+                DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_SKIP;
                 SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
             }
             else

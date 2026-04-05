@@ -59,6 +59,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/extended/SettingsScene.unity
     guid: d6c775dbef30b4034b56bf779424aef9
+  - enabled: 1
+    path: Assets/Scenes/main/scenes/BackgroundsScene.unity
+    guid: ff48343bad630492b86a81ce2123c062
+  - enabled: 1
+    path: Assets/Scenes/main/scenes/ClaimProbScene.unity
+    guid: 7466a5240902542bd9491ce10c22d576
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

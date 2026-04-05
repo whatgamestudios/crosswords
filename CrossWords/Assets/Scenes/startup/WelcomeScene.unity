@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 289835291}
   - component: {fileID: 289835294}
   - component: {fileID: 289835293}
+  - component: {fileID: 289835296}
+  - component: {fileID: 289835297}
   - component: {fileID: 289835295}
   m_Layer: 5
   m_Name: Panel
@@ -208,6 +210,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828ca3277612b4358a173c76f906b362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WelcomeScreen
+--- !u!114 &289835296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b91f3e6fc93418d8a3922bcda8be53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.UpgradeStorageWrapper
+--- !u!114 &289835297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa16e79133ec4485a8b11bd93f9f2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
+  panel: {fileID: 289835290}
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 875006016}
-  - component: {fileID: 875006015}
+  - component: {fileID: 875006017}
   m_Layer: 0
   m_Name: LongTermGameObj
   m_TagString: Untagged
@@ -441,18 +468,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &875006015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875006014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d097a062769e4f90819a5008d7632e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &875006016
 Transform:
   m_ObjectHideFlags: 0
@@ -468,6 +483,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &875006017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875006014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e4bf341a2584872a93b77c66b68c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.DeepLinkManager
+  LoginPath: 1
 --- !u!1 &974572677
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,9 +745,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911319765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f08fa336044b486e85a6cebd41ce4fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e1d1cf92e3c48c2b57127b5c61dbc6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ScreenOrientationLock
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

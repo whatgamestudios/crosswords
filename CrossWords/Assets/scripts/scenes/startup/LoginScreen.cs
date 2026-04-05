@@ -6,7 +6,7 @@ using TMPro;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-//using Immutable.Passport;
+using Immutable.Passport;
 using System.Threading.Tasks;
 
 namespace CrossWords {
@@ -28,9 +28,9 @@ namespace CrossWords {
 
         public async Task Start() {
             AuditLog.Log("Login screen");
-//            PassportStore.SetLoggedIn(false);
+           PassportStore.SetLoggedIn(false);
             SceneStack.Instance().Reset();
-  //          await PassportLogin.Init();
+           await PassportLogin.Init();
             
             // Hide skip button initially
             skipButton.gameObject.SetActive(false);
@@ -136,18 +136,18 @@ namespace CrossWords {
 
         public async void OnButtonClick(string buttonText) {
             if (buttonText == "Help") {
-                // MessagePass.SetMsg(help);
-                // SceneStack.Instance().PushScene();
-                // SceneManager.LoadScene("BigHelpContextScene", LoadSceneMode.Additive);
+                MessagePass.SetMsg(help);
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("BigHelpContextScene", LoadSceneMode.Additive);
             }
             else if (buttonText == "Login") {
                 //Debug.Log("LoginPKCE start");
-#if (UNITY_ANDROID && !UNITY_EDITOR_WIN) || (UNITY_IPHONE && !UNITY_EDITOR_WIN) || UNITY_STANDALONE_OSX
+// #if (UNITY_ANDROID && !UNITY_EDITOR_WIN) || (UNITY_IPHONE && !UNITY_EDITOR_WIN) || UNITY_STANDALONE_OSX
 //                await Passport.Instance.LoginPKCE();
-#else
-//                await Passport.Instance.Login();
-#endif
-                //Debug.Log("LoginPKCE done");
+// #else
+               await Passport.Instance.Login();
+//#endif
+//                Debug.Log("LoginPKCE done");
             }
             else if (buttonText == "Skip") {
                 SceneStack.Instance().PushScene();
@@ -180,15 +180,15 @@ namespace CrossWords {
         }
 
         private async void CheckLogin() {
-            // bool loggedIn = await Passport.Instance.HasCredentialsSaved();
-            // AuditLog.Log("CheckLogin: Loggedin: " + loggedIn);
-            // if (loggedIn) {
-            //     PassportStore.SetLoggedIn(true);
-            //     PassportStore.SetLoggedInChecked();
-            //     DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_THREAD;
-            //     SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
-            //     stopCoroutine();
-            // }
+            bool loggedIn = await Passport.Instance.HasCredentialsSaved();
+            AuditLog.Log("CheckLogin: Loggedin: " + loggedIn);
+            if (loggedIn) {
+                PassportStore.SetLoggedIn(true);
+                PassportStore.SetLoggedInChecked();
+                DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_THREAD;
+                SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+                stopCoroutine();
+            }
         }
     }
 }

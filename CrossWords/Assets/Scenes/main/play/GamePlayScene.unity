@@ -639,10 +639,10 @@ RectTransform:
   - {fileID: 1818573539}
   m_Father: {fileID: 2063394971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 859.99994, y: -1855.0001}
-  m_SizeDelta: {x: 260, y: 100}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 320, y: -1855.0001}
+  m_SizeDelta: {x: 280, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &117579868
 MonoBehaviour:
@@ -7653,9 +7653,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1467518735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f08fa336044b486e85a6cebd41ce4fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e1d1cf92e3c48c2b57127b5c61dbc6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ScreenOrientationLock
 --- !u!1 &1491566162
 GameObject:
   m_ObjectHideFlags: 0
@@ -10801,6 +10801,7 @@ GameObject:
   - component: {fileID: 2063394987}
   - component: {fileID: 2063394988}
   - component: {fileID: 2063394989}
+  - component: {fileID: 2063394990}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -10894,6 +10895,7 @@ MonoBehaviour:
   StatusText2: {fileID: 1559434618}
   StatusText3: {fileID: 1715015225}
   StatusText4: {fileID: 1818573540}
+  Score: 26
 --- !u!114 &2063394987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10932,9 +10934,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09a2b697962d475a948c6b3569e9f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ShareManager
-  panelShare: {fileID: 0}
   DebugPanel: {fileID: 2050670144}
   DebugText: {fileID: 1085346988}
+--- !u!114 &2063394990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa16e79133ec4485a8b11bd93f9f2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
+  panel: {fileID: 2063394970}
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0

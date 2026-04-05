@@ -265,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 117158116}
-  - component: {fileID: 117158115}
+  - component: {fileID: 117158117}
   m_Layer: 0
   m_Name: LongTermGameObj
   m_TagString: Untagged
@@ -273,19 +273,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &117158115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117158114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d097a062769e4f90819a5008d7632e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoginPath: 1
 --- !u!4 &117158116
 Transform:
   m_ObjectHideFlags: 0
@@ -301,6 +288,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &117158117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117158114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e4bf341a2584872a93b77c66b68c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.DeepLinkManager
+  LoginPath: 1
 --- !u!1 &204523972
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,8 +388,8 @@ GameObject:
   - component: {fileID: 289835294}
   - component: {fileID: 289835293}
   - component: {fileID: 289835296}
-  - component: {fileID: 289835298}
-  - component: {fileID: 289835300}
+  - component: {fileID: 289835295}
+  - component: {fileID: 289835297}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -457,6 +457,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289835290}
   m_CullTransparentMesh: 1
+--- !u!114 &289835295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b40bd4ae3ac14567a32154235c045df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.AdvertHandler
+  advertPanel: {fileID: 204523972}
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,25 +479,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 289835290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6dc630fa3e94478b35e4710103eb94, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b6367229479e4e2bb0d8f10d508895c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 289835290}
---- !u!114 &289835298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7cbfdd9abd4d49d4b7aa7860f5f0df3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.LoginScreen
   loginButton: {fileID: 2089359268}
   skipButton: {fileID: 1867438871}
---- !u!114 &289835300
+--- !u!114 &289835297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -493,10 +493,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 289835290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1207aa3bbade418f8be7240305e1d8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa16e79133ec4485a8b11bd93f9f2cf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  advertPanel: {fileID: 204523972}
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
+  panel: {fileID: 289835290}
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,8 +932,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: FourteenNumbers.LoginScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835296}
+        m_TargetAssemblyTypeName: CrossWords.LoginScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2840336364714655594, guid: 3a5dc7f7bb4ae4262b38feebb7ef79e8, type: 3}
+  m_Sprite: {fileID: 2840336364714655594, guid: 06af4931679b840aea93f4eb4832e815, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1182,8 +1182,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: LoginSceneButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 289835296}
+        m_TargetAssemblyTypeName: CrossWords.LoginScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -1366,9 +1366,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911319765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f08fa336044b486e85a6cebd41ce4fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e1d1cf92e3c48c2b57127b5c61dbc6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ScreenOrientationLock
 --- !u!1 &2089359266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,8 +1452,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835298}
-        m_TargetAssemblyTypeName: LoginSceneButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 289835296}
+        m_TargetAssemblyTypeName: CrossWords.LoginScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:

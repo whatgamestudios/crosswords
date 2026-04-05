@@ -214,6 +214,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -266,8 +267,8 @@ GameObject:
   - component: {fileID: 289835291}
   - component: {fileID: 289835294}
   - component: {fileID: 289835293}
+  - component: {fileID: 289835295}
   - component: {fileID: 289835296}
-  - component: {fileID: 289835297}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -317,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4419518618567211912, guid: 758f4d125d04844b1859ba23eda3cf09, type: 3}
+  m_Sprite: {fileID: -4419518618567211912, guid: eb3bfc57c7129410d8d9c56c3ce99716, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -335,6 +336,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289835290}
   m_CullTransparentMesh: 1
+--- !u!114 &289835295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a2cd1fead4b49be8e6996ccf481807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SkipScreen
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,21 +357,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 289835290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80ae247f79d2467e87c55e65aa4cf7f, type: 3}
+  m_Script: {fileID: 11500000, guid: a788a21060cf7451d8d9b98acc9e0989, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &289835297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdacb6c3f35242debbf3969dd9d79e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandler
 --- !u!1 &369663421
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,8 +443,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835297}
-        m_TargetAssemblyTypeName: FourteenNumbers.SkipScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835295}
+        m_TargetAssemblyTypeName: CrossWords.SkipScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -576,7 +577,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 289835296}
-        m_TargetAssemblyTypeName: FourteenNumbers.BackButtonHandler, Assembly-CSharp
+        m_TargetAssemblyTypeName: CrossWords.BackButtonHandler, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -720,6 +721,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -859,6 +861,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 289835293}
   - component: {fileID: 289835295}
   - component: {fileID: 289835296}
+  - component: {fileID: 289835297}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -746,6 +747,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a788a21060cf7451d8d9b98acc9e0989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandler
+--- !u!114 &289835297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa16e79133ec4485a8b11bd93f9f2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
+  panel: {fileID: 289835290}
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3368,9 +3382,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911319765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f08fa336044b486e85a6cebd41ce4fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e1d1cf92e3c48c2b57127b5c61dbc6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ScreenOrientationLock
 --- !u!1 &1917781090
 GameObject:
   m_ObjectHideFlags: 0
