@@ -33,13 +33,29 @@ namespace CrossWords {
                     }
                     else
                     {
-                        SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
+                        if (PassportStore.ChoseToNotLogin())
+                        {
+                            DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_SKIP;
+                            SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);                        
+                        }
                     }
                 }
                 else
                 {
-                    PassportStore.SetLoggedIn(false);
-                    SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
+                    if (PassportStore.ChoseToNotLogin())
+                    {
+                        DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_SKIP;
+                        SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+                    }
+                    else
+                    {
+                        PassportStore.SetLoggedIn(false);
+                        SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
+                    }
                 }
             }
             catch (Exception ex)

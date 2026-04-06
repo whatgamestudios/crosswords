@@ -13,6 +13,7 @@ namespace CrossWords {
         public const int LOGIN_THREAD = 3; 
         public const int LOGIN_SKIP = 4; 
         public const int DEEP_LINK = 5; 
+        public const int SETTINGS = 6; 
         public int LoginPath = NONE;
 
         public void Start() {

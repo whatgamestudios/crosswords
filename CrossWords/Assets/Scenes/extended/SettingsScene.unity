@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use Logout if you want to switch the account that you use for playing Worcadian.
+  m_text: Log in to allow best scores to be published and badges to be earned.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -889,6 +889,7 @@ GameObject:
   - component: {fileID: 289835296}
   - component: {fileID: 289835295}
   - component: {fileID: 289835297}
+  - component: {fileID: 289835298}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -971,7 +972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SettingsScreen
   LocalTimezoneButton: {fileID: 685183967}
   KiribatiTimezoneButton: {fileID: 155725618}
-  DemoModePanel: {fileID: 0}
+  LogInOutButtonText: {fileID: 0}
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,6 +998,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
   panel: {fileID: 289835290}
+--- !u!114 &289835298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c1a01df45f54df5af6fa00c039e5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SettingsLogInOutScreen
+  LogInOutButtonText: {fileID: 239942332}
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,7 +2355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -150, y: -20}
+  m_AnchoredPosition: {x: -150, y: -22}
   m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372015787
@@ -2364,7 +2378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Logout
+  m_text: Login Status
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2742,8 +2756,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 289835295}
-        m_TargetAssemblyTypeName: CrossWords.SettingsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835298}
+        m_TargetAssemblyTypeName: CrossWords.SettingsLogInOutScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -2751,7 +2765,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Logout
+          m_StringArgument: LogInOut
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1694797281

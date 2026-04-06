@@ -8,6 +8,8 @@ namespace CrossWords {
         public const string PASS_WHEN_LOGGED_IN = "PASS_WHEN_LOGGED_IN";
         public const string PASS_ACCOUNT = "PASS_ACCOUNT";
 
+        public const string PASS_CHOSE_NOT_TO_LOGIN = "PASS_CHOSE_NOT_TO_LOGIN";
+
         // Classify "recently" as five minutes.
         public const int RECENTLY_MS = 1000 * 60 * 5;
 
@@ -24,6 +26,21 @@ namespace CrossWords {
             }
             PlayerPrefs.Save();
         }
+
+        public static bool ChoseToNotLogin() {
+            return PlayerPrefs.GetInt(PASS_CHOSE_NOT_TO_LOGIN, 0) != 0;
+        }
+
+        public static void SetChoseToNotLogin(bool skipLogin) {
+            if (skipLogin) {
+                PlayerPrefs.SetInt(PASS_CHOSE_NOT_TO_LOGIN, 1);
+            }
+            else {
+                PlayerPrefs.SetInt(PASS_CHOSE_NOT_TO_LOGIN, 0);
+            }
+            PlayerPrefs.Save();
+        }
+
 
         public static bool WasLoggedInRecently() {
             string whenLoggedInStr = PlayerPrefs.GetString(PASS_WHEN_LOGGED_IN, "0");

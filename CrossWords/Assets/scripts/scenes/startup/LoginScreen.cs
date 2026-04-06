@@ -28,9 +28,9 @@ namespace CrossWords {
 
         public async Task Start() {
             AuditLog.Log("Login screen");
-           PassportStore.SetLoggedIn(false);
+            PassportStore.SetLoggedIn(false);
             SceneStack.Instance().Reset();
-           await PassportLogin.Init();
+            await PassportLogin.Init();
             
             // Hide skip button initially
             skipButton.gameObject.SetActive(false);
@@ -138,6 +138,7 @@ namespace CrossWords {
                 SceneManager.LoadScene("BigHelpContextScene", LoadSceneMode.Additive);
             }
             else if (buttonText == "Login") {
+                PassportStore.SetChoseToNotLogin(false);
                 //Debug.Log("LoginPKCE start");
 // #if (UNITY_ANDROID && !UNITY_EDITOR_WIN) || (UNITY_IPHONE && !UNITY_EDITOR_WIN) || UNITY_STANDALONE_OSX
 //                await Passport.Instance.LoginPKCE();
@@ -147,8 +148,10 @@ namespace CrossWords {
 //                Debug.Log("LoginPKCE done");
             }
             else if (buttonText == "Skip") {
-                SceneStack.Instance().PushScene();
-                SceneManager.LoadScene("SkipSigninScene", LoadSceneMode.Additive);
+                SceneStack.Instance().Reset();
+                DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_SKIP;
+                PassportStore.SetChoseToNotLogin(true);
+                SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
             }
             else {
                 AuditLog.Log("Login Screen: Unknown button");

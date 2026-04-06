@@ -12,6 +12,7 @@ namespace CrossWords {
         public Button LocalTimezoneButton;
         public Button KiribatiTimezoneButton;
 
+        public Button LogInOutButtonText;
 
 
         public void Start() {
@@ -30,7 +31,7 @@ namespace CrossWords {
             }
         }
 
-        public async void OnButtonClick(string buttonText) {
+        public void OnButtonClick(string buttonText) {
             if (buttonText == "ShareLogs") {
                 string msg = AuditLog.GetLogs();
                 SunShineNativeShare.instance.ShareText(msg, msg);
@@ -38,12 +39,6 @@ namespace CrossWords {
             else if (buttonText == "Delete") {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("DeleteScene", LoadSceneMode.Single);
-            }
-            else if (buttonText == "Logout")
-            {
-                PassportStore.SetLoggedIn(false);
-                await Passport.Instance.Logout();
-                SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
             }
             else if (buttonText == "Local" || buttonText == "Kiribati")
             {
