@@ -19,9 +19,6 @@ namespace CrossWords {
             // Get the current selected background. If due to asset sync, that background is no longer
             // owned, switch to the default background.
             int tokenId = SceneStore.GetBackground();
-            if (!ScreenBackground.IsOwned(tokenId) && tokenId > 10) {
-                tokenId = SceneStore.BG_DEFAULT;
-            }
             SceneInfo sceneInfo = BackgroundsMetadata.GetInfo(tokenId);
 
             // Set the background image.

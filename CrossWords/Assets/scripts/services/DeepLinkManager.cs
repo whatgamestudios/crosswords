@@ -29,10 +29,7 @@ namespace CrossWords {
                     onDeepLinkActivated(Application.absoluteURL);
                 }
                 DontDestroyOnLoad(gameObject);
-                
-                // Start-up other long term services
-                AssetSyncManager.StartInstance(this);
-            }
+                            }
             else
             {
                 Destroy(gameObject);

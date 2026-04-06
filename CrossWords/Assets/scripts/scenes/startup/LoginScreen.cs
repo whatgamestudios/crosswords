@@ -21,7 +21,7 @@ namespace CrossWords {
         private Coroutine skipButtonRoutine;
         private bool isRunning = false;
         private Image buttonImage;
-        private int currentButtonFrame = 1;
+        //private int currentButtonFrame = 1;
 
         private string help = "Sign in to claim Scenes and publish best scores.\n\n" +
             "14Numbers uses Passport which uses Google, Apple, Facebook or email to sign in";

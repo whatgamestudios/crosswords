@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 196344893}
   - component: {fileID: 196344892}
   m_Layer: 5
-  m_Name: Option5Surround
+  m_Name: Gen1Type2Surround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -551,9 +551,9 @@ GameObject:
   - component: {fileID: 289835291}
   - component: {fileID: 289835294}
   - component: {fileID: 289835293}
-  - component: {fileID: 289835297}
   - component: {fileID: 289835296}
   - component: {fileID: 289835295}
+  - component: {fileID: 289835297}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -637,10 +637,10 @@ MonoBehaviour:
   panelFreeType1: {fileID: 1006544629}
   panelFreeType2: {fileID: 766114826}
   panelFreeType3: {fileID: 867711701}
-  panelGen1Type0: {fileID: 809839018}
-  panelGen1Type1: {fileID: 196344890}
-  panelGen1Type2: {fileID: 883403210}
-  panelGen1Type3: {fileID: 24793786}
+  panelGen1Type0: {fileID: 24793786}
+  panelGen1Type1: {fileID: 883403210}
+  panelGen1Type2: {fileID: 196344890}
+  panelGen1Type3: {fileID: 809839018}
   panelGen2Type0: {fileID: 1283563472}
   panelGen2Type1: {fileID: 1746740602}
   panelGen2Type2: {fileID: 1522494338}
@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 883403213}
   - component: {fileID: 883403212}
   m_Layer: 5
-  m_Name: Option6Surround
+  m_Name: Gen1Type1Surround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3825,10 +3825,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1911319765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa16e79133ec4485a8b11bd93f9f2cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e1d1cf92e3c48c2b57127b5c61dbc6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
-  panel: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ScreenOrientationLock
 --- !u!1 &1950431915
 GameObject:
   m_ObjectHideFlags: 0
