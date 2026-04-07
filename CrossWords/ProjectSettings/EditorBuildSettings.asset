@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/startup/LoginScene.unity
     guid: ce8f60f6606c14648a5cd013ee8130e8
   - enabled: 1
-    path: Assets/Scenes/startup/SkipSignInScene.unity
-    guid: ab34f8de9057148a999c2989c34990dc
-  - enabled: 1
     path: Assets/Scenes/startup/UnexpectedErrorScene.unity
     guid: d1cb8ce43d5504f47b3226ff5fe2ce66
   - enabled: 1

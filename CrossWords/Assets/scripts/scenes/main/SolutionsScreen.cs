@@ -211,7 +211,7 @@ namespace CrossWords {
                 board.SetCells(sol.BoardString);
                 score = sol.Score;
             }
-            string starterWord = WordListTarget.GetTargetWord(gameDay);
+            string starterWord = WordListSeed.GetSeedWord(gameDay);
             board.SetStarterWord(starterWord);
             board.BlockInteraction();
             mySolutionScoreText.text = $"My Score: {score}";

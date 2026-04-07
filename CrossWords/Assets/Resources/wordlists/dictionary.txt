@@ -16643,6 +16643,7 @@ dowset
 dowsing
 dowve
 dowy
+dox
 doxa
 doxastic
 doxie

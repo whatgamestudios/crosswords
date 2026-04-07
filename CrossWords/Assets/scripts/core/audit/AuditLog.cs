@@ -59,7 +59,7 @@ namespace CrossWords {
             string screenHeight = Screen.height.ToString();
 
             System.Text.StringBuilder info = new System.Text.StringBuilder();
-            info.Append("14Numbers v");
+            info.Append("Worcadian v");
             info.Append(version);
             info.AppendLine();
 

@@ -66,7 +66,7 @@ namespace CrossWords {
                     AuditLog.Log($"Loaded today's solution: {sol.BoardString}");
                     board.ResetAllCells();
                     board.SetCells(sol.BoardString);
-                    string starterWord = WordListTarget.GetTargetWord(gameDay);
+                    string starterWord = WordListSeed.GetSeedWord(gameDay);
                     board.SetStarterWord(starterWord);
                     analyseBoardAndUpdateScore();
                     _moveStack.LoadFromStorage();        
@@ -192,7 +192,7 @@ namespace CrossWords {
         private void resetBoard()
         {
             uint gameDay = Timeline.GameDay();
-            string starterWord = WordListTarget.GetTargetWord(gameDay);
+            string starterWord = WordListSeed.GetSeedWord(gameDay);
             AuditLog.Log($"Loaded word: {starterWord}");
             if (board != null)
             {
