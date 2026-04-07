@@ -14,13 +14,13 @@ namespace CrossWords {
 
     public class PassportLogin {
 
-        public static string RedirectUri = "fourteennumbers://callback";
-        public static string LogoutUri = "fourteennumbers://logout";
-        // public static string RedirectUri = "https://whatgamestudios.com/14numbers/app/callback";
-        // public static string LogoutUri = "https://whatgamestudios.com/14numbers/app/logout";
+        public static string RedirectUri = "worcadian://callback";
+        public static string LogoutUri = "worcadian://logout";
+        // public static string RedirectUri = "https://whatgamestudios.com/worcadian/app/callback";
+        // public static string LogoutUri = "https://whatgamestudios.com/worcadian/app/logout";
 
         // Passport Client ID
-        public static string ClientId = "N5pi7DdS7xCeGFoQKFinU6sEY8f8NPuh";
+        public static string ClientId = "Qe3ywdeEjvyOEolukoW76UdQNgHNjd9i";
 
         public static async Task InitAndLogin() {
             if (Application.internetReachability == NetworkReachability.NotReachable)
