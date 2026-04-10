@@ -1,5 +1,5 @@
 // Copyright (c) Whatgame Studios 2026
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: PROPRIETARY
 pragma solidity ^0.8.26;
 
 import {Test} from "forge-std/Test.sol";
@@ -9,31 +9,26 @@ import {WorcadianCheckInV1} from "../src/WorcadianCheckInV1.sol";
 contract WorcadianCheckInV1Test is Test {
     WorcadianCheckInV1 checkin;
 
-    address admin        = makeAddr("admin");
-    address ownerAddr    = makeAddr("owner");
+    address admin = makeAddr("admin");
+    address ownerAddr = makeAddr("owner");
     address upgradeAdmin = makeAddr("upgradeAdmin");
-    address player1      = makeAddr("player1");
-    address player2      = makeAddr("player2");
-    address stranger     = makeAddr("stranger");
+    address player1 = makeAddr("player1");
+    address player2 = makeAddr("player2");
+    address stranger = makeAddr("stranger");
 
     uint256 constant GAME_START = 1743292800; // March 30, 2026 00:00:00 UTC
-    uint256 constant DAY        = 86400;
-    uint256 constant MINUS_12   = 43200;
+    uint256 constant DAY = 86400;
+    uint256 constant MINUS_12 = 43200;
 
     // Returns noon UTC on _gameDay — unambiguously valid (minDay = _gameDay, maxDay = _gameDay + 1)
     function noonOn(uint32 gameDay) internal pure returns (uint256) {
         return GAME_START + uint256(gameDay) * DAY + DAY / 2;
     }
 
-    function deployProxy(
-        address _admin,
-        address _owner,
-        address _upgradeAdmin
-    ) internal returns (WorcadianCheckInV1) {
+    function deployProxy(address _admin, address _owner, address _upgradeAdmin) internal returns (WorcadianCheckInV1) {
         WorcadianCheckInV1 impl = new WorcadianCheckInV1();
         ERC1967Proxy proxy = new ERC1967Proxy(
-            address(impl),
-            abi.encodeCall(WorcadianCheckInV1.initialize, (_admin, _owner, _upgradeAdmin))
+            address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (_admin, _owner, _upgradeAdmin))
         );
         return WorcadianCheckInV1(address(proxy));
     }
@@ -60,35 +55,26 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_Initialize_ZeroAdmin_Reverts() public {
         WorcadianCheckInV1 impl = new WorcadianCheckInV1();
-        vm.expectRevert(abi.encodeWithSelector(
-            WorcadianCheckInV1.BadAddress.selector, address(0), ownerAddr, upgradeAdmin
-        ));
+        vm.expectRevert(
+            abi.encodeWithSelector(WorcadianCheckInV1.BadAddress.selector, address(0), ownerAddr, upgradeAdmin)
+        );
         new ERC1967Proxy(
-            address(impl),
-            abi.encodeCall(WorcadianCheckInV1.initialize, (address(0), ownerAddr, upgradeAdmin))
+            address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (address(0), ownerAddr, upgradeAdmin))
         );
     }
 
     function test_Initialize_ZeroOwner_Reverts() public {
         WorcadianCheckInV1 impl = new WorcadianCheckInV1();
-        vm.expectRevert(abi.encodeWithSelector(
-            WorcadianCheckInV1.BadAddress.selector, admin, address(0), upgradeAdmin
-        ));
+        vm.expectRevert(abi.encodeWithSelector(WorcadianCheckInV1.BadAddress.selector, admin, address(0), upgradeAdmin));
         new ERC1967Proxy(
-            address(impl),
-            abi.encodeCall(WorcadianCheckInV1.initialize, (admin, address(0), upgradeAdmin))
+            address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (admin, address(0), upgradeAdmin))
         );
     }
 
     function test_Initialize_ZeroUpgradeAdmin_Reverts() public {
         WorcadianCheckInV1 impl = new WorcadianCheckInV1();
-        vm.expectRevert(abi.encodeWithSelector(
-            WorcadianCheckInV1.BadAddress.selector, admin, ownerAddr, address(0)
-        ));
-        new ERC1967Proxy(
-            address(impl),
-            abi.encodeCall(WorcadianCheckInV1.initialize, (admin, ownerAddr, address(0)))
-        );
+        vm.expectRevert(abi.encodeWithSelector(WorcadianCheckInV1.BadAddress.selector, admin, ownerAddr, address(0)));
+        new ERC1967Proxy(address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (admin, ownerAddr, address(0))));
     }
 
     function test_Initialize_CannotReinitialize() public {
@@ -137,9 +123,9 @@ contract WorcadianCheckInV1Test is Test {
         checkin.checkIn(gameDay);
         vm.stopPrank();
 
-        assertEq(checkin.getDaysPlayed(player1), 1);       // not double-counted
-        assertEq(checkin.numberOfPlayers(gameDay), 1);     // not double-counted
-        assertEq(checkin.numberOfSessions(gameDay), 2);    // both sessions recorded
+        assertEq(checkin.getDaysPlayed(player1), 1); // not double-counted
+        assertEq(checkin.numberOfPlayers(gameDay), 1); // not double-counted
+        assertEq(checkin.numberOfSessions(gameDay), 2); // both sessions recorded
     }
 
     function test_CheckIn_SameDay_NoSecondEvent() public {
@@ -175,8 +161,10 @@ contract WorcadianCheckInV1Test is Test {
         uint32 gameDay = 10;
         vm.warp(noonOn(gameDay));
 
-        vm.prank(player1); checkin.checkIn(gameDay);
-        vm.prank(player2); checkin.checkIn(gameDay);
+        vm.prank(player1);
+        checkin.checkIn(gameDay);
+        vm.prank(player2);
+        checkin.checkIn(gameDay);
 
         assertEq(checkin.numberOfPlayers(gameDay), 2);
         assertEq(checkin.numberOfSessions(gameDay), 2);
@@ -268,11 +256,14 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetDaysPlayed_IndependentPerPlayer() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
 
         vm.warp(noonOn(11));
-        vm.prank(player1); checkin.checkIn(11);
-        vm.prank(player2); checkin.checkIn(11);
+        vm.prank(player1);
+        checkin.checkIn(11);
+        vm.prank(player2);
+        checkin.checkIn(11);
 
         assertEq(checkin.getDaysPlayed(player1), 2);
         assertEq(checkin.getDaysPlayed(player2), 1);
@@ -288,11 +279,14 @@ contract WorcadianCheckInV1Test is Test {
     function test_GetNumPlayers_CorrectCountsPerDay() public {
         // day 10: player1 + player2; day 11: player1 only; day 12: nobody
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
-        vm.prank(player2); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
+        vm.prank(player2);
+        checkin.checkIn(10);
 
         vm.warp(noonOn(11));
-        vm.prank(player1); checkin.checkIn(11);
+        vm.prank(player1);
+        checkin.checkIn(11);
 
         uint256[] memory result = checkin.getNumPlayers(10, 3);
         assertEq(result.length, 3);
@@ -313,11 +307,14 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetNumPlayers_StartOffset_CorrectSlice() public {
         vm.warp(noonOn(5));
-        vm.prank(player1); checkin.checkIn(5);
+        vm.prank(player1);
+        checkin.checkIn(5);
 
         vm.warp(noonOn(6));
-        vm.prank(player1); checkin.checkIn(6);
-        vm.prank(player2); checkin.checkIn(6);
+        vm.prank(player1);
+        checkin.checkIn(6);
+        vm.prank(player2);
+        checkin.checkIn(6);
 
         uint256[] memory result = checkin.getNumPlayers(5, 3);
         assertEq(result[0], 1); // day 5
@@ -342,15 +339,16 @@ contract WorcadianCheckInV1Test is Test {
         checkin.checkIn(gameDay);
         checkin.checkIn(gameDay);
         vm.stopPrank();
-        vm.prank(player2); checkin.checkIn(gameDay);
+        vm.prank(player2);
+        checkin.checkIn(gameDay);
 
         uint256[] memory sessions = checkin.getNumSessions(gameDay, 2);
-        uint256[] memory players  = checkin.getNumPlayers(gameDay, 2);
+        uint256[] memory players = checkin.getNumPlayers(gameDay, 2);
 
         assertEq(sessions[0], 4); // 4 total sessions
-        assertEq(players[0],  2); // 2 unique players
+        assertEq(players[0], 2); // 2 unique players
         assertEq(sessions[1], 0);
-        assertEq(players[1],  0);
+        assertEq(players[1], 0);
     }
 
     function test_GetNumSessions_CapsAtFiveYearsOfDays() public view {
@@ -366,8 +364,10 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetTotalPlayers_AfterCheckIns() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
-        vm.prank(player2); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
+        vm.prank(player2);
+        checkin.checkIn(10);
         assertEq(checkin.getTotalPlayers(), 2);
     }
 
@@ -381,25 +381,30 @@ contract WorcadianCheckInV1Test is Test {
         vm.stopPrank();
 
         vm.warp(noonOn(gameDay + 1));
-        vm.prank(player1); checkin.checkIn(gameDay + 1); // new day, same player
+        vm.prank(player1); // new day, same player
+        checkin.checkIn(gameDay + 1);
 
         assertEq(checkin.getTotalPlayers(), 1);
     }
 
     function test_GetTotalPlayers_NewPlayerOnEachDay() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
 
         vm.warp(noonOn(11));
-        vm.prank(player2); checkin.checkIn(11);
+        vm.prank(player2);
+        checkin.checkIn(11);
 
         assertEq(checkin.getTotalPlayers(), 2);
     }
 
     function test_GetPlayers_ReturnsPlayersInRegistrationOrder() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
-        vm.prank(player2); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
+        vm.prank(player2);
+        checkin.checkIn(10);
 
         address[] memory players = checkin.getPlayers(0, 10);
         assertEq(players.length, 2);
@@ -409,7 +414,8 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetPlayers_StartIndexBeyondEnd_ReturnsEmpty() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
 
         address[] memory players = checkin.getPlayers(5, 10);
         assertEq(players.length, 0);
@@ -417,8 +423,10 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetPlayers_CountExceedsAvailable_ClampsToAvailable() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
-        vm.prank(player2); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
+        vm.prank(player2);
+        checkin.checkIn(10);
 
         // Ask for 100 but only 2 exist
         address[] memory players = checkin.getPlayers(0, 100);
@@ -429,10 +437,14 @@ contract WorcadianCheckInV1Test is Test {
         address player3 = makeAddr("player3");
         address player4 = makeAddr("player4");
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
-        vm.prank(player2); checkin.checkIn(10);
-        vm.prank(player3); checkin.checkIn(10);
-        vm.prank(player4); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
+        vm.prank(player2);
+        checkin.checkIn(10);
+        vm.prank(player3);
+        checkin.checkIn(10);
+        vm.prank(player4);
+        checkin.checkIn(10);
 
         // Page 1
         address[] memory page1 = checkin.getPlayers(0, 2);
@@ -453,7 +465,8 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetPlayers_DayZeroPlayer_Included() public {
         vm.warp(GAME_START + MINUS_12);
-        vm.prank(player1); checkin.checkIn(0);
+        vm.prank(player1);
+        checkin.checkIn(0);
 
         address[] memory players = checkin.getPlayers(0, 10);
         assertEq(players.length, 1);
@@ -462,7 +475,8 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_GetPlayers_ZeroCount_ReturnsEmpty() public {
         vm.warp(noonOn(10));
-        vm.prank(player1); checkin.checkIn(10);
+        vm.prank(player1);
+        checkin.checkIn(10);
 
         address[] memory players = checkin.getPlayers(0, 0);
         assertEq(players.length, 0);
@@ -493,17 +507,17 @@ contract WorcadianCheckInV1Test is Test {
     // ── upgradeStorage ────────────────────────────────────────────────────────
 
     function test_UpgradeStorage_AlwaysReverts() public {
-        vm.expectRevert(abi.encodeWithSelector(
-            WorcadianCheckInV1.CanNotUpgradeToLowerOrSameVersion.selector, uint256(1)
-        ));
+        vm.expectRevert(
+            abi.encodeWithSelector(WorcadianCheckInV1.CanNotUpgradeToLowerOrSameVersion.selector, uint256(1))
+        );
         checkin.upgradeStorage("");
     }
 
     function test_UpgradeStorage_AnyCallerReverts() public {
         vm.prank(stranger);
-        vm.expectRevert(abi.encodeWithSelector(
-            WorcadianCheckInV1.CanNotUpgradeToLowerOrSameVersion.selector, uint256(1)
-        ));
+        vm.expectRevert(
+            abi.encodeWithSelector(WorcadianCheckInV1.CanNotUpgradeToLowerOrSameVersion.selector, uint256(1))
+        );
         checkin.upgradeStorage("");
     }
 

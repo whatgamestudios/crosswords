@@ -16,7 +16,6 @@ abstract contract GameDayCheck {
     // USA: Baker and Howard Island: https://en.wikipedia.org/wiki/Time_zone
     uint256 private constant MINUS_TWELVE = 43200;
 
-
     function checkGameDay(uint32 _gameDay) internal view {
         (uint32 minGameDay, uint32 maxGameDay) = determineCurrentGameDays();
         if (_gameDay < minGameDay || _gameDay > maxGameDay) {
@@ -27,7 +26,7 @@ abstract contract GameDayCheck {
     /**
      * @notice Determine the maximum and minimum game days.
      * @dev This function will revert due to an underflow on the first twelve hours
-     *      of game day zero because now - 12 hours - game start time will be less 
+     *      of game day zero because now - 12 hours - game start time will be less
      *      than zero. This is not an issue because day zero is in the past.
      * @return minGameDay, maxGameDay: Minimum and maximum possible game days, given the current time.
      */

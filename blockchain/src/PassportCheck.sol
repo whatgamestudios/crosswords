@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: PROPRIETARY
 pragma solidity ^0.8.26;
 
-import {AccessControlEnumerableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlEnumerableUpgradeable.sol";
+import {
+    AccessControlEnumerableUpgradeable
+} from "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlEnumerableUpgradeable.sol";
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-
 
 // Interface to retrieve the implementation stored inside the Proxy contract
 /// Interface for Passport Wallet's proxy contract.
@@ -13,7 +14,6 @@ interface IWalletProxy {
     /// forge-lint: disable-next-line(mixed-case-function)
     function PROXY_getImplementation() external view returns (address);
 }
-
 
 /**
  * @notice Determine if an address is a Passport Wallet.
@@ -30,15 +30,14 @@ contract PassportCheck is Initializable, AccessControlEnumerableUpgradeable {
     /// @notice Mapping of Allowlisted bytecodes
     mapping(bytes32 bytecodeHash => bool allowed) private bytecodeAllowlist;
 
-
     /**
-     * @notice Initialise Passport Wallet checker. 
-     * @dev At present there is only one Passport implementation. Hence, passing in the address of 
+     * @notice Initialise Passport Wallet checker.
+     * @dev At present there is only one Passport implementation. Hence, passing in the address of
      *  any Passport wallet will be enough to configure this contract.
      */
     /// forge-lint: disable-next-line(mixed-case-function)
     function __PassportCheck_init(address _aPassportWallet) internal onlyInitializing {
-         _addWalletToAllowlist(_aPassportWallet);
+        _addWalletToAllowlist(_aPassportWallet);
     }
 
     /**

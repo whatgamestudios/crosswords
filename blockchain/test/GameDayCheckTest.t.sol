@@ -1,5 +1,5 @@
 // Copyright (c) Whatgame Studios 2026
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: PROPRIETARY
 pragma solidity ^0.8.26;
 
 import {Test} from "forge-std/Test.sol";
@@ -23,9 +23,9 @@ contract GameDayCheckTest is Test {
 
     // Mirror constants from GameDayCheck
     uint256 constant GAME_START = 1743292800; // Monday March 30, 2026 00:00:00 UTC
-    uint256 constant DAY        = 86400;
-    uint256 constant MINUS_12   = 43200;      // GMT-12 offset in seconds
-    uint256 constant PLUS_14    = 50400;      // GMT+14 offset in seconds
+    uint256 constant DAY = 86400;
+    uint256 constant MINUS_12 = 43200; // GMT-12 offset in seconds
+    uint256 constant PLUS_14 = 50400; // GMT+14 offset in seconds
 
     function setUp() public {
         harness = new GameDayCheckHarness();
@@ -125,19 +125,15 @@ contract GameDayCheckTest is Test {
 
     function test_CheckGameDay_FutureDay_Reverts() public {
         vm.warp(GAME_START + 10 * DAY + DAY / 2); // valid: [10, 11]
-        vm.expectRevert(abi.encodeWithSelector(
-            GameDayCheck.GameDayInvalid.selector,
-            uint32(12), uint32(10), uint32(11)
-        ));
+        vm.expectRevert(
+            abi.encodeWithSelector(GameDayCheck.GameDayInvalid.selector, uint32(12), uint32(10), uint32(11))
+        );
         harness.exposedCheckGameDay(12);
     }
 
     function test_CheckGameDay_PastDay_Reverts() public {
         vm.warp(GAME_START + 10 * DAY + DAY / 2); // valid: [10, 11]
-        vm.expectRevert(abi.encodeWithSelector(
-            GameDayCheck.GameDayInvalid.selector,
-            uint32(9), uint32(10), uint32(11)
-        ));
+        vm.expectRevert(abi.encodeWithSelector(GameDayCheck.GameDayInvalid.selector, uint32(9), uint32(10), uint32(11)));
         harness.exposedCheckGameDay(9);
     }
 
@@ -146,10 +142,7 @@ contract GameDayCheckTest is Test {
         harness.exposedCheckGameDay(0);
     }
 
-    function testFuzz_CheckGameDay_AnyDayInValidRange_NeverReverts(
-        uint256 timestamp,
-        uint8 offset
-    ) public {
+    function testFuzz_CheckGameDay_AnyDayInValidRange_NeverReverts(uint256 timestamp, uint8 offset) public {
         timestamp = bound(timestamp, GAME_START + MINUS_12, GAME_START + 10_000 * DAY);
         vm.warp(timestamp);
         (uint32 min, uint32 max) = harness.exposedDetermineCurrentGameDays();
@@ -159,10 +152,7 @@ contract GameDayCheckTest is Test {
         harness.exposedCheckGameDay(day); // must not revert
     }
 
-    function testFuzz_CheckGameDay_DayBeyondMax_AlwaysReverts(
-        uint256 timestamp,
-        uint16 excess
-    ) public {
+    function testFuzz_CheckGameDay_DayBeyondMax_AlwaysReverts(uint256 timestamp, uint16 excess) public {
         timestamp = bound(timestamp, GAME_START + MINUS_12, GAME_START + 10_000 * DAY);
         excess = uint16(bound(excess, 1, 1000));
         vm.warp(timestamp);

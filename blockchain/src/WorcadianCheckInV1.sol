@@ -4,26 +4,24 @@ pragma solidity ^0.8.26;
 
 //import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import {AccessControlEnumerableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlEnumerableUpgradeable.sol";
+import {
+    AccessControlEnumerableUpgradeable
+} from "@openzeppelin/contracts-upgradeable/access/extensions/AccessControlEnumerableUpgradeable.sol";
 
 import {GameDayCheck} from "./GameDayCheck.sol";
-
 
 /**
  * Manage players submitting solutions for the 14Numbers game.
  *
  * This contract is designed to be upgradeable.
  */
-contract WorcadianCheckInV1 is 
-    AccessControlEnumerableUpgradeable, GameDayCheck, UUPSUpgradeable {
-
+contract WorcadianCheckInV1 is AccessControlEnumerableUpgradeable, GameDayCheck, UUPSUpgradeable {
     /// @notice Error: Attempting to upgrade contract storage to version 0.
     error CanNotUpgradeToLowerOrSameVersion(uint256 _storageVersion);
 
     error BadAddress(address _admin, address _owner, address _upgrade);
 
     event CheckIn(uint32 _gameDay, address _player, uint32 _numDaysPlayed);
-
 
     /// @notice Only UPGRADE_ROLE can upgrade the contract
     bytes32 public constant UPGRADE_ROLE = keccak256("UPGRADE_ROLE");
@@ -46,7 +44,6 @@ contract WorcadianCheckInV1 is
     /// @notice version number of the storage variable layout.
     uint256 public version;
 
-
     // Holds a player's stats.
     struct Stats {
         uint32 mostRecentGameDay;
@@ -62,14 +59,12 @@ contract WorcadianCheckInV1 is
     // Every address that has ever played the game, in order of first check-in.
     address[] private allPlayers;
 
-
     /**
      * @dev Don't allow the implementation contract to be initialised.
      */
     constructor() {
         _disableInitializers();
     }
-
 
     /**
      * @notice Initialises the upgradeable contract, setting up admin accounts.
@@ -78,8 +73,10 @@ contract WorcadianCheckInV1 is
      * @param _upgradeAdmin the address to grant `UPGRADE_ROLE` to.
      */
     function initialize(address _roleAdmin, address _owner, address _upgradeAdmin) public virtual initializer {
-        require(_roleAdmin != address(0) && _owner != address(0) && _upgradeAdmin != address(0), 
-            BadAddress(_roleAdmin, _owner, _upgradeAdmin));
+        require(
+            _roleAdmin != address(0) && _owner != address(0) && _upgradeAdmin != address(0),
+            BadAddress(_roleAdmin, _owner, _upgradeAdmin)
+        );
 
         __UUPSUpgradeable_init();
         __AccessControlEnumerable_init();
@@ -92,15 +89,18 @@ contract WorcadianCheckInV1 is
     /**
      * @notice Function to be called when upgrading this contract.
      * @dev Call this function as part of upgradeToAndCall().
-     * @dev This function does not need access control. Future versions should be written to 
+     * @dev This function does not need access control. Future versions should be written to
      *      only update from the previous version to the current version.
      * @ param _data ABI encoded data to be used as part of the contract storage upgrade.
      */
-    function upgradeStorage(bytes memory /* _data */) external virtual {
+    function upgradeStorage(
+        bytes memory /* _data */
+    )
+        external
+        virtual
+    {
         revert CanNotUpgradeToLowerOrSameVersion(version);
     }
-
-
 
     /**
      * @notice Check in when player opens the game play screen.
@@ -143,7 +143,7 @@ contract WorcadianCheckInV1 is
         _days = allPlayerStats[_player].daysPlayed;
     }
 
-    function getNumPlayers(uint32 _startGameDay, uint32 _numDays) external view returns (uint256 [] memory _numPlayers) {
+    function getNumPlayers(uint32 _startGameDay, uint32 _numDays) external view returns (uint256[] memory _numPlayers) {
         _numDays = _numDays > FIVE_YEARS_OF_DAYS ? FIVE_YEARS_OF_DAYS : _numDays;
         _numPlayers = new uint256[](_numDays);
         for (uint32 i = 0; i < _numDays; i++) {
@@ -151,7 +151,11 @@ contract WorcadianCheckInV1 is
         }
     }
 
-    function getNumSessions(uint32 _startGameDay, uint32 _numDays) external view returns (uint256 [] memory _numSessions) {
+    function getNumSessions(uint32 _startGameDay, uint32 _numDays)
+        external
+        view
+        returns (uint256[] memory _numSessions)
+    {
         _numDays = _numDays > FIVE_YEARS_OF_DAYS ? FIVE_YEARS_OF_DAYS : _numDays;
         _numSessions = new uint256[](_numDays);
         for (uint32 i = 0; i < _numDays; i++) {
