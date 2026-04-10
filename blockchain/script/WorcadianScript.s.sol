@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {WorcadianCheckInV1} from "../src/WorcadianCheckInV1.sol";
 
 contract WorcadianScript is Script {
-    function deployV1() public {
+    function deployCheckInV1() public {
         address deployer = vm.envAddress("DEPLOYER_ADDRESS");
         address roleAdmin = deployer;
         address upgradeAdmin = deployer;

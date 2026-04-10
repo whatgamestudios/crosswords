@@ -35,6 +35,15 @@ Then execute the script:
 sh script/deployCheckInV1.sh  
 ```
 
+### Deployed Addresses
+
+*WorcadianCheckIn*:
+
+|Contract                | Address                   |
+|------------------------|---------------------------|
+| ERC1967Proxy.sol       | [0x7e70b51a3090753593aaafedf26536ed2cbc26e8](https://explorer.immutable.com/address/0x7e70b51a3090753593aaafedf26536ed2cbc26e8) |
+| WorcadianCheckInV1     | [0xdde657951a32e75a0e11a7763c029202fe314a50](https://explorer.immutable.com/address/0xdde657951a32e75a0e11a7763c029202fe314a50) |
+
 
 ### C# Code Generation:
 
