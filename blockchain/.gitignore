@@ -15,3 +15,8 @@ docs/
 .env
 
 .gas-snapshot
+
+# C# generated files.
+gen/
+
+.vscode/**

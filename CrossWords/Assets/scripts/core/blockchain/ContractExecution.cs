@@ -1,4 +1,4 @@
-// Copyright (c) Whatgame Studios 2024 - 2025
+// Copyright (c) Whatgame Studios 2024 - 2026
 using UnityEngine;
 using System;
 using System.Collections;
@@ -19,7 +19,7 @@ using Immutable.Passport.Model;
 
 namespace CrossWords {
 
-    public class FourteenNumbersContract {
+    public class ContractExecution {
         public const int MAX_RETRIES = 3;
 
         public enum TransactionStatus {
@@ -34,7 +34,7 @@ namespace CrossWords {
 
         public int retryCount;
 
-        public FourteenNumbersContract(string contractAddr) {
+        public ContractExecution(string contractAddr) {
             contractAddress = contractAddr;
             retryCount = 0;
         }
@@ -92,6 +92,3 @@ namespace CrossWords {
 
     }
 }
-
-
-
