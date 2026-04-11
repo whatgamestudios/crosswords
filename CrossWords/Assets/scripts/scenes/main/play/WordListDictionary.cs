@@ -51,5 +51,20 @@ namespace CrossWords {
         {
             return dictionarySet.Contains(word.ToLower());
         }
+
+        public string GetTwoLetterWords()
+        {
+            System.Text.StringBuilder res = new System.Text.StringBuilder();
+
+            foreach (string word in dictionarySet)
+            {
+                if (word.Length == 2)
+                {
+                    res.Append(word);
+                    res.Append('\n');
+                }
+            }
+            return res.ToString();
+        }
     }
 }

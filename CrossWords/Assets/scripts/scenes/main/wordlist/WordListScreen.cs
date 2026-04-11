@@ -113,7 +113,10 @@ namespace CrossWords {
         }        
 
         public void OnButtonClick(string buttonText) {
-            if (buttonText == "ShareLogs") {
+            if (buttonText == "TwoLetters")
+            {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("TwoLetterWordsScene", LoadSceneMode.Single);
             }
             else
             {
@@ -161,11 +164,8 @@ namespace CrossWords {
             // Bodge the size of the image to approximately fit where the image
             // should be.
             RectTransform rt = img.rectTransform;
-//            Vector2 originalSize = rt.sizeDelta;
             img.sprite = s;
             rt.sizeDelta = new Vector2(sizeX, sizeY);
-  //          rt.sizeDelta = originalSize;
-            
         }
 
         private void DisableLetterButtonsForUsedLetters(string str)
