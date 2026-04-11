@@ -84,6 +84,10 @@ namespace CrossWords {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single);
             }
+            else if (buttonText == "WordList") {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("WordListScene", LoadSceneMode.Single);
+            }
             else
             {
                 AuditLog.Log($"Menu: Unknown button {buttonText}");
