@@ -20,14 +20,20 @@ namespace CrossWords {
         private string checkText;
         private string startsWithText;
 
-        
+        private float sizeX;
+        private float sizeY;
+
         void Start()
         {
             AuditLog.Log($"Word List Scene");
             WireLetterButtons();
-            checkTextSelected = true;
             checkText = "";
             startsWithText = "";
+
+            sizeX = CheckEntryBackground.rectTransform.sizeDelta.x + 500f;
+            sizeY = CheckEntryBackground.rectTransform.sizeDelta.y + 25f;
+
+            OnCheckTextSelected();
         }
 
         void WireLetterButtons()
@@ -51,15 +57,20 @@ namespace CrossWords {
 
         void OnLetterButton(Button button, char letter)
         {
-            button.interactable = false;
-
             if (checkTextSelected)
             {
-                checkText += letter;
+                if (checkText.Length <= 11) {
+                    checkText += letter;
+                    button.interactable = false;
+                }
             }
             else
             {
-                startsWithText += letter;
+                if (startsWithText.Length <= 11)
+                {
+                    startsWithText += letter;
+                    button.interactable = false;
+                }
             }
         }
 
@@ -73,6 +84,7 @@ namespace CrossWords {
                 {
                     checkText = checkText.Substring(0, lenLessOne);
                 }
+                DisableLetterButtonsForUsedLetters(checkText);
             }
             else
             {
@@ -81,6 +93,7 @@ namespace CrossWords {
                 if (lenLessOne >= 0)
                 {
                     startsWithText = startsWithText.Substring(0, lenLessOne);
+                    DisableLetterButtonsForUsedLetters(startsWithText);
                 }
             }
         }
@@ -96,6 +109,7 @@ namespace CrossWords {
             {
                 startsWithText = "";
             }
+            DisableLetterButtonsForUsedLetters("");
         }        
 
         public void OnButtonClick(string buttonText) {
@@ -113,6 +127,7 @@ namespace CrossWords {
             checkTextSelected = true;
             SetImageSprite(CheckEntryBackground, true);
             SetImageSprite(StartsWithBackground, false);
+            DisableLetterButtonsForUsedLetters(checkText);
         }
 
         public void OnStartsWithTextSelected()
@@ -120,6 +135,7 @@ namespace CrossWords {
             checkTextSelected = false;
             SetImageSprite(CheckEntryBackground, false);
             SetImageSprite(StartsWithBackground, true);
+            DisableLetterButtonsForUsedLetters(startsWithText);
         }
 
         void Update()
@@ -141,7 +157,35 @@ namespace CrossWords {
             Rect size = new Rect(0.0f, 0.0f, tex.width, tex.height);
             Vector2 pivot = new Vector2(0.0f, 0.0f);
             Sprite s = Sprite.Create(tex, size, pivot);
+
+            // Bodge the size of the image to approximately fit where the image
+            // should be.
+            RectTransform rt = img.rectTransform;
+//            Vector2 originalSize = rt.sizeDelta;
             img.sprite = s;
+            rt.sizeDelta = new Vector2(sizeX, sizeY);
+  //          rt.sizeDelta = originalSize;
+            
         }
+
+        private void DisableLetterButtonsForUsedLetters(string str)
+        {
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var button in buttons)
+            {
+                string n = button.gameObject.name;
+                if (n.Length != 4 || !n.StartsWith("But", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                char c = n[3];
+                if (c >= 'A' && c <= 'Z')
+                {
+                    button.interactable = (str.Contains(c) == false);
+                }
+            }
+        }
+
     }
 }
