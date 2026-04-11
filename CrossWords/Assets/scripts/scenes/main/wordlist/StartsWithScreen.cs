@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 namespace CrossWords { 
 
-    public class TwoLetterWordsScreen : MonoBehaviour
+    public class StartsWithScreen : MonoBehaviour
     {
         public TextMeshProUGUI InfoText;
         public RectTransform scrollContent;
 
         void Start()
         {
-            AuditLog.Log($"Two Letter Words screen");
+            AuditLog.Log($"Starts With screen");
             InfoText.text = "Loading";
             Invoke("DelayedLoad", 0.1f);
         }
@@ -23,7 +23,7 @@ namespace CrossWords {
             WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
             if (wordListDictionary == null)
             {
-                AuditLog.Log("Two Letter Word screen: No dictionary");
+                AuditLog.Log("Starts With screen: No dictionary");
             }
             else if (!wordListDictionary.DictionaryLoaded)
             {
@@ -31,8 +31,20 @@ namespace CrossWords {
             }
             else
             {
-                string words = wordListDictionary.GetTwoLetterWords();
-                InfoText.text = words;
+                string prefix = MessagePass.GetMsg();
+                (bool max, string words) = wordListDictionary.StartsWith(prefix);
+                if (words.Length == 0)
+                {
+                    InfoText.text = "No words found";
+                }
+                else if (max)
+                {
+                    InfoText.text = "The first 1000 words are:\n" + words;
+                }
+                else
+                {
+                    InfoText.text = words;
+                }
 
                 // 1. Force TMP to calculate its heights immediately
                 InfoText.ForceMeshUpdate();

@@ -66,5 +66,29 @@ namespace CrossWords {
             }
             return res.ToString();
         }
+
+        public (bool, string) StartsWith(string prefix)
+        {
+            System.Text.StringBuilder res = new System.Text.StringBuilder();
+            prefix = prefix.ToLower();
+
+            int numResults = 0;
+            int limit = 1000;
+            foreach (string word in dictionarySet)
+            {
+                if (word.StartsWith(prefix))
+                {
+                    res.Append(word);
+                    res.Append('\n');
+                    numResults++;
+                    if (numResults >= limit)
+                    {
+                        return (true, res.ToString());
+                    }
+                }
+            }
+            return (false, res.ToString());
+        }
+
     }
 }

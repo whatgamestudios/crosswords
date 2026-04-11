@@ -113,7 +113,14 @@ namespace CrossWords {
         }        
 
         public void OnButtonClick(string buttonText) {
-            if (buttonText == "TwoLetters")
+            AuditLog.Log("WordList: button: " + buttonText);
+            if (buttonText == "StartsWith")
+            {
+                MessagePass.SetMsg(startsWithText);
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("StartsWithScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "TwoLetters")
             {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("TwoLetterWordsScene", LoadSceneMode.Single);

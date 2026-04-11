@@ -1114,7 +1114,6 @@ GameObject:
   - component: {fileID: 289835296}
   - component: {fileID: 289835297}
   - component: {fileID: 289835298}
-  - component: {fileID: 289835299}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1222,20 +1221,6 @@ MonoBehaviour:
   StartsWithEntryText: {fileID: 1248896356}
   CheckEntryBackground: {fileID: 602055597}
   StartsWithBackground: {fileID: 1449820367}
---- !u!114 &289835299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordListDictionary
-  dictionaryFile: {fileID: 4900000, guid: f1998c163d70c49c8bf2e98e583bc4cb, type: 3}
-  DictionaryLoaded: 0
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,8 +1981,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CrossWords.SettingsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835298}
+        m_TargetAssemblyTypeName: CrossWords.WordListScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -4118,8 +4103,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CrossWords.SettingsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835298}
+        m_TargetAssemblyTypeName: CrossWords.WordListScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:

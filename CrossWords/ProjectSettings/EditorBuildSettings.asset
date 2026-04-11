@@ -71,6 +71,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/main/wordlist/TwoLetterWordsScene.unity
     guid: 1ad36d8dc48104e98b284fd3e985ca21
+  - enabled: 1
+    path: Assets/Scenes/main/wordlist/StartsWithScene.unity
+    guid: ff38c8aaf90db427ba2fcfd3d199756e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
