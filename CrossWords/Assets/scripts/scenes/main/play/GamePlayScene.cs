@@ -318,7 +318,7 @@ namespace CrossWords {
                         status1 = "Getting there";
                         break;
                     case 15:
-                        status1 = "Is khajur a";
+                        status1 = "What is a";
                         status2 = "word?";
                         break;
                     case 14:
@@ -349,12 +349,12 @@ namespace CrossWords {
                         status1 = "Riding high";
                         break;
                     case 6:
-                        status1 = "Today is a good";
-                        status2 = "day";
+                        status1 = "Today is a";
+                        status2 = "good day";
                         break;
                     case 5:
-                        status1 = "Today is a great";
-                        status2 = "day";
+                        status1 = "Today is a";
+                        status2 = "great day";
                         break;
                     case 4:
                         status1 = "Awesome";
