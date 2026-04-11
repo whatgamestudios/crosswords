@@ -50,6 +50,36 @@ namespace CrossWords {
             return maybe;
         }
 
+        public bool Remove(char target)
+        {
+            if (_stack.Count == 0)
+            {
+                return false;
+            }
+
+            Stack<MoveEntry> tempStack = new Stack<MoveEntry>();
+
+            bool found = false;
+            while (_stack.Count > 0)
+            {
+                MoveEntry current = _stack.Pop();
+                if (current.Letter == target) 
+                {
+                    found = true;
+                    break; // Found it, don't push it to temp
+                }
+                tempStack.Push(current);
+            }
+
+            // Push everything back in the original order
+            while (tempStack.Count > 0)
+            {
+                _stack.Push(tempStack.Pop());
+            }
+            StoreToStorage();
+            return found;
+        }
+
         public void LoadFromStorage()
         {
             _stack.Clear();
@@ -75,7 +105,7 @@ namespace CrossWords {
             string all = "";
             foreach (var item in _stack)
             {
-                string s = String.Format("{0,2}{1,2}{1}", item.X, item.Y, item.Letter);
+                string s = String.Format("{0,2}{1,2}{2}", item.X, item.Y, item.Letter);
                 all += s;               
             }
             MoveStackStore.Store(all);

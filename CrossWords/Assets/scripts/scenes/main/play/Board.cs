@@ -238,17 +238,15 @@ namespace CrossWords {
 
         internal void OnCellPointerDown(int x, int y)
         {
-            // Occupied cells are never selectable.
-            if (IsCellOccupied(x, y))
+            if (!CanSelectCell(x, y))
                 return;
 
-            // Empty cells are only selectable if at least one adjacent cell already has a character,
-            // unless the board is completely empty (first move).
-            if (!CanSelectEmptyCell(x, y))
-                return;
-
+            // If an cell is already selected, then switch the colour
+            // back to its unselected colour.
             if (_selectedX.HasValue && _selectedY.HasValue)
-                RestoreCellVisual(_selectedX.Value, _selectedY.Value);
+            {
+                RestoreCellBackground(_selectedX.Value, _selectedY.Value);
+            }
 
             _selectedX = x;
             _selectedY = y;
@@ -335,27 +333,18 @@ namespace CrossWords {
             return !IsEmptyChar(_characters[y, x]);
         }
 
-        bool CanSelectEmptyCell(int x, int y)
+        bool CanSelectCell(int x, int y)
         {
             if (interactionBlocked)
             {
                 return false;
             }
 
-            if (IsCellOccupied(x, y))
+            if (IsStarterCell(x, y))
             {
                 return false;
             }
-
-            // If the board has no characters at all yet, allow selection anywhere.
-            // if (!HasAnyCharacterOnBoard())
-                return true;
-
-            // 4-neighborhood adjacency (up/down/left/right).
-            // return IsNeighborOccupied(x - 1, y) ||
-            //     IsNeighborOccupied(x + 1, y) ||
-            //     IsNeighborOccupied(x, y - 1) ||
-            //     IsNeighborOccupied(x, y + 1);
+            return true;
         }
 
         public void BlockInteraction()
@@ -374,13 +363,6 @@ namespace CrossWords {
                 }
             }
             return false;
-        }
-
-        bool IsNeighborOccupied(int x, int y)
-        {
-            if ((uint)x >= BOARD_SIZE || (uint)y >= BOARD_SIZE)
-                return false;
-            return IsCellOccupied(x, y);
         }
 
         public char GetCell(int x, int y)
@@ -405,6 +387,9 @@ namespace CrossWords {
             return s;
         }
 
+        /**
+         * Indicate which cell if any has been selected.
+         */
         public bool TryGetSelectedCell(out int x, out int y)
         {
             if (!_selectedX.HasValue || !_selectedY.HasValue)
@@ -472,6 +457,15 @@ namespace CrossWords {
         internal bool IsStarterCell(int x, int y)
         {
             return _isStarterCell[y, x];
+        }
+
+
+        void RestoreCellBackground(int x, int y)
+        {
+            if (_isStarterCell[y, x])
+                _cellViews[y, x].SetStarterWordBackground();
+            else
+                _cellViews[y, x].SetNormalBackground();
         }
 
         void RestoreCellVisual(int x, int y)
@@ -578,16 +572,26 @@ namespace CrossWords {
 
             public void SetNormalAppearance()
             {
+                SetNormalBackground();
+                _text.color = NormalCellTextColor;
+            }
+
+            public void SetNormalBackground()
+            {
                 _borderImage.color = CellBorderColor;
                 _innerImage.color = CellNormalColor;
-                _text.color = NormalCellTextColor;
             }
 
             public void SetStarterWordAppearance()
             {
+                SetStarterWordBackground();
+                _text.color = StarterCellTextColor;
+            }
+            
+            public void SetStarterWordBackground()
+            {
                 _borderImage.color = StarterCellBorderColor;
                 _innerImage.color = StarterCellInnerColor;
-                _text.color = StarterCellTextColor;
             }
 
             public void OnPointerDown(PointerEventData eventData)

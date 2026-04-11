@@ -152,7 +152,28 @@ namespace CrossWords {
         void OnLetterButton(Button button, char letter)
         {
             if (board == null || !board.TryGetSelectedCell(out int x, out int y))
+            {
                 return;
+            }
+
+            if (board.IsCellOccupied(x, y))
+            {
+                char previousChar = board.GetCell(x, y);
+                bool found = _moveStack.Remove(previousChar);
+                if (!found)
+                {
+                    AuditLog.Log($"Replacing character <{previousChar}> not found");
+                } 
+                else
+                {
+                    GameObject btnObject = GameObject.Find($"But{previousChar}");
+                    if (btnObject != null)
+                    {
+                        Button prevButton = btnObject.GetComponent<Button>();
+                        prevButton.interactable = true;
+                    }
+                }
+            }
 
             board.SetCell(x, y, letter);
             _moveStack.Add(letter, x, y);
