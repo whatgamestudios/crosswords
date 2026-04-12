@@ -27,13 +27,15 @@ namespace CrossWords {
         {
             AuditLog.Log($"Word List Scene");
             WireLetterButtons();
-            checkText = "";
-            startsWithText = "";
+
+            (checkTextSelected, checkText, startsWithText) = WordListStore.Load();
 
             sizeX = CheckEntryBackground.rectTransform.sizeDelta.x + 500f;
             sizeY = CheckEntryBackground.rectTransform.sizeDelta.y + 25f;
 
-            OnCheckTextSelected();
+            SetImageSprite(CheckEntryBackground, checkTextSelected);
+            SetImageSprite(StartsWithBackground, !checkTextSelected);
+            DisableLetterButtonsForUsedLetters(checkText);
         }
 
         void WireLetterButtons()
@@ -72,6 +74,7 @@ namespace CrossWords {
                     button.interactable = false;
                 }
             }
+            WordListStore.Store(checkTextSelected, checkText, startsWithText);
         }
 
         public void OnBackSpaceButton()
@@ -96,6 +99,7 @@ namespace CrossWords {
                     DisableLetterButtonsForUsedLetters(startsWithText);
                 }
             }
+            WordListStore.Store(checkTextSelected, checkText, startsWithText);
         }
 
 
@@ -110,6 +114,7 @@ namespace CrossWords {
                 startsWithText = "";
             }
             DisableLetterButtonsForUsedLetters("");
+            WordListStore.Store(checkTextSelected, checkText, startsWithText);
         }        
 
         public void OnButtonClick(string buttonText) {
@@ -138,6 +143,7 @@ namespace CrossWords {
             SetImageSprite(CheckEntryBackground, true);
             SetImageSprite(StartsWithBackground, false);
             DisableLetterButtonsForUsedLetters(checkText);
+            WordListStore.Store(checkTextSelected, checkText, startsWithText);
         }
 
         public void OnStartsWithTextSelected()
@@ -146,6 +152,7 @@ namespace CrossWords {
             SetImageSprite(CheckEntryBackground, false);
             SetImageSprite(StartsWithBackground, true);
             DisableLetterButtonsForUsedLetters(startsWithText);
+            WordListStore.Store(checkTextSelected, checkText, startsWithText);
         }
 
         void Update()

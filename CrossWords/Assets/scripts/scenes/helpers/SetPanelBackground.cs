@@ -12,7 +12,6 @@ namespace CrossWords {
             // Set panel width to screen width
             RectTransform panelRect = panel.GetComponent<RectTransform>();
             panelRect.sizeDelta = new Vector2(Screen.width * 3 / 2, panelRect.sizeDelta.y);
-            AuditLog.Log($"SetPanelBackground: panel: {panel}");
             ScreenBackgroundSetter.SetPanelBackground(panel);
         }
     }
