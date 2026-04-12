@@ -119,7 +119,13 @@ namespace CrossWords {
 
         public void OnButtonClick(string buttonText) {
             AuditLog.Log("WordList: button: " + buttonText);
-            if (buttonText == "StartsWith")
+            if (buttonText == "CheckWord")
+            {
+                MessagePass.SetMsg(checkText);
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("WordCheckScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "StartsWith")
             {
                 MessagePass.SetMsg(startsWithText);
                 SceneStack.Instance().PushScene();

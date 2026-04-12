@@ -74,6 +74,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/main/wordlist/StartsWithScene.unity
     guid: ff38c8aaf90db427ba2fcfd3d199756e
+  - enabled: 1
+    path: Assets/Scenes/main/wordlist/WordCheckScene.unity
+    guid: db378c7aa39fc4dbbb223f0f7a48adef
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

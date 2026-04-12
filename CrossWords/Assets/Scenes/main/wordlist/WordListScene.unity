@@ -8378,8 +8378,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CrossWords.SettingsScreen, Assembly-CSharp
+      - m_Target: {fileID: 289835298}
+        m_TargetAssemblyTypeName: CrossWords.WordListScreen, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -8387,7 +8387,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: InWordList
+          m_StringArgument: CheckWord
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1742643357
