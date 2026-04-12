@@ -41,12 +41,12 @@ namespace CrossWords {
                 if (inDic)
                 {
                     WordCheckResult.text = word + " is in the word list";
-                    SuggestButtonText.text = "Suggest Word be Removed from the Word List";
+                    SuggestButtonText.text = "Suggest word be REMOVED from the word list";
                 }
                 else
                 {
                     WordCheckResult.text = word + " is not in the word list";
-                    SuggestButtonText.text = "Suggest Word be Added to the Word List";
+                    SuggestButtonText.text = "Suggest word be ADDED to the word list";
                 }
                 SuggestBackground.SetActive(true);
                 SuggestButton.gameObject.SetActive(true);
