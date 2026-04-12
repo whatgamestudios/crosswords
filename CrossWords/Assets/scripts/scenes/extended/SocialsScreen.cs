@@ -15,7 +15,7 @@ namespace CrossWords {
     
         public void OnButtonClick(string buttonText) {
             if (buttonText == "Instagram") {
-                Application.OpenURL("https://www.instagram.com/14numbers_/");
+                Application.OpenURL("https://www.instagram.com/worcadian/");
             }
             else if (buttonText == "Discord") {
                 Application.OpenURL("https://discord.gg/V6nbs2grws");
@@ -24,7 +24,7 @@ namespace CrossWords {
                 Application.OpenURL("https://www.youtube.com/@14Numbers");
             }
             else if (buttonText == "Twitter") {
-                Application.OpenURL("https://x.com/14_numbers");
+                Application.OpenURL("https://x.com/worcadian");
             }
             else {
                 AuditLog.Log($"Socials Screen: Unknown button: {buttonText}");
