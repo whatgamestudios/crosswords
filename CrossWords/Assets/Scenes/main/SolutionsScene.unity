@@ -2914,7 +2914,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2103547704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 231346eb4884b4e629d7384784a54974, type: 3}
+  m_Script: {fileID: 11500000, guid: ecb0bc0d1615642cfbc8303652274bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.MyBoard
 --- !u!1660057539 &9223372036854775807
