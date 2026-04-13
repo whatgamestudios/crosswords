@@ -43,6 +43,7 @@ sh script/deployCheckInV1.sh
 |------------------------|---------------------------|
 | ERC1967Proxy.sol       | [0x7e70b51a3090753593aaafedf26536ed2cbc26e8](https://explorer.immutable.com/address/0x7e70b51a3090753593aaafedf26536ed2cbc26e8) |
 | WorcadianCheckInV1     | [0xdde657951a32e75a0e11a7763c029202fe314a50](https://explorer.immutable.com/address/0xdde657951a32e75a0e11a7763c029202fe314a50) |
+| WorcadianCheckInV2     | [0xeb6223ed5e8b1e815a70e64f587fae4e6733a2c3](https://explorer.immutable.com/address/0xeb6223ed5e8b1e815a70e64f587fae4e6733a2c3) |
 
 
 ### C# Code Generation:

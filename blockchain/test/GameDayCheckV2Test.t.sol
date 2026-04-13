@@ -3,12 +3,12 @@
 pragma solidity ^0.8.26;
 
 import {Test} from "forge-std/Test.sol";
-import {GameDayCheck} from "../src/GameDayCheck.sol";
+import {GameDayCheckV2} from "../src/GameDayCheckV2.sol";
 
 /**
  * Concrete harness to expose GameDayCheck's internal functions for testing.
  */
-contract GameDayCheckHarness is GameDayCheck {
+contract GameDayCheckHarnessV2 is GameDayCheckV2 {
     function exposedCheckGameDay(uint32 _gameDay) external view {
         checkGameDay(_gameDay);
     }
@@ -18,17 +18,17 @@ contract GameDayCheckHarness is GameDayCheck {
     }
 }
 
-contract GameDayCheckTest is Test {
-    GameDayCheckHarness harness;
+contract GameDayCheckTestV2 is Test {
+    GameDayCheckHarnessV2 harness;
 
     // Mirror constants from GameDayCheck
-    uint256 constant GAME_START = 1743292800; // Monday March 30, 2025 00:00:00 UTC
+    uint256 constant GAME_START = 1774828800; // Monday March 30, 2026 00:00:00 UTC
     uint256 constant DAY = 86400;
     uint256 constant MINUS_12 = 43200; // GMT-12 offset in seconds
     uint256 constant PLUS_14 = 50400; // GMT+14 offset in seconds
 
     function setUp() public {
-        harness = new GameDayCheckHarness();
+        harness = new GameDayCheckHarnessV2();
     }
 
     // ── determineCurrentGameDays ──────────────────────────────────────────────
@@ -126,14 +126,14 @@ contract GameDayCheckTest is Test {
     function test_CheckGameDay_FutureDay_Reverts() public {
         vm.warp(GAME_START + 10 * DAY + DAY / 2); // valid: [10, 11]
         vm.expectRevert(
-            abi.encodeWithSelector(GameDayCheck.GameDayInvalid.selector, uint32(12), uint32(10), uint32(11))
+            abi.encodeWithSelector(GameDayCheckV2.GameDayInvalid.selector, uint32(12), uint32(10), uint32(11))
         );
         harness.exposedCheckGameDay(12);
     }
 
     function test_CheckGameDay_PastDay_Reverts() public {
         vm.warp(GAME_START + 10 * DAY + DAY / 2); // valid: [10, 11]
-        vm.expectRevert(abi.encodeWithSelector(GameDayCheck.GameDayInvalid.selector, uint32(9), uint32(10), uint32(11)));
+        vm.expectRevert(abi.encodeWithSelector(GameDayCheckV2.GameDayInvalid.selector, uint32(9), uint32(10), uint32(11)));
         harness.exposedCheckGameDay(9);
     }
 

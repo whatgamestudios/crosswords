@@ -4,10 +4,11 @@ pragma solidity ^0.8.26;
 
 import {Test} from "forge-std/Test.sol";
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
+import {WorcadianCheckInV2} from "../src/WorcadianCheckInV2.sol";
 import {WorcadianCheckInV1} from "../src/WorcadianCheckInV1.sol";
 
-contract WorcadianCheckInV1Test is Test {
-    WorcadianCheckInV1 checkin;
+contract WorcadianCheckInV2Test is Test {
+    WorcadianCheckInV2 checkin;
 
     address admin = makeAddr("admin");
     address ownerAddr = makeAddr("owner");
@@ -16,7 +17,7 @@ contract WorcadianCheckInV1Test is Test {
     address player2 = makeAddr("player2");
     address stranger = makeAddr("stranger");
 
-    uint256 constant GAME_START = 1743292800; // March 30, 2025 00:00:00 UTC
+    uint256 constant GAME_START = 1774828800; // March 30, 2026 00:00:00 UTC
     uint256 constant DAY = 86400;
     uint256 constant MINUS_12 = 43200;
 
@@ -25,16 +26,21 @@ contract WorcadianCheckInV1Test is Test {
         return GAME_START + uint256(gameDay) * DAY + DAY / 2;
     }
 
-    function deployProxy(address _admin, address _owner, address _upgradeAdmin) internal returns (WorcadianCheckInV1) {
+    function deployProxyV1UpgradeToV2(address _admin, address _owner, address _upgradeAdmin) internal returns (WorcadianCheckInV2) {
         WorcadianCheckInV1 impl = new WorcadianCheckInV1();
         ERC1967Proxy proxy = new ERC1967Proxy(
             address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (_admin, _owner, _upgradeAdmin))
         );
-        return WorcadianCheckInV1(address(proxy));
+        WorcadianCheckInV2 implV2 = new WorcadianCheckInV2();
+        vm.prank(_upgradeAdmin);
+        WorcadianCheckInV2(address(proxy)).upgradeToAndCall(address(implV2), 
+            abi.encodeWithSelector(WorcadianCheckInV2.upgradeStorage.selector, bytes(""))
+        );
+        return WorcadianCheckInV2(address(proxy));
     }
 
     function setUp() public {
-        checkin = deployProxy(admin, ownerAddr, upgradeAdmin);
+        checkin = deployProxyV1UpgradeToV2(admin, ownerAddr, upgradeAdmin);
     }
 
     // ── initialize ────────────────────────────────────────────────────────────
@@ -45,8 +51,8 @@ contract WorcadianCheckInV1Test is Test {
         assertTrue(checkin.hasRole(checkin.UPGRADE_ROLE(), upgradeAdmin));
     }
 
-    function test_Initialize_VersionIsOne() public view {
-        assertEq(checkin.version(), 1);
+    function test_Initialize_VersionIsTwo() public view {
+        assertEq(checkin.version(), 2);
     }
 
     function test_Initialize_OwnerReturnsCorrectAddress() public view {
@@ -54,27 +60,27 @@ contract WorcadianCheckInV1Test is Test {
     }
 
     function test_Initialize_ZeroAdmin_Reverts() public {
-        WorcadianCheckInV1 impl = new WorcadianCheckInV1();
+        WorcadianCheckInV2 impl = new WorcadianCheckInV2();
         vm.expectRevert(
-            abi.encodeWithSelector(WorcadianCheckInV1.BadAddress.selector, address(0), ownerAddr, upgradeAdmin)
+            abi.encodeWithSelector(WorcadianCheckInV2.BadAddress.selector, address(0), ownerAddr, upgradeAdmin)
         );
         new ERC1967Proxy(
-            address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (address(0), ownerAddr, upgradeAdmin))
+            address(impl), abi.encodeCall(WorcadianCheckInV2.initialize, (address(0), ownerAddr, upgradeAdmin))
         );
     }
 
     function test_Initialize_ZeroOwner_Reverts() public {
-        WorcadianCheckInV1 impl = new WorcadianCheckInV1();
-        vm.expectRevert(abi.encodeWithSelector(WorcadianCheckInV1.BadAddress.selector, admin, address(0), upgradeAdmin));
+        WorcadianCheckInV2 impl = new WorcadianCheckInV2();
+        vm.expectRevert(abi.encodeWithSelector(WorcadianCheckInV2.BadAddress.selector, admin, address(0), upgradeAdmin));
         new ERC1967Proxy(
-            address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (admin, address(0), upgradeAdmin))
+            address(impl), abi.encodeCall(WorcadianCheckInV2.initialize, (admin, address(0), upgradeAdmin))
         );
     }
 
     function test_Initialize_ZeroUpgradeAdmin_Reverts() public {
-        WorcadianCheckInV1 impl = new WorcadianCheckInV1();
-        vm.expectRevert(abi.encodeWithSelector(WorcadianCheckInV1.BadAddress.selector, admin, ownerAddr, address(0)));
-        new ERC1967Proxy(address(impl), abi.encodeCall(WorcadianCheckInV1.initialize, (admin, ownerAddr, address(0))));
+        WorcadianCheckInV2 impl = new WorcadianCheckInV2();
+        vm.expectRevert(abi.encodeWithSelector(WorcadianCheckInV2.BadAddress.selector, admin, ownerAddr, address(0)));
+        new ERC1967Proxy(address(impl), abi.encodeCall(WorcadianCheckInV2.initialize, (admin, ownerAddr, address(0))));
     }
 
     function test_Initialize_CannotReinitialize() public {
@@ -84,7 +90,7 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_Initialize_ImplementationDirectly_Reverts() public {
         // _disableInitializers() in the constructor prevents direct init of the impl
-        WorcadianCheckInV1 impl = new WorcadianCheckInV1();
+        WorcadianCheckInV2 impl = new WorcadianCheckInV2();
         vm.expectRevert();
         impl.initialize(admin, ownerAddr, upgradeAdmin);
     }
@@ -108,7 +114,7 @@ contract WorcadianCheckInV1Test is Test {
         vm.warp(noonOn(gameDay));
 
         vm.expectEmit(true, true, true, true, address(checkin));
-        emit WorcadianCheckInV1.CheckIn(gameDay, player1, 1);
+        emit WorcadianCheckInV2.CheckIn(gameDay, player1, 1);
 
         vm.prank(player1);
         checkin.checkIn(gameDay);
@@ -508,15 +514,7 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_UpgradeStorage_AlwaysReverts() public {
         vm.expectRevert(
-            abi.encodeWithSelector(WorcadianCheckInV1.CanNotUpgradeToLowerOrSameVersion.selector, uint256(1))
-        );
-        checkin.upgradeStorage("");
-    }
-
-    function test_UpgradeStorage_AnyCallerReverts() public {
-        vm.prank(stranger);
-        vm.expectRevert(
-            abi.encodeWithSelector(WorcadianCheckInV1.CanNotUpgradeToLowerOrSameVersion.selector, uint256(1))
+            abi.encodeWithSelector(WorcadianCheckInV2.CanNotUpgradeToLowerOrSameVersion.selector, uint256(2))
         );
         checkin.upgradeStorage("");
     }
@@ -524,7 +522,7 @@ contract WorcadianCheckInV1Test is Test {
     // ── _authorizeUpgrade ─────────────────────────────────────────────────────
 
     function test_Upgrade_WithUpgradeRole_Succeeds() public {
-        WorcadianCheckInV1 newImpl = new WorcadianCheckInV1();
+        WorcadianCheckInV2 newImpl = new WorcadianCheckInV2();
         vm.prank(upgradeAdmin);
         checkin.upgradeToAndCall(address(newImpl), "");
     }
@@ -537,19 +535,19 @@ contract WorcadianCheckInV1Test is Test {
         checkin.checkIn(gameDay);
 
         // Upgrade to a new implementation
-        WorcadianCheckInV1 newImpl = new WorcadianCheckInV1();
+        WorcadianCheckInV2 newImpl = new WorcadianCheckInV2();
         vm.prank(upgradeAdmin);
         checkin.upgradeToAndCall(address(newImpl), "");
 
         // Storage must be intact
-        assertEq(checkin.version(), 1);
+        assertEq(checkin.version(), 2);
         assertEq(checkin.getDaysPlayed(player1), 1);
         assertEq(checkin.numberOfPlayers(gameDay), 1);
         assertTrue(checkin.hasRole(checkin.OWNER_ROLE(), ownerAddr));
     }
 
     function test_Upgrade_WithoutUpgradeRole_Reverts() public {
-        WorcadianCheckInV1 newImpl = new WorcadianCheckInV1();
+        WorcadianCheckInV2 newImpl = new WorcadianCheckInV2();
         vm.prank(stranger);
         vm.expectRevert();
         checkin.upgradeToAndCall(address(newImpl), "");
@@ -557,7 +555,7 @@ contract WorcadianCheckInV1Test is Test {
 
     function test_Upgrade_ByAdmin_WithoutUpgradeRole_Reverts() public {
         // DEFAULT_ADMIN_ROLE does not grant upgrade rights
-        WorcadianCheckInV1 newImpl = new WorcadianCheckInV1();
+        WorcadianCheckInV2 newImpl = new WorcadianCheckInV2();
         vm.prank(admin);
         vm.expectRevert();
         checkin.upgradeToAndCall(address(newImpl), "");
