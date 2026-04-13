@@ -14,10 +14,12 @@ import {
  * This contract is designed to be upgradeable.
  */
 contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradeable {
-    /// @notice Error: Attempting to upgrade contract storage to version 0.
+    /// @notice Error: Attempting to upgrade contract storage.
     error CanNotUpgradeToLowerOrSameVersion(uint256 _storageVersion);
 
     error BadAddress(address _admin, address _owner, address _upgrade, address _wordSmithAdmin);
+
+    error WordNotInList(string _word);
 
     /// @notice One or more words has been added.
     event WordsAdded(uint256 _number);
@@ -46,7 +48,7 @@ contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradea
     /// @notice version number of the storage variable layout.
     uint256 public version;
 
-    mapping(bytes32 => bool) private wordList;
+    mapping(bytes32 => bool) internal wordList;
 
 
     /**
@@ -61,6 +63,7 @@ contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradea
      * @param _roleAdmin the address to grant `DEFAULT_ADMIN_ROLE` to.
      * @param _owner the address to grant `OWNER_ROLE` to.
      * @param _upgradeAdmin the address to grant `UPGRADE_ROLE` to.
+     * @param _wordSmithAdmin the address to grant `WORDSMITH_ROLE` to.
      */
     function initialize(address _roleAdmin, address _owner, address _upgradeAdmin, address _wordSmithAdmin) public virtual initializer {
         require(
@@ -73,6 +76,7 @@ contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradea
         _grantRole(DEFAULT_ADMIN_ROLE, _roleAdmin);
         _grantRole(OWNER_ROLE, _owner);
         _grantRole(UPGRADE_ROLE, _upgradeAdmin);
+        _grantRole(WORDSMITH_ROLE, _wordSmithAdmin);
         version = _VERSION1;
     }
 
@@ -108,7 +112,9 @@ contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradea
      * @param _word Word to remove from the word list.
      */
     function removeWord(bytes calldata _word) external virtual onlyRole(WORDSMITH_ROLE) {
-        wordList[keccak256(_word)] = false;
+        bytes32 wordHash = keccak256(_word);
+        require(wordList[wordHash], WordNotInList(string(_word)));
+        wordList[wordHash] = false;
         emit WordRemoved(string(_word));
     }
 
