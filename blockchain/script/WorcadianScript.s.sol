@@ -6,6 +6,9 @@ import "forge-std/Script.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {WorcadianCheckInV1} from "../src/WorcadianCheckInV1.sol";
 import {WorcadianCheckInV2} from "../src/WorcadianCheckInV2.sol";
+import {WorcadianWordListV1} from "../src/WorcadianWordListV1.sol";
+import {WordListSeed} from "../src/WordListSeed.sol";
+import {WorcadianGameV1} from "../src/WorcadianGameV1.sol";
 
 contract WorcadianScript is Script {
     function deployCheckInV1() public {
@@ -36,5 +39,73 @@ contract WorcadianScript is Script {
             abi.encodeWithSelector(WorcadianCheckInV2.upgradeStorage.selector, bytes("")));
 
         console.log("Implementation V2 address: ", address(implV2));
+    }
+
+    /**
+     * @notice Deploy WorcadianWordListV1, WordListSeed, and WorcadianGameV1 together
+     *         with their ERC-1967 proxy contracts.
+     *
+     * Required environment variables:
+     *   DEPLOYER_ADDRESS  – tx sender; receives all admin / owner / upgrade roles.
+     *
+     * Deployment order:
+     *   1. WorcadianWordListV1  implementation & proxy
+     *   2. WordListSeed         implementation & proxy
+     *   3. WorcadianGameV1      implementation & proxy
+     */
+    function deployGame() public {
+        address deployer = vm.envAddress("DEPLOYER_ADDRESS");
+        // A randomly selected passport wallet on mainnet.
+        address passportWallet = 0xDa77D416bb4238c9424b8d27A7f90fA2Bdf4911E;
+        address roleAdmin = deployer;
+        address owner = deployer;
+        address upgradeAdmin = deployer;
+        address wordSmithAdmin = deployer;
+
+        // ── WorcadianWordListV1 ───────────────────────────────────────────────
+
+        vm.broadcast();
+        WorcadianWordListV1 wordListImpl = new WorcadianWordListV1();
+
+        vm.broadcast();
+        ERC1967Proxy wordListProxy = new ERC1967Proxy(
+            address(wordListImpl),
+            abi.encodeCall(WorcadianWordListV1.initialize,
+                (roleAdmin, owner, upgradeAdmin, wordSmithAdmin))
+        );
+
+        console.log("WorcadianWordListV1 implementation:", address(wordListImpl));
+        console.log("WorcadianWordListV1 proxy:         ", address(wordListProxy));
+
+        // ── WordListSeed ──────────────────────────────────────────────────────
+
+        vm.broadcast();
+        WordListSeed seedImpl = new WordListSeed();
+
+        vm.broadcast();
+        ERC1967Proxy seedProxy = new ERC1967Proxy(
+            address(seedImpl),
+            abi.encodeCall(WordListSeed.initialize,
+                (roleAdmin, owner, upgradeAdmin, wordSmithAdmin))
+        );
+
+        console.log("WordListSeed implementation:       ", address(seedImpl));
+        console.log("WordListSeed proxy:                ", address(seedProxy));
+
+        // ── WorcadianGameV1 ───────────────────────────────────────────────────
+
+        vm.broadcast();
+        WorcadianGameV1 gameImpl = new WorcadianGameV1();
+
+        vm.broadcast();
+        ERC1967Proxy gameProxy = new ERC1967Proxy(
+            address(gameImpl),
+            abi.encodeCall(WorcadianGameV1.initialize,
+                (roleAdmin, owner, upgradeAdmin,
+                 passportWallet, address(seedProxy), address(wordListProxy)))
+        );
+
+        console.log("WorcadianGameV1 implementation:    ", address(gameImpl));
+        console.log("WorcadianGameV1 proxy:             ", address(gameProxy));
     }
 }
