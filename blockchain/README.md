@@ -41,9 +41,15 @@ sh script/deployCheckInV1.sh
 
 |Contract                | Address                   |
 |------------------------|---------------------------|
-| ERC1967Proxy.sol       | [0x7e70b51a3090753593aaafedf26536ed2cbc26e8](https://explorer.immutable.com/address/0x7e70b51a3090753593aaafedf26536ed2cbc26e8) |
+| CheckIn Proxy.         | [0x7e70b51a3090753593aaafedf26536ed2cbc26e8](https://explorer.immutable.com/address/0x7e70b51a3090753593aaafedf26536ed2cbc26e8) |
 | WorcadianCheckInV1     | [0xdde657951a32e75a0e11a7763c029202fe314a50](https://explorer.immutable.com/address/0xdde657951a32e75a0e11a7763c029202fe314a50) |
 | WorcadianCheckInV2     | [0xeb6223ed5e8b1e815a70e64f587fae4e6733a2c3](https://explorer.immutable.com/address/0xeb6223ed5e8b1e815a70e64f587fae4e6733a2c3) |
+| WordList Proxy         | [0x6b17A8D0eD442a234df46342B52C49f4247e119d](https://explorer.immutable.com/address/0x6b17A8D0eD442a234df46342B52C49f4247e119d) |
+| WorcadianWordListV1    | [0x8cC43512a60CAF3a19930D3DeA4db8A2F355Ab9d](https://explorer.immutable.com/address/0x8cC43512a60CAF3a19930D3DeA4db8A2F355Ab9d) |
+| Seed Word Proxy         | [0xaf14a6EC2a10E7c193e3ef0762Ca320267A6571D](https://explorer.immutable.com/address/0xaf14a6EC2a10E7c193e3ef0762Ca320267A6571D) |
+| WordListSeed            | [0x5Cbdc8858770643c54F0AaFe55B509b1aDe4aAAE](https://explorer.immutable.com/address/0x5Cbdc8858770643c54F0AaFe55B509b1aDe4aAAE) |
+| Game      Proxy         | [0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD](https://explorer.immutable.com/address/0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD) |
+| WorcadianGameV1         | [0x438c62f2C1b882A9e08740009525EF0ed9a63b97](https://explorer.immutable.com/address/0x438c62f2C1b882A9e08740009525EF0ed9a63b97) |
 
 
 ### C# Code Generation:
