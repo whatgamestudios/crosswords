@@ -54,5 +54,9 @@ namespace CrossWords {
             }
         }
 
+        public async Task<string> GetSeedWord(int gameDay) {
+            return await service.GetSeedWordQueryAsync(new BigInteger(gameDay));
+        }
+
     }
 }

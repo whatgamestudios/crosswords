@@ -36,6 +36,10 @@ namespace CrossWords {
             {
                 Invoke("LoadSeedWordsProcess", 0.1f);
             }
+            else if (buttonText == "CheckSeed") 
+            {
+                Invoke("CheckSeedWordsProcess", 0.1f);
+            }
             else
             {
                 AuditLog.Log("Admin: Unknown button: " + buttonText);
@@ -112,6 +116,35 @@ namespace CrossWords {
             }
         }
 
+        private async Task CheckSeedWordsProcess() {
+            isProcessing = true;
+            try {
+                resetLog();
+                log("CheckSeedWordsProcess: started");
+
+                SeedWordProcessor seedProcessorContract = new SeedWordProcessor();
+
+                int numSeedWords = WordListSeed.GetNumSeedWords();
+                int numIncorrect = 0;
+                for (int i = 0; i < numSeedWords; i++) {
+                    log($"Checking {i} of {numSeedWords}. Wrong: {numIncorrect}");
+                    string word = await seedProcessorContract.GetSeedWord(i);
+                    string appWord = WordListSeed.GetSeedWord((uint)i);
+                    if (word != appWord) {
+                        numIncorrect++;
+                        log($" app {appWord}, contract {word}");
+                    }
+                }
+
+                log("CheckSeedWordsProcess: done");
+            }
+            catch (Exception ex) {
+                log($"Exception during admin process: {ex.Message}");
+            }
+            finally {
+                isProcessing = false;
+            }
+        }
 
 
         // private async Task StartCheckinProcess() {
