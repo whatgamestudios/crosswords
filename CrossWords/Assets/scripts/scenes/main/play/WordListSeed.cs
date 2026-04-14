@@ -1384,7 +1384,28 @@ namespace CrossWords {
             string word = seedWords[gameDay % seedWords.Length];
 
             AuditLog.Log($"Game day: {gameDay}, Seed word: {word}");
-            return word.ToUpper(); 
+            return word.ToUpper();
+        }
+
+        public static List<string> GetOrderedWords(uint startWord, int count)
+        {
+            int total = seedWords.Length;
+            if (startWord >= (uint)total)
+                throw new System.ArgumentOutOfRangeException(nameof(startWord), $"startWord ({startWord}) must be less than the word list length ({total}).");
+
+            int start = (int)startWord;
+            int actualCount = System.Math.Min(count, total - start);
+            var result = new List<string>(actualCount);
+            for (int i = 0; i < actualCount; i++)
+            {
+                result.Add(seedWords[start + i].ToUpper());
+            }
+            return result;
+        }
+
+        public static int GetNumSeedWords()
+        {
+            return seedWords.Length;
         }
     }
 }

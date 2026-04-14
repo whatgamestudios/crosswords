@@ -8,6 +8,7 @@ import {WorcadianCheckInV1} from "../src/WorcadianCheckInV1.sol";
 import {WorcadianCheckInV2} from "../src/WorcadianCheckInV2.sol";
 import {WorcadianWordListV1} from "../src/WorcadianWordListV1.sol";
 import {WordListSeed} from "../src/WordListSeed.sol";
+import {WordListSeedV2} from "../src/WordListSeedV2.sol";
 import {WorcadianGameV1} from "../src/WorcadianGameV1.sol";
 
 contract WorcadianScript is Script {
@@ -108,4 +109,17 @@ contract WorcadianScript is Script {
         console.log("WorcadianGameV1 implementation:    ", address(gameImpl));
         console.log("WorcadianGameV1 proxy:             ", address(gameProxy));
     }
+
+    function deploySeedV2() public {
+        vm.broadcast();
+        WordListSeedV2 implV2 = new WordListSeedV2();
+
+        WordListSeedV2 proxy = WordListSeedV2(address(0xaf14a6EC2a10E7c193e3ef0762Ca320267A6571D));
+        vm.broadcast();
+        proxy.upgradeToAndCall(address(implV2), 
+            abi.encodeWithSelector(WorcadianCheckInV2.upgradeStorage.selector, bytes("")));
+
+        console.log("Implementation V2 address: ", address(implV2));
+    }
+
 }

@@ -48,6 +48,7 @@ sh script/deployCheckInV1.sh
 | WorcadianWordListV1    | [0x8cC43512a60CAF3a19930D3DeA4db8A2F355Ab9d](https://explorer.immutable.com/address/0x8cC43512a60CAF3a19930D3DeA4db8A2F355Ab9d) |
 | Seed Word Proxy         | [0xaf14a6EC2a10E7c193e3ef0762Ca320267A6571D](https://explorer.immutable.com/address/0xaf14a6EC2a10E7c193e3ef0762Ca320267A6571D) |
 | WordListSeed            | [0x5Cbdc8858770643c54F0AaFe55B509b1aDe4aAAE](https://explorer.immutable.com/address/0x5Cbdc8858770643c54F0AaFe55B509b1aDe4aAAE) |
+| WordListSeedV2          | [0x22e6ba1f880ecfdac8c9489811473898d64a64ec](https://explorer.immutable.com/address/0x22e6ba1f880ecfdac8c9489811473898d64a64ec) |
 | Game      Proxy         | [0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD](https://explorer.immutable.com/address/0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD) |
 | WorcadianGameV1         | [0x438c62f2C1b882A9e08740009525EF0ed9a63b97](https://explorer.immutable.com/address/0x438c62f2C1b882A9e08740009525EF0ed9a63b97) |
 
