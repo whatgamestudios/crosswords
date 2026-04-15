@@ -40,6 +40,10 @@ namespace CrossWords {
             {
                 Invoke("CheckSeedWordsProcess", 0.1f);
             }
+            else if (buttonText == "AddWords") 
+            {
+                Invoke("AddWordsProcess", 0.1f);
+            }
             else
             {
                 AuditLog.Log("Admin: Unknown button: " + buttonText);
@@ -145,6 +149,82 @@ namespace CrossWords {
                 isProcessing = false;
             }
         }
+
+        private async Task AddWordsProcess() {
+            isProcessing = true;
+            try {
+                resetLog();
+                log("AddWordsProcess: started");
+
+                if (!PassportStore.IsLoggedIn()) {
+                    log("Passport not logged in");
+                    return;
+                }
+
+                // Check network connectivity
+                if (Application.internetReachability == NetworkReachability.NotReachable) {
+                    log("No network connectivity available");
+                    return;
+                }
+
+                await PassportLogin.InitAndLogin();
+                log("Passport init done");
+
+                WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
+                if (wordListDictionary == null)
+                {
+                    log("ERROR: No dictionary");
+                    return;
+                }
+                else if (!wordListDictionary.DictionaryLoaded)
+                {
+                    log("ERROR: Dictionary not loaded");
+                    return;
+                }
+
+                HashSet<string> dict = wordListDictionary.GetDict();
+
+                int groupSize = 300;
+                List<string> words = new List<string>();
+
+                int size = dict.Count;
+                int num = 0;
+
+                WordListProcessor processorContract = new WordListProcessor();
+
+                foreach (string word in dict)
+                {
+                    int ofs = (num % groupSize);
+                    num++;
+                    words.Add(word);
+                    if (ofs + 1 == groupSize) {
+                        log($"Loading {num} of {size}");
+                        bool ok = await processorContract.AddWords(words);
+                        if (!ok) {
+                            log("AddWords returned no OK");
+                            break;
+                        }
+                        words = new List<string>();
+                    }
+                } 
+
+                // Send off the final set of words
+                log($"Loading {num} of {size}");
+                bool ok2 = await processorContract.AddWords(words);
+                if (!ok2) {
+                    log("AddWords returned no OK");
+                }
+
+                log("AddWordsProcess: done");
+            }
+            catch (Exception ex) {
+                log($"Exception during admin process: {ex.Message}");
+            }
+            finally {
+                isProcessing = false;
+            }
+        }
+
 
 
         // private async Task StartCheckinProcess() {

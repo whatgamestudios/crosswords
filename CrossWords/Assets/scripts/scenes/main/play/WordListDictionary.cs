@@ -90,5 +90,9 @@ namespace CrossWords {
             return (false, res.ToString());
         }
 
+        public HashSet<string> GetDict() {
+            return dictionarySet;
+        }
+
     }
 }
