@@ -44,6 +44,10 @@ namespace CrossWords {
             {
                 Invoke("AddWordsProcess", 0.1f);
             }
+            else if (buttonText == "CheckWords")
+            {
+                Invoke("CheckWords", 0.1f);
+            }
             else
             {
                 AuditLog.Log("Admin: Unknown button: " + buttonText);
@@ -225,7 +229,52 @@ namespace CrossWords {
             }
         }
 
+        private async Task CheckWords() {
+            isProcessing = true;
+            const int batchSize = 1000;
+            try {
+                resetLog();
+                log("CheckWords: started");
 
+                WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
+                if (wordListDictionary == null) {
+                    log("ERROR: No dictionary");
+                    return;
+                }
+                if (!wordListDictionary.DictionaryLoaded) {
+                    log("ERROR: Dictionary not loaded");
+                    return;
+                }
+
+                HashSet<string> dict = wordListDictionary.GetDict();
+                List<string> allWords = new List<string>(dict);
+                int total = allWords.Count;
+                WordListProcessor processorContract = new WordListProcessor();
+
+                int numMissing = 0;
+                for (int i = 0; i < total; i += batchSize) {
+                    int count = Math.Min(batchSize, total - i);
+                    List<string> batch = allWords.GetRange(i, count);
+                    log($"Checking words {i} to {i + count - 1} of {total}. Missing so far: {numMissing}");
+
+                    List<bool> present = await processorContract.InWordListBulk(batch);
+                    for (int j = 0; j < present.Count; j++) {
+                        if (!present[j]) {
+                            numMissing++;
+                            log($" not on contract: {batch[j]}");
+                        }
+                    }
+                }
+
+                log($"CheckWords: done. Total missing on contract: {numMissing}");
+            }
+            catch (Exception ex) {
+                log($"Exception during admin process: {ex.Message}");
+            }
+            finally {
+                isProcessing = false;
+            }
+        }
 
         // private async Task StartCheckinProcess() {
         //     if (!PassportStore.IsLoggedIn()) {
