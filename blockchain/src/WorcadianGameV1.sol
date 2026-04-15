@@ -131,7 +131,7 @@ contract WorcadianGameV1 is
     }
 
     /// @dev All submissions, indexed by game day and then by score.
-    mapping(uint32 => mapping(uint256 => Submission[])) private _submissions;
+    mapping(uint32 => mapping(uint256 => Submission[])) internal _submissions;
 
     // ── Constructor ───────────────────────────────────────────────────────────
 

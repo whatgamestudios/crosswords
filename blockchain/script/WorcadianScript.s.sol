@@ -10,6 +10,7 @@ import {WorcadianWordListV1} from "../src/WorcadianWordListV1.sol";
 import {WordListSeed} from "../src/WordListSeed.sol";
 import {WordListSeedV2} from "../src/WordListSeedV2.sol";
 import {WorcadianGameV1} from "../src/WorcadianGameV1.sol";
+import {WorcadianGameV2} from "../src/WorcadianGameV2.sol";
 
 contract WorcadianScript is Script {
     function deployCheckInV1() public {
@@ -122,4 +123,15 @@ contract WorcadianScript is Script {
         console.log("Implementation V2 address: ", address(implV2));
     }
 
+    function deployGameV2() public {
+        vm.broadcast();
+        WorcadianGameV2 implV2 = new WorcadianGameV2();
+
+        WorcadianGameV2 proxy = WorcadianGameV2(address(0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD));
+        vm.broadcast();
+        proxy.upgradeToAndCall(address(implV2), 
+            abi.encodeWithSelector(WorcadianGameV2.upgradeStorage.selector, bytes("")));
+
+        console.log("Implementation V2 address: ", address(implV2));
+    }
 }

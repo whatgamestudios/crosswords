@@ -51,6 +51,7 @@ sh script/deployCheckInV1.sh
 | WordListSeedV2          | [0x22e6ba1f880ecfdac8c9489811473898d64a64ec](https://explorer.immutable.com/address/0x22e6ba1f880ecfdac8c9489811473898d64a64ec) |
 | Game      Proxy         | [0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD](https://explorer.immutable.com/address/0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD) |
 | WorcadianGameV1         | [0x438c62f2C1b882A9e08740009525EF0ed9a63b97](https://explorer.immutable.com/address/0x438c62f2C1b882A9e08740009525EF0ed9a63b97) |
+| WorcadianGameV2         | [0x22e46e7b4f98f38f1be96f833e488148727f72ad](https://explorer.immutable.com/address/0x22e46e7b4f98f38f1be96f833e488148727f72ad) |
 
 
 ### C# Code Generation:
