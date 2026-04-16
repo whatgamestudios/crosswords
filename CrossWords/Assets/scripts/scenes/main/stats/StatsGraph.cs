@@ -19,11 +19,12 @@ namespace CrossWords {
         private const uint MAX_SCORE_LABEL_WIDTH = 50;
         private const uint MAX_SCORE_LABEL_HEIGHT = 20;
 
-        private const uint X_LEFT_OFFSET = 50;
+        private const uint X_LEFT_OFFSET = 80;
         private const uint X_RIGHT_OFFSET = 50;
         private const uint Y_TOP_OFFSET = 50;
         private const uint Y_BOTTOM_OFFSET = 50;
 
+        private const float BAR_LINE_WIDTH = 15f;
 
         private uint[] scoreDistribution;
 
@@ -31,6 +32,7 @@ namespace CrossWords {
         public void Start() {
             AuditLog.Log("Stats graph screen");
             createScoreDistribution();
+            //createDummyScoreDistribution();
 
 
             showGraph();
@@ -59,6 +61,18 @@ namespace CrossWords {
             scoreDistribution = scoreDist;
         }
 
+        private void createDummyScoreDistribution() {
+            uint[] scoreDist = new uint[MAX_SCORE];
+            scoreDist[0] = 10;
+            scoreDist[1] = 20;
+            scoreDist[2] = 15;
+            scoreDist[3] = 10;
+            scoreDist[5] = 5;
+            scoreDist[10] = 1;
+            scoreDist[15] = 5;
+            scoreDist[MAX_SCORE - 1] = 1;
+            scoreDistribution = scoreDist;
+        }
 
 
         private void showGraph()
@@ -164,6 +178,23 @@ namespace CrossWords {
 
         private void CreateDot(Vector2 anchoredPosition)
         {
+            float xPosition = anchoredPosition.x;
+            float yPosition = anchoredPosition.y;
+            float lineHeight = yPosition - Y_TOP_OFFSET;
+            if (lineHeight > 0f)
+            {
+                GameObject lineObj = new GameObject("barLine", typeof(Image));
+                lineObj.transform.SetParent(graphContainer, false);
+                Image lineImage = lineObj.GetComponent<Image>();
+                lineImage.sprite = dotSprite;
+                lineImage.color = new Color(0.6f, 0.6f, 0.6f, 0.85f);
+                RectTransform lineRect = lineObj.GetComponent<RectTransform>();
+                lineRect.anchorMin = lineRect.anchorMax = new Vector2(0, 0);
+                lineRect.pivot = new Vector2(0.5f, 0f);
+                lineRect.anchoredPosition = new Vector2(xPosition, Y_TOP_OFFSET);
+                lineRect.sizeDelta = new Vector2(BAR_LINE_WIDTH, lineHeight);
+            }
+
             GameObject dot = new GameObject("dot", typeof(Image));
             dot.transform.SetParent(graphContainer, false);
             dot.GetComponent<Image>().sprite = dotSprite;
