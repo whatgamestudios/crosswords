@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/main/SolutionsScene.unity
     guid: 96207deec96a34eb2a5a7b489ead5133
   - enabled: 1
-    path: Assets/Scenes/main/StatsScene.unity
+    path: Assets/Scenes/main/stats/StatsScene.unity
     guid: 9104267e0097d426ab6ac062cdc873f9
   - enabled: 1
     path: Assets/Scenes/helper/HelpContextScene.unity

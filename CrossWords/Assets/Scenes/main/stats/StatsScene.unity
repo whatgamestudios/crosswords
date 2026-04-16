@@ -643,6 +643,7 @@ GameObject:
   - component: {fileID: 289835295}
   - component: {fileID: 289835296}
   - component: {fileID: 289835297}
+  - component: {fileID: 289835298}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -727,11 +728,6 @@ MonoBehaviour:
   daysPublishedText: {fileID: 931666458}
   firstDayPlayedText: {fileID: 1293443975}
   firstDatePlayedText: {fileID: 1894126946}
-  lastDayPlayedText: {fileID: 0}
-  lastDatePlayedText: {fileID: 0}
-  graphContainer: {fileID: 36414341}
-  dotSprite: {fileID: -7632292786504573332, guid: a5366ae57f0114ec5b8dab6b12efb21a, type: 3}
-  labelFont: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,6 +753,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
   panel: {fileID: 289835290}
+--- !u!114 &289835298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991997b1ab06c44d5909e6efe60af43d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.StatsGraph
+  graphContainer: {fileID: 36414341}
+  dotSprite: {fileID: -7632292786504573332, guid: a5366ae57f0114ec5b8dab6b12efb21a, type: 3}
+  labelFont: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0

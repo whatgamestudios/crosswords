@@ -8,75 +8,37 @@ using System.Collections.Generic;
 
 namespace CrossWords {
 
-    public class ShowStats : MonoBehaviour {
-        public TextMeshProUGUI pointsAveText;
-        public TextMeshProUGUI daysPlayedText;
-        public TextMeshProUGUI daysPublishedText;
-        public TextMeshProUGUI firstDayPlayedText;
-        public TextMeshProUGUI firstDatePlayedText;
-
+    public class StatsGraph : MonoBehaviour {
         [SerializeField] private RectTransform graphContainer;
         [SerializeField] private Sprite dotSprite;
         public Font labelFont;
 
+        private const uint MAX_SCORE = 20;
+        private const uint MAX_NUM_Y_TICKS = 5;
 
-        private string help = "" +
-            "Streaks are sequential days played.";
+        private const uint MAX_SCORE_LABEL_WIDTH = 50;
+        private const uint MAX_SCORE_LABEL_HEIGHT = 20;
+
+        private const uint X_LEFT_OFFSET = 50;
+        private const uint X_RIGHT_OFFSET = 50;
+        private const uint Y_TOP_OFFSET = 50;
+        private const uint Y_BOTTOM_OFFSET = 50;
+
+
+        private uint[] scoreDistribution;
+
 
         public void Start() {
-            AuditLog.Log("Stats screen");
+            AuditLog.Log("Stats graph screen");
+            createScoreDistribution();
 
-            int firstPlayed = Stats.GetFirstDayPlayed();
-            int lastPlayed = (int) Stats.GetLastGameDay();
-            int timesPlayed = Stats.GetNumDaysPlayed();
-            int timesPublished = Stats.GetNumTimesPublished();
-            int averageScore = Stats.GetAverageScore();
-
-
-            string firstPlayedS;
-            string lastPlayedS;
-
-            if (firstPlayed == 0) {
-                firstPlayedS = "Never Played";
-                lastPlayedS = "Never Played";
-            }
-            else {
-                DateTime firstPlayedDate = Timeline.GetRelativeDate(firstPlayed);
-                firstPlayedS = firstPlayedDate.ToString("D");
-
-                DateTime lastPlayedDate = Timeline.GetRelativeDate(lastPlayed);
-                lastPlayedS = lastPlayedDate.ToString("D");
-            }
-
-            pointsAveText.text = averageScore.ToString();
-            daysPlayedText.text = timesPlayed.ToString();
-            daysPublishedText.text = timesPublished.ToString();
-            firstDayPlayedText.text = firstPlayed.ToString();
-            firstDatePlayedText.text = firstPlayedS;
 
             showGraph();
         }
 
-        public void OnButtonClick(string buttonText) {
-            if (buttonText == "Help") {
-                MessagePass.SetMsg(help);
-                SceneStack.Instance().PushScene();
-                SceneManager.LoadScene("HelpContextScene", LoadSceneMode.Additive);
-            }
-            else {
-                AuditLog.Log($"Show Stats: Unknown button: {buttonText}");
-            }
-        }
 
-
-        private void showGraph()
-        {
-            AuditLog.Log($"Stats: showGraph");
-            uint maxScore = 20;
-            uint maxNumYTicks = 5;
-
-            uint[] scoreDistribution = new uint[maxScore];
-
+        private void createScoreDistribution() {
+            uint[] scoreDist = new uint[MAX_SCORE];
             int firstPlayed = Stats.GetFirstDayPlayed();
             int lastPlayed = (int) Stats.GetLastGameDay();
             if ((firstPlayed != 0) && (lastPlayed != 0))
@@ -87,19 +49,22 @@ namespace CrossWords {
                     if (exists)
                     {
                         uint score = sol.Score;
-                        if (score < maxScore)
+                        if (score < MAX_SCORE)
                         {
-                            scoreDistribution[score]++;
+                            scoreDist[score]++;
                         }
                     }
                 }
             }
+            scoreDistribution = scoreDist;
+        }
 
-            // RectTransform graphContainer;
-            // Sprite dotSprite;
 
-            float graphHeight = graphContainer.sizeDelta.y;
-            float graphWidth = graphContainer.sizeDelta.x;
+
+        private void showGraph()
+        {
+            float graphHeight = graphContainer.sizeDelta.y - Y_TOP_OFFSET - Y_BOTTOM_OFFSET;
+            float graphWidth = graphContainer.sizeDelta.x - X_LEFT_OFFSET - X_RIGHT_OFFSET;
 
             AuditLog.Log($"Stats: h: {graphHeight}, w:{graphWidth}");
 
@@ -112,39 +77,39 @@ namespace CrossWords {
             yMax = Mathf.Max(yMax, 1); // Avoid division by zero
             AuditLog.Log($"Stats: ymax: {yMax}");
 
-            float xSize = graphWidth / maxScore;
+            float xSize = graphWidth / MAX_SCORE;
             AuditLog.Log($"Stats: xSize: {xSize}");
 
 
             // 1. Draw Y-Axis Labels
             // Separator count is the y axis lines
-            uint separatorCount = maxNumYTicks;
-            if (yMax < maxNumYTicks)
+            uint separatorCount = MAX_NUM_Y_TICKS;
+            if (yMax < MAX_NUM_Y_TICKS)
             {
                 separatorCount = (uint) yMax;
             }
             for (int i = 0; i <= separatorCount; i++) {
                 float normalizedValue = i / (float)separatorCount;
-                float yPos = normalizedValue * graphHeight;
+                float yPos = normalizedValue * graphHeight + Y_TOP_OFFSET;
                 string labelText = Mathf.RoundToInt(normalizedValue * yMax).ToString();
-                CreateLabel(new Vector2(20, yPos), labelText, TextAlignmentOptions.Right);
+                CreateLabel(new Vector2(MAX_SCORE_LABEL_HEIGHT, yPos), labelText, TextAlignmentOptions.Right);
             }
 
             // 2. Draw X-Axis Labels (0 to 21)
-            for (int i = 0; i <= maxScore; i++) {
-                float xPos = i * xSize;
+            for (int i = 0; i <= MAX_SCORE; i++) {
+                float xPos = i * xSize + X_LEFT_OFFSET;
                 // Only draw every 3rd or 5th label if it looks cluttered
                 if (i % 1 == 0) { 
-                    CreateLabel(new Vector2(xPos, 50), i.ToString(), TextAlignmentOptions.Top);
+                    CreateLabel(new Vector2(xPos, MAX_SCORE_LABEL_WIDTH), i.ToString(), TextAlignmentOptions.Top);
                 }
             }
 
 
-            for (int i = 0; i < maxScore && i <= maxScore; i++)
+            for (int i = 0; i < MAX_SCORE && i <= MAX_SCORE; i++)
             {
-                float xPosition = i * xSize;
+                float xPosition = i * xSize + X_LEFT_OFFSET;
                 // Scale Y relative to the container height and max value
-                float yPosition = (scoreDistribution[i] / (float)yMax) * graphHeight;
+                float yPosition = (scoreDistribution[i] / (float)yMax) * graphHeight + Y_TOP_OFFSET;
                 
                 CreateDot(new Vector2(xPosition, yPosition));
             }
