@@ -21,8 +21,8 @@ namespace CrossWords {
 
         private const uint X_LEFT_OFFSET = 80;
         private const uint X_RIGHT_OFFSET = 50;
-        private const uint Y_TOP_OFFSET = 50;
-        private const uint Y_BOTTOM_OFFSET = 50;
+        private const uint Y_TOP_OFFSET = 70;
+        private const uint Y_BOTTOM_OFFSET = 40;
 
         private const float BAR_LINE_WIDTH = 15f;
 

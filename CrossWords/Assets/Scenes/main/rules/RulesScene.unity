@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 102286190}
   - component: {fileID: 102286189}
   m_Layer: 5
-  m_Name: HelpTItle
+  m_Name: TItle
   m_TagString: ColMe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Help
+  m_text: Rules
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -869,9 +869,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Worcadian is a puzzle game. Everyone in the world is trying to solve the
-    same puzzle each day. Starting with a seed word, create as many words as you
-    can using only the letters A to Z.
+  m_text: "Worcadian is a puzzle game in which everyone in the world is trying to
+    solve the same puzzle each day. \n\nThe rules:\n\n1. Only letters that build
+    off the seed word are counted.\n\n2. Each letter can only be used once.\n\n3.
+    Each letter that is only in words that are in the word list reduces the score
+    by one. \n\n4. Each letter that is in one or more words that are not in the word
+    list increases the score by one. \n\n5. All letters have equal value.\n\nThe
+    goal is to use all of the letters in words in the word list. This will give you
+    a score of zero."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}
   m_sharedMaterial: {fileID: -1750055789576322554, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}
@@ -1034,7 +1039,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 531484458}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.67999995
+  m_Size: 0.85
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1244,7 +1249,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2500}
+  m_SizeDelta: {x: 0, y: 2000}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1595580007
 GameObject:
@@ -1292,7 +1297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595580007}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -1305,7 +1310,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595580007}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/main/play/GamePlayScene.unity
     guid: 7cb6444ced6d14fc6aa37b0d43fcb722
   - enabled: 1
-    path: Assets/Scenes/main/HelpScene.unity
+    path: Assets/Scenes/main/lore/LoreScene.unity
     guid: 97add8d071e754e229ccd0c54a0af445
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/main/OtherMenuScene.unity
     guid: b1f5b78be3c5746dba0b545401cdc07f
   - enabled: 1
@@ -77,6 +77,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/main/wordlist/WordCheckScene.unity
     guid: db378c7aa39fc4dbbb223f0f7a48adef
+  - enabled: 1
+    path: Assets/Scenes/main/rules/RulesScene.unity
+    guid: d1896119f9c1342e08addc5536401284
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

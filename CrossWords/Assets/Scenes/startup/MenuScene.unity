@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 615298}
   - component: {fileID: 615297}
   m_Layer: 5
-  m_Name: ButtonTODO
+  m_Name: ButtonRules
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: How
+          m_StringArgument: Rules
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &615298
@@ -1000,7 +1000,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Help
+          m_StringArgument: Lore
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &304409954
@@ -3851,7 +3851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TODO?
+  m_text: Rules
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

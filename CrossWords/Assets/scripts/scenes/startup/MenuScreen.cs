@@ -63,10 +63,15 @@ namespace CrossWords {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("BackgroundsScene", LoadSceneMode.Single);
             }
-            else if (buttonText == "Help")
+            else if (buttonText == "Lore")
             {
                 SceneStack.Instance().PushScene();
-                SceneManager.LoadScene("HelpScene", LoadSceneMode.Single);
+                SceneManager.LoadScene("LoreScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "Rules")
+            {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("RulesScene", LoadSceneMode.Single);
             }
             if (buttonText == "Passport") {
                 SceneStack.Instance().PushScene();

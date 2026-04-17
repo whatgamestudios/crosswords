@@ -121,12 +121,18 @@ namespace CrossWords {
             AuditLog.Log("WordList: button: " + buttonText);
             if (buttonText == "CheckWord")
             {
+                if (checkText.Length == 0) {
+                    return;
+                }
                 MessagePass.SetMsg(checkText);
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("WordCheckScene", LoadSceneMode.Single);
             }
             else if (buttonText == "StartsWith")
             {
+                if (startsWithText.Length == 0) {
+                    return;
+                }
                 MessagePass.SetMsg(startsWithText);
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("StartsWithScene", LoadSceneMode.Single);

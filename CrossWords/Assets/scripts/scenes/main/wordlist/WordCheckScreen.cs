@@ -9,17 +9,12 @@ namespace CrossWords {
     public class WordCheckScreen : MonoBehaviour
     {
         public TextMeshProUGUI WordCheckResult;
-        public TextMeshProUGUI SuggestButtonText;
-        public Button SuggestButton;
-        public GameObject SuggestBackground;
 
 
         void Start()
         {
             AuditLog.Log($"Check Word screen");
             WordCheckResult.text = "Loading";
-            SuggestBackground.SetActive(false);
-            SuggestButton.gameObject.SetActive(false);
             Invoke("DelayedLoad", 0.1f);
         }
         
@@ -41,15 +36,11 @@ namespace CrossWords {
                 if (inDic)
                 {
                     WordCheckResult.text = word + " is in the word list";
-                    SuggestButtonText.text = "Suggest word be REMOVED from the word list";
                 }
                 else
                 {
                     WordCheckResult.text = word + " is not in the word list";
-                    SuggestButtonText.text = "Suggest word be ADDED to the word list";
                 }
-                SuggestBackground.SetActive(true);
-                SuggestButton.gameObject.SetActive(true);
             }
         }
     }
