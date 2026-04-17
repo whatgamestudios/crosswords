@@ -26,14 +26,13 @@ namespace CrossWords {
             
             lastCheckTime = Time.time;
 
-            GameState gameState = GameState.Instance();
-            if (gameState.IsPlayerStateUnknown())
-            {
+            uint today = Timeline.GameDay();
+            GamePlayScene gamePlayScene = FindFirstObjectByType<GamePlayScene>();
+            if (gamePlayScene == null) {
                 return;
             }
+            uint gameDayBeingPlayed = gamePlayScene.GameDayBeingPlayed;
 
-            uint today = Timeline.GameDay();
-            uint gameDayBeingPlayed = gameState.GameDayBeingPlayed();
             if (today != gameDayBeingPlayed)
             {
                 // It has just passed midnight!

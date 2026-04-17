@@ -17,6 +17,8 @@ namespace CrossWords
         public const string STATS_DAYS_CLAIMED = "STATS_DAYS_CLAIMED";
 
         public const string STATS_NUM_TIMES_PUBLISHED = "STATS_NUM_TIMES_PUBLISHED";
+        public const string STATS_MOST_RECENT_PUBLISHED_DAY = "STATS_MOST_RECENT_PUBLISHED_DAY";
+        public const string STATS_PUBLISHED_SCORE = "STATS_PUBLISHED_SCORE";
         public const string STATS_LAST_PUBLISHED = "STATS_LAST_PUBLISHED";
 
         public const int NEVER_PLAYED = -1;
@@ -114,25 +116,30 @@ namespace CrossWords
         }
 
 
-        // public static void SetPublished()
-        // {
-        //     int gameDay = GetLastGameDay();
-        //     if (gameDay != GetMostRecentDayPublished())
-        //     {
-        //         //PlayerPrefs.SetInt(STATS_MOST_RECENT_PUBLISHED_DAY, gameDay);
-        //         int timesPlayed = GetNumTimesPublished();
-        //         PlayerPrefs.SetInt(STATS_NUM_TIMES_PUBLISHED, timesPlayed + 1);
-        //     }
-        // }
+        public static void SetPublished(uint score)
+        {
+            uint gameDay = GetLastGameDay();
+            if (gameDay != GetMostRecentDayPublished())
+            {
+                PlayerPrefs.SetInt(STATS_MOST_RECENT_PUBLISHED_DAY, (int) gameDay);
+                int timesPlayed = GetNumTimesPublished();
+                PlayerPrefs.SetInt(STATS_NUM_TIMES_PUBLISHED, timesPlayed + 1);
+            }
+            PlayerPrefs.SetInt(STATS_PUBLISHED_SCORE, (int) score);
+        }
 
-        // public static int GetMostRecentDayPublished() {
-        //     return PlayerPrefs.GetInt(STATS_MOST_RECENT_PUBLISHED_DAY, 0);
-        // }
+        public static uint GetMostRecentDayPublished() {
+            return (uint) PlayerPrefs.GetInt(STATS_MOST_RECENT_PUBLISHED_DAY, 0);
+        }
 
-        // public static bool HasPublishedToday()
-        // {
-        //     return GetLastGameDay() == GetMostRecentDayPublished();
-        // }
+        public static uint GetPublishedScore() {
+            return (uint) PlayerPrefs.GetInt(STATS_PUBLISHED_SCORE, 0);
+        }
+
+        public static bool HasPublishedToday()
+        {
+            return GetLastGameDay() == GetMostRecentDayPublished();
+        }
 
         public static int GetNumTimesPublished()
         {

@@ -1265,8 +1265,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FourteenNumbers.PublishManager, Assembly-CSharp
+      - m_Target: {fileID: 2063394993}
+        m_TargetAssemblyTypeName: CrossWords.PublishManager, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 5
         m_Arguments:
@@ -10591,6 +10591,8 @@ GameObject:
   - component: {fileID: 2063394990}
   - component: {fileID: 2063394991}
   - component: {fileID: 2063394992}
+  - component: {fileID: 2063394993}
+  - component: {fileID: 2063394994}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -10684,6 +10686,7 @@ MonoBehaviour:
   StatusText3: {fileID: 1715015225}
   StatusText4: {fileID: 1818573540}
   Score: 26
+  GameDayBeingPlayed: 0
 --- !u!114 &2063394987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10761,6 +10764,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98f6334f61fb4338a44419793e408bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.CheckIn
+--- !u!114 &2063394993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df436c56a3d144a1eae5a226ccbfff9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.PublishManager
+  panelPublish: {fileID: 95944143}
+  buttonPublishText: {fileID: 118117787}
+--- !u!114 &2063394994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26278fbfd829e40b28baa59dbe88e9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BestScoreLoader
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0

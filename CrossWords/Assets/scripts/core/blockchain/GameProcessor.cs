@@ -71,5 +71,16 @@ namespace CrossWords {
         public async Task<GetResultsOutputDTO> GetResults(uint gameDay) {
             return await service.GetResultsQueryAsync(gameDay);
         }
+
+        public async Task<int> GetBestScore(uint gameDay) {
+            GetResultsOutputDTO res = await GetResults(gameDay);
+            if (res.NumSubmissions > 0) {
+                return (int) res.BestScore;
+            }
+            else {
+                return 53;
+            }
+        }
+
     }
 }

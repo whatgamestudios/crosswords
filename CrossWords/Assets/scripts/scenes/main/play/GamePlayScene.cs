@@ -26,11 +26,10 @@ namespace CrossWords {
 
         public uint Score = 26;
 
+        public uint GameDayBeingPlayed = 0;
+
         private const int TIME_STATUS_MOVE = 40;
         private DateTime timeOfStatusMove = DateTime.Now;
-
-        // Needed for scrolling status
-        //private int statusWordOffset = 0;
 
         void Awake()
         {
@@ -40,9 +39,10 @@ namespace CrossWords {
             }
         }
 
-        void Start()
+        async void Start()
         {
             uint gameDay = Timeline.GameDay();
+            GameDayBeingPlayed = gameDay;
             AuditLog.Log($"Game Play screen for day {gameDay}");
 
             WireLetterButtons();
@@ -74,17 +74,11 @@ namespace CrossWords {
                 }
             }
 
-            setGameState(gameDay);
-            //await PassportLogin.InitAndLogin();
+            await PassportLogin.InitAndLogin();
 
             Invoke("DelayedScoreUpdate", 0.1f);
         }
         
-        public void OnDisable()
-        {
-            GameState.Instance().SetPlayerState(GameState.PlayerState.Unknown);
-        }
-
         void DelayedScoreUpdate()
         {
             if (!dictionaryLoaded)
@@ -93,18 +87,6 @@ namespace CrossWords {
                 Invoke("DelayedScoreUpdate", 0.1f);
             }
         }
-
-        private void setGameState(uint todaysGameDay) {
-            GameState gameState = GameState.Instance();
-            gameState.SetGameDayBeingPlayed(todaysGameDay);
-            //gameState.SetPointsEarnedTotal(pointsEarnedTotalToday());
-            if (gameState.IsPlayerStateUnknown())
-            {
-                gameState.SetPlayerState(GameState.PlayerState.Playing);
-            }
-        }
-
-
 
         void WireLetterButtons()
         {

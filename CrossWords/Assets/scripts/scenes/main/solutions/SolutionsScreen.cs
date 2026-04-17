@@ -7,6 +7,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
+using CrossWords.WorcadianGameV1.ContractDefinition;
 
 namespace CrossWords {
 
@@ -29,7 +30,10 @@ namespace CrossWords {
 
         public TextMeshProUGUI mySolutionScoreText;
 
-//TODO        private GetAllSolutionsOutputDTO todaysResult = null;
+        public TextMeshProUGUI bestSolutionScoreText;
+        public TextMeshProUGUI bestPlayerText;
+
+        private GetResultsOutputDTO todaysResult = null;
 
         public void Start() {
             AuditLog.Log("Solutions screen");
@@ -72,12 +76,17 @@ namespace CrossWords {
                 showSolution(newIndex);
             }
             else if (buttonText == "Right") {
-                // int newIndex = indexDisplaying + 1;
-                // if (newIndex == todaysResult.Solutions.Count - 1) {
-                //     buttonRight.interactable = false;
-                // }
-                // buttonLeft.interactable = true;
-                // showSolution(newIndex);
+                if (todaysResult == null) {
+                    return;
+                }
+                if (todaysResult.NumSubmissions > 0) {
+                    int newIndex = indexDisplaying + 1;
+                    if (newIndex == todaysResult.NumSubmissions - 1) {
+                        buttonRight.interactable = false;
+                    }
+                    buttonLeft.interactable = true;
+                    showSolution(newIndex);
+                }
             }
             else {
                 AuditLog.Log($"Unknown button: {buttonText}");
@@ -108,96 +117,66 @@ namespace CrossWords {
         }
         async void GetResult()
         {
-            // FourteenNumbersSolutionsContract fourteenNumbersContracts = new FourteenNumbersSolutionsContract();
-            // todaysResult = await fourteenNumbersContracts.GetAllSolutions(gameDayDisplaying);
-            // showCached(gameDayDisplaying, indexDisplaying);
 
-            // if (todaysResult.Solutions.Count > 1)
-            // {
-            //     buttonRight.interactable = true;
-            // }
+            GameProcessor gameProcessor = new GameProcessor();
+            todaysResult = await gameProcessor.GetResults(gameDayDisplaying);
+            showCached(gameDayDisplaying, indexDisplaying);
+
+            if (todaysResult.Submissions != null && todaysResult.Submissions.Count > 1)
+            {
+                buttonRight.interactable = true;
+            }
         }
 
         public void showCached(uint gameDay, int index) {
-            // if (todaysResult == null) {
-            //     AuditLog.Log("Todays result is null");
-            //     return;
-            // }
+            if (todaysResult == null) {
+                AuditLog.Log("Todays result is null");
+                return;
+            }
 
-            // if (todaysResult.Solutions.Count != 0)
-            // {
-            //     string player = todaysResult.Solutions[index].Player;
-            //     bestPlayerText.text = player.Substring(0, 6) + "...." + player.Substring(player.Length - 4, 4);
-            // }
-            // else
-            // {
-            //     bestPlayerText.text = "";
-            // }
-            // bestPointsTotalText.text = todaysResult.Points.ToString();
+            BestBoard board = FindFirstObjectByType<BestBoard>();
+            if (board == null) {
+                AuditLog.Log("BestBoard not found");
+                return;
+            }
 
-            // byte[] combinedSolutionBytes = {};
-            // if (todaysResult.Solutions.Count != 0) {
-            //     combinedSolutionBytes = todaysResult.Solutions[index].CombinedSolution;
-            // }
-            // var combinedSolution = System.Text.Encoding.Default.GetString(combinedSolutionBytes);
-            // string sol1 = "";
-            // string sol2 = "";
-            // string sol3 = "";
-            // if (combinedSolution.Length != 0) {
-            //     int indexOfEquals = combinedSolution.IndexOf('=');
-            //     sol1 = combinedSolution.Substring(0, indexOfEquals);
-            //     combinedSolution = combinedSolution.Substring(indexOfEquals+1);
-            //     indexOfEquals = combinedSolution.IndexOf('=');
-            //     sol2 = combinedSolution.Substring(0, indexOfEquals);
-            //     sol3 = combinedSolution.Substring(indexOfEquals+1);
-            // }
+            var submissions = todaysResult.Submissions;
+            if (submissions == null || submissions.Count == 0) {
+                if (bestPlayerText != null) {
+                    bestPlayerText.text = "";
+                }
+                board.ResetAllCells();
+                string seedWord = WordListSeed.GetSeedWord(gameDay);
+                board.SetStarterWord(seedWord);
+                board.BlockInteraction();
+                int score = 26 - seedWord.Length;
+                bestSolutionScoreText.text = $"Best Score: {score}";
+                return;
+            }
 
-            // if (gameDayDisplaying == gameDayToday) {
-            //     bestInput1Text.text = replace(sol1);
-            //     bestInput2Text.text = replace(sol2);
-            //     bestInput3Text.text = replace(sol3);
-            // }
-            // else {
-            //     bestInput1Text.text = replace(sol1, true);
-            //     bestInput2Text.text = replace(sol2, true);
-            //     bestInput3Text.text = replace(sol3, true);
-            // }
+            if (index < 0 || index >= submissions.Count) {
+                AuditLog.Log($"ERROR: showCached: index {index} out of range (count {submissions.Count})");
+                return;
+            }
 
-            // uint points1 = 0;
-            // uint points2 = 0;
-            // uint points3 = 0;
-            // CalcProcessor processor = new CalcProcessor();
-            // uint targetValue = TargetValue.GetTarget(gameDayDisplaying);
-            // int errorCode;
-            // int res1 = 0;
-            // int res2 = 0;
-            // int res3 = 0;
-            // if (sol1.Length != 0) {
-            //     (res1, errorCode) = processor.Calc(sol1);
-            //     if (errorCode == CalcProcessor.ERR_NO_ERROR) {
-            //         points1 = Points.CalcPoints((uint) res1, targetValue);
-            //     }
+            Submission sub = submissions[index];
+            if (bestPlayerText != null) {
+                string player = sub.Player ?? "";
+                if (player.Length >= 10) {
+                    bestPlayerText.text = player.Substring(0, 6) + "...." + player.Substring(player.Length - 4, 4);
+                } else {
+                    bestPlayerText.text = player;
+                }
+            }
 
-            // }
-            // if (sol2.Length != 0) {
-            //     (res2, errorCode) = processor.Calc(sol2);
-            //     if (errorCode == CalcProcessor.ERR_NO_ERROR) {
-            //         points2 = Points.CalcPoints((uint) res2, targetValue);
-            //     }
-            // }
-            // if (sol3.Length != 0) {
-            //     (res3, errorCode) = processor.Calc(sol3);
-            //     if (errorCode == CalcProcessor.ERR_NO_ERROR) {
-            //         points3 = Points.CalcPoints((uint) res3, targetValue);
-            //     }
-            // }
-            // bestCalculated1Text.text = res1.ToString();
-            // bestCalculated2Text.text = res2.ToString();
-            // bestCalculated3Text.text = res3.ToString();
-
-            // bestPoints1Text.text = points1.ToString();
-            // bestPoints2Text.text = points2.ToString();
-            // bestPoints3Text.text = points3.ToString();
+            board.ResetAllCells();
+            if (!string.IsNullOrEmpty(sub.Board)) {
+                board.SetCells(sub.Board);
+            }
+            string starterWord = WordListSeed.GetSeedWord(gameDay);
+            board.SetStarterWord(starterWord);
+            board.BlockInteraction();
+            bestSolutionScoreText.text = $"Best Score: {todaysResult.BestScore}";
         }
 
         void DisplayMyResult(uint gameDay) {
