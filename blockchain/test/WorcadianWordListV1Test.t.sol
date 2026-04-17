@@ -16,7 +16,7 @@ contract WorcadianWordListV1Test is Test {
     address stranger = makeAddr("stranger");
 
     function deployProxy(address _admin, address _owner, address _upgradeAdmin, address _wordSmithAdmin)
-        internal
+        internal virtual
         returns (WorcadianWordListV1)
     {
         WorcadianWordListV1 impl = new WorcadianWordListV1();

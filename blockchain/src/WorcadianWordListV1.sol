@@ -133,7 +133,7 @@ contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradea
      * @param _word The word to check.
      * @return true if the word is in the list.
      */
-    function inWordList(bytes calldata _word) external view returns (bool) {
+    function inWordList(bytes calldata _word) external virtual view returns (bool) {
         return wordList[keccak256(_word)];
     }
 
@@ -142,7 +142,7 @@ contract WorcadianWordListV1 is AccessControlEnumerableUpgradeable, UUPSUpgradea
      * @param _words The words to check.
      * @return bool[]: true if each word is in the list.
      */
-    function inWordListBulk(bytes[] calldata _words) external view returns (bool[] memory) {
+    function inWordListBulk(bytes[] calldata _words) external virtual view returns (bool[] memory) {
         bool[] memory result = new bool[](_words.length);
         for (uint256 i = 0; i < _words.length; i++) {
             result[i] = wordList[keccak256(_words[i])];

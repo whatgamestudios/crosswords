@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {WorcadianCheckInV1} from "../src/WorcadianCheckInV1.sol";
 import {WorcadianCheckInV2} from "../src/WorcadianCheckInV2.sol";
 import {WorcadianWordListV1} from "../src/WorcadianWordListV1.sol";
+import {WorcadianWordListV2} from "../src/WorcadianWordListV2.sol";
 import {WordListSeed} from "../src/WordListSeed.sol";
 import {WordListSeedV2} from "../src/WordListSeedV2.sol";
 import {WorcadianGameV1} from "../src/WorcadianGameV1.sol";
@@ -134,4 +135,18 @@ contract WorcadianScript is Script {
 
         console.log("Implementation V2 address: ", address(implV2));
     }
+
+
+    function deployWordListV2() public {
+        vm.broadcast();
+        WorcadianWordListV2 implV2 = new WorcadianWordListV2();
+
+        WorcadianWordListV2 proxy = WorcadianWordListV2(address(0x6b17A8D0eD442a234df46342B52C49f4247e119d));
+        vm.broadcast();
+        proxy.upgradeToAndCall(address(implV2), 
+            abi.encodeWithSelector(WorcadianWordListV2.upgradeStorage.selector, bytes("")));
+
+        console.log("Implementation V2 address: ", address(implV2));
+    }
+
 }
