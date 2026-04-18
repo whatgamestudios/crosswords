@@ -9,14 +9,6 @@ using System.Text;
 namespace CrossWords {
 
     public class ShareManager : MonoBehaviour {
-        public GameObject DebugPanel;
-        public TextMeshProUGUI DebugText;
-
-        public void Start()
-        {
-            DebugPanel.SetActive(false);
-        }
-
 
         public void OnButtonClick(string buttonText)
         {
@@ -57,10 +49,6 @@ namespace CrossWords {
                 }
                 msg += "Score: " + score;
 
-msg += check();
-
-                // DebugPanel.SetActive(true);
-                // DebugText.text = msg;
                 AuditLog.Log($"Shared: {msg}");
                 SunShineNativeShare.instance.ShareText(msg, msg);
             }

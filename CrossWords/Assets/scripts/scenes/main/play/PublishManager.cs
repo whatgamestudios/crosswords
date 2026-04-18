@@ -15,9 +15,11 @@ namespace CrossWords {
 
         private bool publishButtonPressed = false;
 
-        private const int TIME_PER_FLASH = 500;
-        DateTime timeOfLastFlash = DateTime.Now;
-        bool cursorOn = false;
+        // private const int TIME_PER_FLASH = 500;
+        // DateTime timeOfLastFlash = DateTime.Now;
+        // bool cursorOn = false;
+
+        private const int PUBLISH_THRESHOLD = 8;
 
 
         public void Start()
@@ -66,6 +68,12 @@ namespace CrossWords {
                 panelPublish.SetActive(false);
                 return;
             }
+            if (score > PUBLISH_THRESHOLD)
+            {
+                panelPublish.SetActive(false);
+                return;
+            }
+
             if (!PassportStore.IsLoggedIn())
             {
                 buttonPublishText.text = "Sign in to Publish";
