@@ -875,8 +875,8 @@ MonoBehaviour:
     Each letter that is only in words that are in the word list reduces the score
     by one. \n\n4. Each letter that is in one or more words that are not in the word
     list increases the score by one. \n\n5. All letters have equal value.\n\nThe
-    goal is to use all of the letters in words in the word list. This will give you
-    a score of zero."
+    goal is to use all of the letters in words that are in the word list. This will
+    give you a score of zero."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}
   m_sharedMaterial: {fileID: -1750055789576322554, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}
