@@ -21,7 +21,7 @@ namespace CrossWords {
                 Application.OpenURL("https://discord.gg/V6nbs2grws");
             }
             else if (buttonText == "YouTube") {
-                Application.OpenURL("https://www.youtube.com/@14Numbers");
+                Application.OpenURL("https://www.youtube.com/@WorcadianOfficial");
             }
             else if (buttonText == "Twitter") {
                 Application.OpenURL("https://x.com/worcadian");
