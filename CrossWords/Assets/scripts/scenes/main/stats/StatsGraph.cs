@@ -24,7 +24,7 @@ namespace CrossWords {
         private const uint Y_TOP_OFFSET = 70;
         private const uint Y_BOTTOM_OFFSET = 40;
 
-        private const float BAR_LINE_WIDTH = 15f;
+        private const float BAR_LINE_WIDTH = 25f;
 
         private uint[] scoreDistribution;
 

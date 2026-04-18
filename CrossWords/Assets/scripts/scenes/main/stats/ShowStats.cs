@@ -15,9 +15,6 @@ namespace CrossWords {
         public TextMeshProUGUI firstDayPlayedText;
         public TextMeshProUGUI firstDatePlayedText;
 
-        private string help = "" +
-            "Streaks are sequential days played.";
-
         public void Start() {
             AuditLog.Log("Stats screen");
 
@@ -48,17 +45,6 @@ namespace CrossWords {
             daysPublishedText.text = timesPublished.ToString();
             firstDayPlayedText.text = firstPlayed.ToString();
             firstDatePlayedText.text = firstPlayedS;
-        }
-
-        public void OnButtonClick(string buttonText) {
-            if (buttonText == "Help") {
-                MessagePass.SetMsg(help);
-                SceneStack.Instance().PushScene();
-                SceneManager.LoadScene("HelpContextScene", LoadSceneMode.Additive);
-            }
-            else {
-                AuditLog.Log($"Show Stats: Unknown button: {buttonText}");
-            }
         }
     }
 }
