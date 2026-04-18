@@ -275,7 +275,7 @@ namespace CrossWords {
 
             string status1 = "";
             string status2 = "";
-            if (Score >= 21)
+            if (Score >= 20)
             {
                 status1 = "Start from the";
                 status2 = "seed word";
@@ -284,9 +284,9 @@ namespace CrossWords {
             {
                 switch (Score)
                 {
-                    case 20:
-                        status1 = "Good start";
-                        break;
+                    // case 20:
+                    //     status1 = "Good start";
+                    //     break;
                     case 19:
                         status1 = "Great start";
                         break;

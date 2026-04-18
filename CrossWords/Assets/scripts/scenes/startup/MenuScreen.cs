@@ -11,11 +11,12 @@ namespace CrossWords {
 
     public class MenuScreen : MonoBehaviour {
         public TextMeshProUGUI loggedIn;
+        public GameObject loggedInPanel;
 
 
         public async void Start() {
             AuditLog.Log("Menu screen");
-            loggedIn.text = "Loading";
+            loggedInPanel.SetActive(false);
 
             bool isLoggedIn = PassportStore.IsLoggedIn();
             if (isLoggedIn) {
@@ -33,10 +34,8 @@ namespace CrossWords {
                                     DeepLinkManager.Instance.LoginPath + 
                                     ") as\n" + 
                                     account;
+                    loggedInPanel.SetActive(true);
                 }
-            }
-            else {
-                loggedIn.text = "Not Logged In";
             }
         }
 
