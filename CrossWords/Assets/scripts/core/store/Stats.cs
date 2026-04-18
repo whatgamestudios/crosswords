@@ -41,7 +41,6 @@ namespace CrossWords
                 PlayerPrefs.SetInt(STATS_LAST_PLAYED, (int) gameDay);
             }
 
-
             Solution current = new Solution(gameDay, score, solution);
             string currentSerialisd = current.Serialise();
             PlayerPrefs.SetString(STATS_CURRENT, current.Serialise());

@@ -28,8 +28,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="fourteennumbers" android:host="callback" />
-                <data android:scheme="fourteennumbers" android:host="logout" />
+                <data android:scheme="worcadian" android:host="callback" />
+                <data android:scheme="worcadian" android:host="logout" />
             </intent-filter>
         </activity>
 
