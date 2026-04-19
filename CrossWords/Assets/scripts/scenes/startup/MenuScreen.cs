@@ -92,6 +92,10 @@ namespace CrossWords {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("WordListScene", LoadSceneMode.Single);
             }
+            else if (buttonText == "HowToPlay") {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("HowToPlayScene", LoadSceneMode.Single);
+            }
             else
             {
                 AuditLog.Log($"Menu: Unknown button {buttonText}");

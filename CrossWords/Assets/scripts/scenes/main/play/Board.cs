@@ -253,6 +253,12 @@ namespace CrossWords {
             _cellViews[y, x].SetBackgroundColor(CellSelectedColor);
         }
 
+        public void FakeOnCellPointerDown(int x, int y)
+        {
+            OnCellPointerDown(x, y);
+        }
+
+
         /// <summary>
         /// Sets the character at grid position (x, y): x is column (0 = left), y is row (0 = top).
         /// </summary>
