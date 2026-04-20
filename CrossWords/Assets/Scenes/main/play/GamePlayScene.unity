@@ -10593,6 +10593,7 @@ GameObject:
   - component: {fileID: 2063394992}
   - component: {fileID: 2063394993}
   - component: {fileID: 2063394994}
+  - component: {fileID: 2063394995}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -10725,8 +10726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09a2b697962d475a948c6b3569e9f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ShareManager
-  DebugPanel: {fileID: 0}
-  DebugText: {fileID: 0}
 --- !u!114 &2063394990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10790,6 +10789,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26278fbfd829e40b28baa59dbe88e9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BestScoreLoader
+--- !u!114 &2063394995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af67a7c646254479beb19a99901c5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandlerAndroid
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0

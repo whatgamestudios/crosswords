@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 289835297}
   - component: {fileID: 289835299}
   - component: {fileID: 289835300}
+  - component: {fileID: 289835301}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -406,9 +407,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordCheckScreen
   WordCheckResult: {fileID: 771944211}
-  SuggestButtonText: {fileID: 0}
-  SuggestButton: {fileID: 0}
-  SuggestBackground: {fileID: 0}
+--- !u!114 &289835301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289835290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af67a7c646254479beb19a99901c5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandlerAndroid
 --- !u!1 &294060456
 GameObject:
   m_ObjectHideFlags: 0
