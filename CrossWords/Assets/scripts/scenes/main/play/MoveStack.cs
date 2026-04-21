@@ -117,5 +117,12 @@ namespace CrossWords {
             StoreToStorage();
         }
 
+        public List<MoveEntry> GetEntriesBottomToTop()
+        {
+            var list = new List<MoveEntry>(_stack); // Stack enumerates top-to-bottom
+            list.Reverse();
+            return list;
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace CrossWords {
         public TextMeshProUGUI StatusText3;
         public TextMeshProUGUI StatusText4;
 
-        readonly MoveStack _moveStack = new MoveStack();
+        public MoveStack moveStack = new MoveStack();
 
         private bool dictionaryLoaded = false;
 
@@ -69,7 +69,7 @@ namespace CrossWords {
                     string starterWord = WordListSeed.GetSeedWord(gameDay);
                     board.SetStarterWord(starterWord);
                     analyseBoardAndUpdateScore();
-                    _moveStack.LoadFromStorage();        
+                    moveStack.LoadFromStorage();        
                     DisableLetterButtonsForUsedLetters();
                 }
             }
@@ -141,7 +141,7 @@ namespace CrossWords {
             if (board.IsCellOccupied(x, y))
             {
                 char previousChar = board.GetCell(x, y);
-                bool found = _moveStack.Remove(previousChar);
+                bool found = moveStack.Remove(previousChar);
                 if (!found)
                 {
                     AuditLog.Log($"Replacing character <{previousChar}> not found");
@@ -158,7 +158,7 @@ namespace CrossWords {
             }
 
             board.SetCell(x, y, letter);
-            _moveStack.Add(letter, x, y);
+            moveStack.Add(letter, x, y);
             button.interactable = false;
 
             analyseBoardAndUpdateScore();
@@ -166,7 +166,7 @@ namespace CrossWords {
 
         public void OnBackSpaceButton()
         {
-            bool successful = _moveStack.TryRemoveTop(out MoveEntry entry);
+            bool successful = moveStack.TryRemoveTop(out MoveEntry entry);
             if (successful)
             {
                 board.ResetCell(entry.X, entry.Y);
@@ -186,10 +186,9 @@ namespace CrossWords {
             GameDayText.text = Timeline.GameDayStr();
             TimeToNextText.text = Timeline.TimeToNextDayStr();
 
-            if (board != null)
+            if (board != null) {
                 board.UpdateBoard();
-
-            showStatus();
+            }
         }
 
         private void resetBoard()
@@ -201,10 +200,11 @@ namespace CrossWords {
             {
                 board.ResetAllCells();
                 board.SetStarterWord(starterWord);
-            }        
-            _moveStack.Clear();                  
+            }
+            moveStack.Clear();
             analyseBoardAndUpdateScore();
             DisableLetterButtonsForUsedLetters();
+            showStatus();
         }
 
         void analyseBoardAndUpdateScore()
@@ -252,6 +252,7 @@ namespace CrossWords {
                 string b = board.GetCells();
                 uint gameDay = Timeline.GameDay();
                 Stats.SetCurrent(gameDay, Score, b);
+                showStatus();
             }
         }
 
