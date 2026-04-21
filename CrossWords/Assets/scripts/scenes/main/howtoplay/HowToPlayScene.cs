@@ -255,7 +255,7 @@ namespace CrossWords {
                     break;
 
                 case 38:
-                    InfoText.text = "Use the clean button ¢";
+                    InfoText.text = "Use the clear button ¢";
                     InfoPanel.SetActive(true);
                     NextMove = 4;
                     break;
