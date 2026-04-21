@@ -239,74 +239,120 @@ namespace CrossWords {
                 case 34:
                     InfoText.text = "The more letters";
                     InfoPanel.SetActive(true);
-                    NextMove = 4;
+                    NextMove = 0;
                     break;
                 case 35:
-                    InfoText.text = "you use";
-                    NextMove = 4;
+                    SelectCell(6,4);
+                    NextMove = 0;
                     break;
                 case 36:
-                    InfoText.text = "the lower your score";
-                    NextMove = 4;
+                    OnLetterButton('U');
+                    NextMove = 0;
                     break;
                 case 37:
+                    SelectCell(6,3);
+                    NextMove = 0;
+                    break;
+                case 38:
+                    OnLetterButton('Q');
+                    NextMove = 0;
+                    break;
+                case 39:
+                    InfoText.text = "you use";
+                    NextMove = 0;
+                    SelectCell(6,6);
+                    NextMove = 0;
+                    break;
+                case 40:
+                    OnLetterButton('S');
+                    NextMove = 0;
+                    break;
+                case 41:
+                    SelectCell(7,6);
+                    NextMove = 0;
+                    break;
+                case 42:
+                    OnLetterButton('O');
+                    NextMove = 0;
+                    break;
+                case 43:
+                    InfoText.text = "the lower your score";
+                    NextMove = 0;
+                    SelectCell(8,6);
+                    NextMove = 0;
+                    break;
+                case 44:
+                    OnLetterButton('N');
+                    NextMove = 0;
+                    break;
+                case 45:
+                    SelectCell(7,7);
+                    NextMove = 0;
+                    break;
+                case 46:
+                    OnLetterButton('X');
+                    NextMove = 4;
+                    break;
+
+
+                case 47:
                     InfoPanel.SetActive(false);
                     NextMove = 4;
                     break;
 
-                case 38:
+                case 48:
                     InfoText.text = "Use the clear button ¢";
                     InfoPanel.SetActive(true);
                     NextMove = 4;
                     break;
-                case 39:
+                case 49:
                     InfoText.text = "to reset the board";
                     NextMove = 4;
                     break;
-                case 40:
+                case 50:
                     resetBoard();
                     NextMove = 4;
                     break;
-                case 41:
+                case 51:
                     InfoPanel.SetActive(false);
                     NextMove = 4;
                     break;
 
-                case 42:
+                case 52:
                     InfoText.text = "There is a different";
                     InfoPanel.SetActive(true);
                     NextMove = 4;
                     break;
-                case 43:
+                case 53:
                     InfoText.text = "seed word each day";
                     NextMove = 4;
                     GameDay = 13;
                     resetBoard();
                     break;
-                case 44:
+                case 54:
                     NextMove = 4;
                     GameDay = 14;
                     resetBoard();
                     break;
-                case 45:
+                case 55:
                     NextMove = 4;
                     GameDay = 15;
                     resetBoard();
                     break;
-                case 46:
+                case 56:
                     NextMove = 4;
                     GameDay = 16;
                     resetBoard();
                     break;
 
-                case 47:
+                case 57:
                     InfoPanel.SetActive(false);
                     NextMove = 0;
                     break;
 
 
 
-                case 48:
+                case 58:
                     TimeInShow = 0;
                     NextMove = 10;
                     InfoPanel.SetActive(false);
