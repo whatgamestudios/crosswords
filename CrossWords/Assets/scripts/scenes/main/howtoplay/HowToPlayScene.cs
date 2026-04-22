@@ -8,7 +8,7 @@ namespace CrossWords {
 
     public class HowToPlayScene : MonoBehaviour
     {
-        Board board;
+        HowToPlayBoard board;
 
         public TextMeshProUGUI ScoreText;
 
@@ -41,7 +41,7 @@ namespace CrossWords {
         {
             if (board == null)
             {
-                board = FindFirstObjectByType<Board>();
+                board = FindFirstObjectByType<HowToPlayBoard>();
             }
         }
 
@@ -194,7 +194,7 @@ namespace CrossWords {
                     break;
                 case 24:
                     SelectCell(2,8);
-                    NextMove = 0;
+                    NextMove = 0; 
                     break;
                 case 25:
                     OnLetterButton('Z');
@@ -440,7 +440,6 @@ namespace CrossWords {
 
         void analyseBoardAndUpdateScore()
         {
-
             List<WordOnBoard> words = AnalyseBoard.Analyse(board);
 
             Score = 26;
@@ -474,10 +473,6 @@ namespace CrossWords {
                 }
                 Score = ScoreCalculator.Score(inDictionary, words);
                 ScoreText.text = Score.ToString();
-
-                string b = board.GetCells();
-                uint gameDay = Timeline.GameDay();
-                Stats.SetCurrent(gameDay, Score, b);
             }
         }
 
