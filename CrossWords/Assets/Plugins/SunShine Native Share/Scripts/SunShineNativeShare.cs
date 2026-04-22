@@ -11,7 +11,7 @@ public class SunShineNativeShare : MonoBehaviour
     public static string TYPE_PDF = "application/pdf*";
 
 //    public static string fileProviderName = "com.SmileSoft.unityplugin";
-    public static string fileProviderName = "com.whatgamestudios.numbers.unityplugin";
+    public static string fileProviderName = "com.whatgamestudios.worcadian.unityplugin";
 
     private INativeShare _nativeShare;
 
