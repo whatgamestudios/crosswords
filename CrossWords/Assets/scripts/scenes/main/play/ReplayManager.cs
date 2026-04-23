@@ -29,7 +29,7 @@ namespace CrossWords {
         private DateTime _timeOfLastMove = DateTime.Now;
         private bool _selectCell;
 
-        private const int TIME_MOVE = 300;
+        private const int TIME_MOVE = 250;
 
         public bool IsReplaying { get; private set; }
 
