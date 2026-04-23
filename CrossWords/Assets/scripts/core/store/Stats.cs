@@ -104,12 +104,16 @@ namespace CrossWords
 
         public static int GetNumDaysPlayed()
         {
-            return PlayerPrefs.GetInt(STATS_DAYS_PLAYED, 1);
+            return PlayerPrefs.GetInt(STATS_DAYS_PLAYED, 0);
         }
 
         public static int GetAverageScore()
         {
-            int total = PlayerPrefs.GetInt(STATS_TOTAL_POINTS, 26);
+            int total = PlayerPrefs.GetInt(STATS_TOTAL_POINTS, -1);
+            if (total == -1)
+            {
+                return -1;
+            }
             int daysPlayed = GetNumDaysPlayed();
             return total / daysPlayed;
         }

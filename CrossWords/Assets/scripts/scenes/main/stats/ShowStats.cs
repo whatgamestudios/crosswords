@@ -40,7 +40,7 @@ namespace CrossWords {
                 lastPlayedS = lastPlayedDate.ToString("D");
             }
 
-            pointsAveText.text = averageScore.ToString();
+            pointsAveText.text = averageScore == -1 ? '\u221E'.ToString() : averageScore.ToString();
             daysPlayedText.text = timesPlayed.ToString();
             daysPublishedText.text = timesPublished.ToString();
             firstDayPlayedText.text = firstPlayed.ToString();
