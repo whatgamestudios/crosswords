@@ -7202,8 +7202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1312922856}
-  - component: {fileID: 1312922855}
-  - component: {fileID: 1312922854}
+  - component: {fileID: 1312922857}
   m_Layer: 0
   m_Name: LongTermGameObj
   m_TagString: Untagged
@@ -7211,30 +7210,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1312922854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312922853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d097a062769e4f90819a5008d7632e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1312922855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312922853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f427b55ad87c47a493e15b5ed69bbd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1312922856
 Transform:
   m_ObjectHideFlags: 0
@@ -7250,6 +7225,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1312922857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312922853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e4bf341a2584872a93b77c66b68c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.DeepLinkManager
+  LoginPath: 1
 --- !u!1001 &1350489528
 PrefabInstance:
   m_ObjectHideFlags: 0
