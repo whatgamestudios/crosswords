@@ -12,11 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/startup/LoginScene.unity
     guid: ce8f60f6606c14648a5cd013ee8130e8
   - enabled: 1
-    path: Assets/Scenes/startup/UnexpectedErrorScene.unity
-    guid: d1cb8ce43d5504f47b3226ff5fe2ce66
-  - enabled: 1
     path: Assets/Scenes/startup/MenuScene.unity
     guid: 4e4672fa9440e40ae9ae9965fde858f1
+  - enabled: 1
+    path: Assets/Scenes/startup/UnexpectedErrorScene.unity
+    guid: d1cb8ce43d5504f47b3226ff5fe2ce66
   - enabled: 1
     path: Assets/Scenes/main/play/GamePlayScene.unity
     guid: 7cb6444ced6d14fc6aa37b0d43fcb722

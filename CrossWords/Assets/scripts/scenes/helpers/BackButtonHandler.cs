@@ -25,12 +25,13 @@ namespace CrossWords {
         }
 
         public static void GoBack() {
-            var previousScene = SceneStack.Instance().PopScene();
             var currentScene = SceneManager.GetActiveScene().buildIndex;
             // If menu scene, then quit the app
             if (currentScene == SceneStack.MENU_SCENE) {
                 Application.Quit();
             }
+
+            var previousScene = SceneStack.Instance().PopScene();
             AuditLog.Log($"Back: switching from scene {currentScene} to scene {previousScene}");
             SceneManager.LoadScene(previousScene, LoadSceneMode.Single);
         }
