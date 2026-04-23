@@ -23,8 +23,8 @@ namespace CrossWords {
         private Image buttonImage;
         //private int currentButtonFrame = 1;
 
-        private string help = "Sign in to claim Scenes and publish best scores.\n\n" +
-            "14Numbers uses Passport which uses Google, Apple, Facebook or email to sign in";
+        private string help = "Sign in to publish your solutions.\n\n" +
+            "Worcadian uses Passport which uses Google, Apple, Facebook or email to sign in";
 
         public async Task Start() {
             AuditLog.Log("Login screen");

@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4397fb936c14469b2e80b8b8d32148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.HelpContextScreen
-  helpText: {fileID: 0}
+  helpText: {fileID: 2110840354}
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
