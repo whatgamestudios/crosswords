@@ -94,7 +94,7 @@ namespace CrossWords {
                     NextMove = 0;
                     break;
                 case 1:
-                    InfoText.text = "Buid words off the seed word";
+                    InfoText.text = "Build words off the seed word";
                     InfoPanel.SetActive(true);
                     NextMove = 8;
                     break;
