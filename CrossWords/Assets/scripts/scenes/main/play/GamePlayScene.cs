@@ -173,6 +173,11 @@ namespace CrossWords {
             }
             analyseBoardAndUpdateScore();
             DisableLetterButtonsForUsedLetters();
+            if (successful)
+            {
+                board.FakeOnCellPointerDown(entry.X, entry.Y);
+                AuditLog.Log("here");
+            }
         }
 
 
