@@ -19,18 +19,18 @@ namespace CrossWords {
                 string wordStr = word.Word;
                 foreach (char ch in wordStr.ToCharArray())
                 {
-                    int chInt = ch - 'A';
-                    if (!used[chInt])
+                    if (!inDic)
                     {
-                        if (inDic)
+                        score++;
+                    }
+                    else
+                    {
+                        int chInt = ch - 'A';
+                        if (!used[chInt])
                         {
                             score--;
+                            used[chInt] = true;
                         }
-                        else
-                        {
-                            score++;
-                        }
-                        used[chInt] = true;
                     }
                 }
             }
