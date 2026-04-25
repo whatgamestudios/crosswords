@@ -57,8 +57,8 @@ contract MockWordList {
 
 // ── Test contract ─────────────────────────────────────────────────────────────
 
-contract WorcadianGameV1SubmitTest is Test {
-    WorcadianGameV1    game;
+contract WorcadianGameV3SubmitTest is Test {
+    WorcadianGameV3    game;
     MockPassportImpl   passportImpl;
     MockPassportWallet passportWallet;
     MockPassportWallet passportWallet2;
@@ -164,7 +164,7 @@ contract WorcadianGameV1SubmitTest is Test {
     function _deployProxy(
         address _admin, address _owner, address _upgradeAdmin,
         address _passportWallet, address _wordListSeed, address _wordList
-    ) internal returns (WorcadianGameV1) {
+    ) internal returns (WorcadianGameV3) {
         WorcadianGameV1 implV1 = new WorcadianGameV1();
         ERC1967Proxy proxy = new ERC1967Proxy(
             address(implV1),
@@ -604,5 +604,18 @@ contract WorcadianGameV1SubmitTest is Test {
 
     function test_GetSubmissionCountAtScore_UnknownScore_ReturnsZero() public view {
         assertEq(game.getSubmissionCountAtScore(GAME_DAY, 999), 0);
+    }
+
+
+    // -- analyseBoard --------------------------------------------------
+    function test_AnalyseBoard_Only() public {
+        _setAllInDict(true);
+        vm.prank(address(passportWallet));
+        (uint256 score, string[] memory words, bool[] memory inDict) = game.analyseBoard(_onlyBoard());
+        assertEq(score, SCORE_IN_DICT, "score");
+        assertEq(words.length, 1, "words len");
+        assertEq(words[0], "ONLY", "first word");
+        assertEq(inDict.length, 1, "in dict length");
+        assertEq(inDict[0], true, "in dict value");
     }
 }

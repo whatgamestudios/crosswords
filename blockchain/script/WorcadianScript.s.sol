@@ -12,6 +12,7 @@ import {WordListSeed} from "../src/WordListSeed.sol";
 import {WordListSeedV2} from "../src/WordListSeedV2.sol";
 import {WorcadianGameV1} from "../src/WorcadianGameV1.sol";
 import {WorcadianGameV2} from "../src/WorcadianGameV2.sol";
+import {WorcadianGameV3} from "../src/WorcadianGameV3.sol";
 
 contract WorcadianScript is Script {
     function deployCheckInV1() public {
@@ -136,7 +137,6 @@ contract WorcadianScript is Script {
         console.log("Implementation V2 address: ", address(implV2));
     }
 
-
     function deployWordListV2() public {
         vm.broadcast();
         WorcadianWordListV2 implV2 = new WorcadianWordListV2();
@@ -147,6 +147,19 @@ contract WorcadianScript is Script {
             abi.encodeWithSelector(WorcadianWordListV2.upgradeStorage.selector, bytes("")));
 
         console.log("Implementation V2 address: ", address(implV2));
+    }
+
+    function deployGameV3() public {
+        vm.broadcast();
+
+        WorcadianGameV3 implV3 = new WorcadianGameV3();
+
+        WorcadianGameV2 proxy = WorcadianGameV2(address(0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD));
+        vm.broadcast();
+        proxy.upgradeToAndCall(address(implV3), 
+            abi.encodeWithSelector(WorcadianGameV2.upgradeStorage.selector, bytes("")));
+
+        console.log("Implementation V3 address: ", address(implV3));
     }
 
 }
