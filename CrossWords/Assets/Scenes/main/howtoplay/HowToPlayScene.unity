@@ -185,8 +185,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278585087
+  m_fontColor: {r: 1, g: 0.023584902, b: 0.023584902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10791,8 +10791,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5386890067296147408, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.023584902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386890067296147408, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.023584902
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386890067296147408, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386890067296147408, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_fontSizeBase
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386890067296147408, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278585087
       objectReference: {fileID: 0}
     - target: {fileID: 5419705754974587365, guid: 16ff31ac95d344fb0ac50cc8c3aa2456, type: 3}
       propertyPath: m_text
