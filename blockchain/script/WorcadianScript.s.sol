@@ -13,6 +13,7 @@ import {WordListSeedV2} from "../src/WordListSeedV2.sol";
 import {WorcadianGameV1} from "../src/WorcadianGameV1.sol";
 import {WorcadianGameV2} from "../src/WorcadianGameV2.sol";
 import {WorcadianGameV3} from "../src/WorcadianGameV3.sol";
+import {WorcadianGameV4} from "../src/WorcadianGameV4.sol";
 
 contract WorcadianScript is Script {
     function deployCheckInV1() public {
@@ -162,4 +163,16 @@ contract WorcadianScript is Script {
         console.log("Implementation V3 address: ", address(implV3));
     }
 
+    function deployGameV4() public {
+        vm.broadcast();
+
+        WorcadianGameV4 implV4 = new WorcadianGameV4();
+
+        WorcadianGameV3 proxy = WorcadianGameV3(address(0xBe3558861DE7BB699b9a929d1eA5503dCcb329cD));
+        vm.broadcast();
+        proxy.upgradeToAndCall(address(implV4), 
+            abi.encodeWithSelector(WorcadianGameV3.upgradeStorage.selector, bytes("")));
+
+        console.log("Implementation V4 address: ", address(implV4));
+    }
 }

@@ -54,6 +54,7 @@ sh script/deployCheckInV1.sh
 | WorcadianGameV1         | [0x438c62f2C1b882A9e08740009525EF0ed9a63b97](https://explorer.immutable.com/address/0x438c62f2C1b882A9e08740009525EF0ed9a63b97) |
 | WorcadianGameV2         | [0x22e46e7b4f98f38f1be96f833e488148727f72ad](https://explorer.immutable.com/address/0x22e46e7b4f98f38f1be96f833e488148727f72ad) |
 | WorcadianGameV3         | [0xeddc92f04b51c8637d269ea2e9d8127a9dd318bf](https://explorer.immutable.com/address/0xeddc92f04b51c8637d269ea2e9d8127a9dd318bf) |
+| WorcadianGameV4         | [0xcdd7dcaef49742d5c0901c429fd97d05d31bbadc](https://explorer.immutable.com/address/0xcdd7dcaef49742d5c0901c429fd97d05d31bbadc) |
 
 ### C# Code Generation:
 
