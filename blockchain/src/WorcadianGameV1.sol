@@ -362,7 +362,7 @@ contract WorcadianGameV1 is
     function _isSeedWordOnBoard(
         bytes memory _boardBytes,
         bytes memory _seedBytes
-    ) private pure returns (bool) {
+    ) internal pure returns (bool) {
         uint256 wordLen = _seedBytes.length;
         if (wordLen == 0 || wordLen > BOARD_SIZE) {
             return false;
@@ -381,7 +381,7 @@ contract WorcadianGameV1 is
      * @dev Convert the string word array to bytes[] and query WorcadianWordListV1
      *      in a single batched external call.
      */
-    function _checkWords(string[] memory _words) private view returns (bool[] memory) {
+    function _checkWords(string[] memory _words) internal view returns (bool[] memory) {
         uint256 len = _words.length;
         bytes[] memory wordBytes = new bytes[](len);
         for (uint256 i = 0; i < len; i++) {
