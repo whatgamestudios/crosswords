@@ -166,17 +166,28 @@ namespace CrossWords {
 
         public void OnBackSpaceButton()
         {
-            bool successful = moveStack.TryRemoveTop(out MoveEntry entry);
-            if (successful)
+            bool selected = board.TryGetSelectedCell(out int x, out int y);
+
+            if (selected && board.IsCellOccupied(x, y))
             {
-                board.ResetCell(entry.X, entry.Y);
+                board.ResetCell(x, y);
+                analyseBoardAndUpdateScore();
+                DisableLetterButtonsForUsedLetters();
+                board.FakeOnCellPointerDown(x, y);
             }
-            analyseBoardAndUpdateScore();
-            DisableLetterButtonsForUsedLetters();
-            if (successful)
+            else
             {
-                board.FakeOnCellPointerDown(entry.X, entry.Y);
-                AuditLog.Log("here");
+                bool successful = moveStack.TryRemoveTop(out MoveEntry entry);
+                if (successful)
+                {
+                    board.ResetCell(entry.X, entry.Y);
+                }
+                analyseBoardAndUpdateScore();
+                DisableLetterButtonsForUsedLetters();
+                if (successful)
+                {
+                    board.FakeOnCellPointerDown(entry.X, entry.Y);
+                }
             }
         }
 
