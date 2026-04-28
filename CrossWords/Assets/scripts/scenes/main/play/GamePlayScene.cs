@@ -170,6 +170,13 @@ namespace CrossWords {
 
             if (selected && board.IsCellOccupied(x, y))
             {
+                char previousChar = board.GetCell(x, y);
+                bool found = moveStack.Remove(previousChar);
+                if (!found)
+                {
+                    AuditLog.Log($"Backspacing character <{previousChar}> not found");
+                } 
+
                 board.ResetCell(x, y);
                 analyseBoardAndUpdateScore();
                 DisableLetterButtonsForUsedLetters();
