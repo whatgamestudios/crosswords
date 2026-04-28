@@ -61483,6 +61483,7 @@ utopism
 utricle
 utricles
 uts
+uv
 uva
 uval
 uvanite
@@ -61662,8 +61663,13 @@ vanquished
 vanquisher
 vans
 vansire
+vape
+vaped
+vaper
+vapes
 vapid
 vapidly
+vaping
 vapor
 vapored
 vaporing

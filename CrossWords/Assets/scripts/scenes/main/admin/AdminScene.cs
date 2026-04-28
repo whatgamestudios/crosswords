@@ -190,7 +190,12 @@ namespace CrossWords {
 
                 // int groupSize = 300;
                 List<string> words = new List<string>();
-                words.Add("ip");
+                words.Add("uv");
+                words.Add("vape");
+                words.Add("vaped");
+                words.Add("vapes");
+                words.Add("vaper");
+                words.Add("vaping");
 
                 WordListProcessor processorContract = new WordListProcessor();
                 bool ok = await processorContract.AddWords(words);
