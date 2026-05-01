@@ -72,9 +72,14 @@ namespace CrossWords {
                 else
                 {
                     int charVal = c - 'A';
+                    // Squared Latin Capital Letter
 //                    string mathMonoSpaceC = char.ConvertFromUtf32(0x1F130 + charVal);
-//                    string mathMonoSpaceC = char.ConvertFromUtf32(0x1F150 + charVal);
-                    string mathMonoSpaceC = char.ConvertFromUtf32(0x1F170 + charVal);
+                    // Negative Circled Latin Capital Letter
+                    string mathMonoSpaceC = char.ConvertFromUtf32(0x1F150 + charVal);
+                    // Negative Squared Latin Capital Letter
+                    //string mathMonoSpaceC = char.ConvertFromUtf32(0x1F170 + charVal);
+                    // Regional Indicator Symbol Letter
+                    // string mathMonoSpaceC = char.ConvertFromUtf32(0x1F1E6 + charVal);
                     sbo.Append(mathMonoSpaceC);
                 }
             }
