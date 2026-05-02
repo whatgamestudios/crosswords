@@ -15,6 +15,17 @@ namespace CrossWords {
         public async Task Start()
         {
             AuditLog.Log("Welcome screen");
+
+            PostHogStats postHod = GetComponent<PostHogStats>();
+            if (postHod == null)
+            {
+                AuditLog.Log("PostHogStats is null");
+            }
+            else
+            {
+                postHod.LogWelcome();
+            }
+
             try
             {
                 await PassportLogin.Init();

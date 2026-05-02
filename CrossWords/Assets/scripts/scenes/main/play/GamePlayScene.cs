@@ -45,6 +45,17 @@ namespace CrossWords {
             GameDayBeingPlayed = gameDay;
             AuditLog.Log($"Game Play screen for day {gameDay}");
 
+            PostHogStats postHod = GetComponent<PostHogStats>();
+            if (postHod == null)
+            {
+                AuditLog.Log("PostHogStats is null");
+            }
+            else
+            {
+                AuditLog.Log("PostHogStats PlayingGame");
+                postHod.LogPlayingGame();
+            }
+
             WireLetterButtons();
 
             uint lastPlayedGameDay = Stats.GetLastGameDay();
