@@ -64,6 +64,24 @@ namespace CrossWords {
             PostHog.Capture("user_skip");
         }
 
+        public void LogSettingsLogin()
+        {
+            string passportAccount = PassportStore.GetPassportAccount();
+            PostHog.Capture("user_settings_login", new Dictionary<string, object>
+            {
+                { "passport", passportAccount}
+            });
+        }
+
+        public void LogSettingsLogout()
+        {
+            string passportAccount = PassportStore.GetPassportAccount();
+            PostHog.Capture("user_settings_logout", new Dictionary<string, object>
+            {
+                { "passport", passportAccount}
+            });
+        }
+
         public void LogPlayingGame()
         {
             uint gameDay = Timeline.GameDay();

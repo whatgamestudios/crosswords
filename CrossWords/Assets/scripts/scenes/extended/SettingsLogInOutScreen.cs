@@ -45,6 +45,17 @@ namespace CrossWords {
 
             if (PassportStore.IsLoggedIn())
             {
+                PostHogStats postHod = GetComponent<PostHogStats>();
+                if (postHod == null)
+                {
+                    AuditLog.Log("PostHogStats is null");
+                }
+                else
+                {
+                    postHod.LogSettingsLogout();
+                }
+
+
                 PassportStore.SetLoggedIn(false);
                 await PassportLogin.Init();
                 await Passport.Instance.Logout();
@@ -52,6 +63,16 @@ namespace CrossWords {
             }
             else
             {
+                PostHogStats postHod = GetComponent<PostHogStats>();
+                if (postHod == null)
+                {
+                    AuditLog.Log("PostHogStats is null");
+                }
+                else
+                {
+                    postHod.LogSettingsLogin();
+                }
+
                 PassportStore.SetLoggedIn(false);
                 PassportStore.SetChoseToNotLogin(false);
                 SceneStack.Instance().Reset();
