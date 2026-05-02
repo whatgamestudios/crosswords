@@ -39,9 +39,6 @@ namespace CrossWords {
         public void OnButtonClick(string buttonText) {
             bool isLoggedIn = PassportStore.IsLoggedIn();
             if (buttonText == "Passport") {
-                // Now use the general link to play as directly linking the 14Numbers Scenes NFT collection
-                // no longer works.
-                //string url = "https://play.immutable.com/collection/zkEvm/0x29c3a209d8423f9a53bf8ad39bbb85087a2a938b/";
                 string url = "https://play.immutable.com/";
                 Application.OpenURL(url);
             }

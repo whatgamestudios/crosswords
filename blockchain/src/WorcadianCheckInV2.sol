@@ -11,7 +11,7 @@ import {
 import {GameDayCheckV2} from "./GameDayCheckV2.sol";
 
 /**
- * Manage players submitting solutions for the 14Numbers game.
+ * Contract to manager check-in to Worcadian.
  *
  * This contract is designed to be upgradeable.
  */
