@@ -29,6 +29,7 @@ namespace CrossWords {
             WireLetterButtons();
 
             (checkTextSelected, checkText, startsWithText) = WordListStore.Load();
+            checkTextSelected = false;
 
             sizeX = CheckEntryBackground.rectTransform.sizeDelta.x + 500f;
             sizeY = CheckEntryBackground.rectTransform.sizeDelta.y + 25f;
@@ -141,6 +142,11 @@ namespace CrossWords {
             {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("TwoLetterWordsScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "NewWords")
+            {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("NewWordsScene", LoadSceneMode.Single);
             }
             else
             {
