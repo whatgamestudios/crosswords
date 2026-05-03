@@ -7482,6 +7482,7 @@ btise
 btl
 btry
 btu
+btw
 bu
 bual
 buat
@@ -13387,6 +13388,7 @@ csmp
 csnet
 csp
 cst
+csv
 csw
 ct
 cte
@@ -15244,6 +15246,7 @@ devoirs
 devon
 devonic
 devons
+devops
 devot
 devota
 devotary
@@ -23201,6 +23204,7 @@ geums
 gey
 geyan
 gez
+gf
 ghafir
 ghain
 ghaist
@@ -27850,6 +27854,7 @@ images
 imago
 imagoes
 iman
+imao
 imaret
 imarets
 imban
@@ -33596,6 +33601,7 @@ lutra
 lutrin
 lutrinae
 lutrine
+luv
 luvian
 luvish
 luwian
@@ -41337,6 +41343,7 @@ pci
 pcm
 pct
 pd
+pdf
 pdl
 pdn
 pdq
@@ -47945,6 +47952,7 @@ roebucks
 roed
 roes
 roey
+rofl
 rog
 rogan
 rogative
@@ -53266,6 +53274,7 @@ sta
 stab
 stabile
 stable
+stablecoin
 stabled
 stabler
 stabling

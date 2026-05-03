@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordListDictionary
-  dictionaryFile: {fileID: 4900000, guid: f1998c163d70c49c8bf2e98e583bc4cb, type: 3}
+  dictionaryFile: {fileID: 4900000, guid: 7463b9393635548d6b8ba320577a3509, type: 3}
   DictionaryLoaded: 0
 --- !u!114 &289835300
 MonoBehaviour:
