@@ -31,6 +31,17 @@ namespace CrossWords {
         private float targetLocationA2;
         private float targetLocationN;
 
+        private double scaleW;
+        private double scaleO;
+        private double scaleR;
+        private double scaleC;
+        private double scaleA;
+        private double scaleD;
+        private double scaleI;
+        private double scaleA2;
+        private double scaleN;
+
+
         private float perLetterWidth;
 
         private DateTime start;
@@ -69,15 +80,25 @@ namespace CrossWords {
 
             float panelWidth = titlePanel.GetComponent<RectTransform>().rect.width;
             perLetterWidth = panelWidth / (NUM_LETTERS + 1);
-            targetLocationW = perLetterWidth * -4;
-            targetLocationO = perLetterWidth * -3;
-            targetLocationR = perLetterWidth * -2;
-            targetLocationC = perLetterWidth;
-            targetLocationA = 0;
-            targetLocationD = perLetterWidth * 1;
-            targetLocationI = perLetterWidth * 2;
-            targetLocationA2 = perLetterWidth * 3;
-            targetLocationN = perLetterWidth * 4;
+            targetLocationW = perLetterWidth * (float) -4.3;
+            targetLocationO = perLetterWidth * (float) -2.95;
+            targetLocationR = perLetterWidth * (float) -1.9;
+            targetLocationC = perLetterWidth * (float) -0.85;
+            targetLocationA = perLetterWidth * (float) 0.2;
+            targetLocationD = perLetterWidth * (float) 1.25;
+            targetLocationI = perLetterWidth * (float) 2.3;
+            targetLocationA2 = perLetterWidth * (float) 3.35;
+            targetLocationN = perLetterWidth * (float) 4.4;
+
+            scaleW = 1.5;
+            scaleO = 1.0;
+            scaleR = 0.9;
+            scaleC = 0.9;
+            scaleA = 0.9;
+            scaleD = 1.0;
+            scaleI = 0.9;
+            scaleA2 = 0.9;
+            scaleN = 1.0;
         }
 
         public void Update() {
@@ -103,36 +124,36 @@ namespace CrossWords {
             switch (animationStage)
             {
                 case 0:
-                    animateLetter(floatingImageW, targetLocationW, animationProgress);
+                    animateLetter(floatingImageW, targetLocationW, scaleW, animationProgress);
                     break;
                 case 1:
-                    animateLetter(floatingImageO, targetLocationO, animationProgress);
+                    animateLetter(floatingImageO, targetLocationO, scaleO, animationProgress);
                     break;
                 case 2:
-                    animateLetter(floatingImageR, targetLocationR, animationProgress);
+                    animateLetter(floatingImageR, targetLocationR, scaleR, animationProgress);
                     break;
                 case 3:
-                    animateLetter(floatingImageC, targetLocationC, animationProgress);
+                    animateLetter(floatingImageC, targetLocationC, scaleC, animationProgress);
                     break;
                 case 4:
-                    animateLetter(floatingImageA, targetLocationA, animationProgress);
+                    animateLetter(floatingImageA, targetLocationA, scaleA, animationProgress);
                     break;
                 case 5:
-                    animateLetter(floatingImageD, targetLocationD, animationProgress);
+                    animateLetter(floatingImageD, targetLocationD, scaleD, animationProgress);
                     break;
                 case 6:
-                    animateLetter(floatingImageI, targetLocationI, animationProgress);
+                    animateLetter(floatingImageI, targetLocationI, scaleI, animationProgress);
                     break;
                 case 7:
-                    animateLetter(floatingImageA2, targetLocationA2, animationProgress);
+                    animateLetter(floatingImageA2, targetLocationA2, scaleA2, animationProgress);
                     break;
                 case 8:
-                    animateLetter(floatingImageN, targetLocationN, animationProgress);
+                    animateLetter(floatingImageN, targetLocationN, scaleN, animationProgress);
                     break;
             }
         }
 
-        private void animateLetter(GameObject floatingImage, float targetLocation, float progress)
+        private void animateLetter(GameObject floatingImage, float targetLocation, double scale, float progress)
         {
             floatingImage.SetActive(true);
 
@@ -143,7 +164,7 @@ namespace CrossWords {
            float locationX = Mathf.Lerp(0, targetLocation, progress);
            imageRect.anchoredPosition = new Vector2(locationX , 0);
 
-            float size = Mathf.Lerp(0, perLetterWidth, progress);
+            float size = Mathf.Lerp(0, perLetterWidth, progress) * (float) scale;
             imageRect.sizeDelta = new Vector2(size, size);
         }
 
