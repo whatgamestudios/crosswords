@@ -35,6 +35,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 127249
   packageName: Native Share For Android And iOS
-  packageVersion: 3.0
+  packageVersion: 3.1
   assetPath: Assets/Plugins/iOS/NativeShare-Bridging-Header.h
-  uploadId: 725019
+  uploadId: 783501
