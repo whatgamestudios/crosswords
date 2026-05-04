@@ -885,8 +885,8 @@ MonoBehaviour:
   m_text: "Worcadian is a puzzle game in which everyone in the world is trying to
     solve the same puzzle each day. \n\nThe rules:\n\n1. Only letters that build
     off the seed word are counted.\n\n2. Each letter can only be used once.\n\n3.
-    Letters contained in words that are in the word list reduces the score. \n\n4.
-    Letters contained in words that are not in the word list increases the score.
+    Letters contained in words that are in the word list reduce the score. \n\n4.
+    Letters contained in words that are not in the word list increase the score.
     \n\n5. All letters have equal value.\n\nThe goal is to get a score of zero.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1196d8ee02bde47a7ace907b29a0660b, type: 2}

@@ -140,15 +140,7 @@ namespace CrossWords {
             else if (buttonText == "Login") {
                 PassportStore.SetChoseToNotLogin(false);
 
-                PostHogStats postHod = GetComponent<PostHogStats>();
-                if (postHod == null)
-                {
-                    AuditLog.Log("PostHogStats is null");
-                }
-                else
-                {
-                    postHod.LogPressedLogin();
-                }
+                PostHogStats.GetInstance().LogPressedLogin();
 
                 //Debug.Log("LoginPKCE start");
 // #if (UNITY_ANDROID && !UNITY_EDITOR_WIN) || (UNITY_IPHONE && !UNITY_EDITOR_WIN) || UNITY_STANDALONE_OSX
@@ -163,15 +155,7 @@ namespace CrossWords {
                 DeepLinkManager.Instance.LoginPath = DeepLinkManager.LOGIN_SKIP;
                 PassportStore.SetChoseToNotLogin(true);
 
-                PostHogStats postHod = GetComponent<PostHogStats>();
-                if (postHod == null)
-                {
-                    AuditLog.Log("PostHogStats is null");
-                }
-                else
-                {
-                    postHod.LogPressedSkip();
-                }
+                PostHogStats.GetInstance().LogPressedSkip();
 
                 SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
             }

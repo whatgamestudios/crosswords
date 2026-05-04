@@ -7,10 +7,21 @@ using System.Collections.Generic;
 namespace CrossWords {
 
     // Follows documnetation here: https://posthog.com/docs/libraries/unity
-    public class PostHogStats : MonoBehaviour {
+    public class PostHogStats {
+
+        private static PostHogStats Instance;
+
+        public static PostHogStats GetInstance()
+        {
+            if (Instance == null)
+            {
+                Instance = new PostHogStats();
+            }
+            return Instance;
+        }
 
 
-        void Start()
+        private PostHogStats()
         {
             AuditLog.Log("PostHogStats start");
             PostHog.Setup(new PostHogConfig
@@ -31,7 +42,7 @@ namespace CrossWords {
         }
 
 
-        void LogFirstTime()
+        private void LogFirstTime()
         {
             string device = SystemInfo.deviceModel;
             string operatingSystem = SystemInfo.operatingSystem;
