@@ -44,6 +44,7 @@ namespace CrossWords {
         {
             if (buttonText == "Play")
             {
+                MessagePass.SetMsg(null);
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("GamePlayScene", LoadSceneMode.Single);
             }

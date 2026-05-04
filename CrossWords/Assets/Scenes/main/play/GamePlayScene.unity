@@ -10909,6 +10909,8 @@ GameObject:
   - component: {fileID: 2063394996}
   - component: {fileID: 2063394998}
   - component: {fileID: 2063394999}
+  - component: {fileID: 2063395000}
+  - component: {fileID: 2063395001}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -11151,6 +11153,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5411e8a25dd42f48dc12869e948ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ShareManager
+--- !u!114 &2063395000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3d6ab84036448f48b13ead3ca39757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.VideoOrchestrator
+  BlockInteractionPanel: {fileID: 1267765833}
+--- !u!114 &2063395001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063394970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244b169db35b44b639180a7a2da07447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.AnimatorWorcadianPurple
+  titlePanel: {fileID: 351622118}
 --- !u!1 &2081586891
 GameObject:
   m_ObjectHideFlags: 0

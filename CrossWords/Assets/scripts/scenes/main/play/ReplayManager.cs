@@ -33,9 +33,6 @@ namespace CrossWords {
 
         public bool IsReplaying { get; private set; }
 
-        // TODO
-        TitleAnimator titleAnimator;
-
         void Awake()
         {
             if (board == null)
@@ -46,9 +43,6 @@ namespace CrossWords {
 
 
         public void OnReplayButtonPress() {
-            titleAnimator = FindFirstObjectByType<TitleAnimator>();
-            titleAnimator.Init();
-
             GamePlayScene gamePlay = FindFirstObjectByType<GamePlayScene>();
             StartReplay(gamePlay.moveStack);
             

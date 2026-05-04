@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace CrossWords {
 
-    public class TitleAnimator : MonoBehaviour {
+    public class AnimatorTitle : MonoBehaviour {
         public GameObject titlePanel;
 
         private GameObject floatingImageW;
@@ -99,6 +99,19 @@ namespace CrossWords {
             scaleI = 0.9;
             scaleA2 = 0.9;
             scaleN = 1.0;
+        }
+
+        public void End()
+        {
+            if (floatingImageW != null) floatingImageW.SetActive(false);
+            if (floatingImageO != null) floatingImageO.SetActive(false);
+            if (floatingImageR != null) floatingImageR.SetActive(false);
+            if (floatingImageC != null) floatingImageC.SetActive(false);
+            if (floatingImageA != null) floatingImageA.SetActive(false);
+            if (floatingImageD != null) floatingImageD.SetActive(false);
+            if (floatingImageI != null) floatingImageI.SetActive(false);
+            if (floatingImageA2 != null) floatingImageA2.SetActive(false);
+            if (floatingImageN != null) floatingImageN.SetActive(false);
         }
 
         public void Update() {
