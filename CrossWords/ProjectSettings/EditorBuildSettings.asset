@@ -45,9 +45,6 @@ EditorBuildSettings:
     path: Assets/Scenes/extended/DeleteScene.unity
     guid: cfc5db6d27843413885dacc40f6dc637
   - enabled: 1
-    path: Assets/Scenes/extended/PassportScene.unity
-    guid: 8a694e2161ab746a0b094c70ba875fea
-  - enabled: 1
     path: Assets/Scenes/extended/SettingsScene.unity
     guid: d6c775dbef30b4034b56bf779424aef9
   - enabled: 1

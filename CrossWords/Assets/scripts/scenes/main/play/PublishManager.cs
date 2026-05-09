@@ -34,15 +34,8 @@ namespace CrossWords {
                 AuditLog.Log("Publish");
                 publishButtonPressed = true;
                 panelPublish.SetActive(false);
-                if (PassportStore.IsLoggedIn())
-                {
-                    SceneStack.Instance().PushScene();
-                    SceneManager.LoadScene("PublishScene", LoadSceneMode.Additive);
-                }
-                else
-                {
-                    SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
-                }
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("PublishScene", LoadSceneMode.Additive);
             }
             else
             {
@@ -72,12 +65,6 @@ namespace CrossWords {
             {
                 panelPublish.SetActive(false);
                 return;
-            }
-
-            if (!PassportStore.IsLoggedIn())
-            {
-                buttonPublishText.text = "Sign in to Publish";
-                buttonPublishText.fontSize = 50;
             }
 
             // Flash the colour of the publish panel.

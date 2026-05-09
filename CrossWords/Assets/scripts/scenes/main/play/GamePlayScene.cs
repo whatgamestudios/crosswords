@@ -39,7 +39,7 @@ namespace CrossWords {
             }
         }
 
-        async void Start()
+        void Start()
         {
             uint gameDay = Timeline.GameDay();
             GameDayBeingPlayed = gameDay;

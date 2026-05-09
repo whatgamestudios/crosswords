@@ -49,10 +49,6 @@ namespace CrossWords {
             string screenWidth = Screen.width.ToString();
             string screenHeight = Screen.height.ToString();
             
-            bool isLoggedIn = PassportStore.IsLoggedIn();
-            bool choseNotToLogin = PassportStore.ChoseToNotLogin();
-            string passportAccount = PassportStore.GetPassportAccount();
-
             PostHog.Capture("user_init");
         }
 
@@ -61,49 +57,13 @@ namespace CrossWords {
             PostHog.Capture("user_welcome");
         }
 
-        public void LogPressedLogin()
-        {
-            string passportAccount = PassportStore.GetPassportAccount();
-            PostHog.Capture("user_login", new Dictionary<string, object>
-            {
-                { "passport", passportAccount}
-            });
-        }
-
-        public void LogPressedSkip()
-        {
-            PostHog.Capture("user_skip");
-        }
-
-        public void LogSettingsLogin()
-        {
-            string passportAccount = PassportStore.GetPassportAccount();
-            PostHog.Capture("user_settings_login", new Dictionary<string, object>
-            {
-                { "passport", passportAccount}
-            });
-        }
-
-        public void LogSettingsLogout()
-        {
-            string passportAccount = PassportStore.GetPassportAccount();
-            PostHog.Capture("user_settings_logout", new Dictionary<string, object>
-            {
-                { "passport", passportAccount}
-            });
-        }
-
         public void LogPlayingGame()
         {
             uint gameDay = Timeline.GameDay();
-            bool choseNotToLogin = PassportStore.ChoseToNotLogin();
-            string passportAccount = PassportStore.GetPassportAccount();
 
             PostHog.Capture("user_play", new Dictionary<string, object>
             {
-                { "game day", gameDay },
-                { "chose not to", choseNotToLogin},
-                { "passport", passportAccount}
+                { "game day", gameDay }
             });            
         }        
 

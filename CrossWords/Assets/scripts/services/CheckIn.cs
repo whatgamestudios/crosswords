@@ -1,8 +1,5 @@
 // Copyright (c) Whatgame Studios 2024 - 2026
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections;
 using System.Threading.Tasks;
 using System;
@@ -10,14 +7,11 @@ using System;
 namespace CrossWords {
     public class CheckIn : MonoBehaviour {
 
-        CheckInProcessor contract;
-
-        string status;
+        private readonly CheckInServerProcessor checkInProcessor = new CheckInServerProcessor();
         private bool isProcessing = false;
 
         public void Start() {
             AuditLog.Log("Checkin start");
-            contract = new CheckInProcessor();
             StartCheckinProcess();
         }
 
@@ -25,11 +19,7 @@ namespace CrossWords {
             if (isProcessing) {
                 return;
             }
-            if (!PassportStore.IsLoggedIn()) {
-                return;
-            }
 
-            // Check network connectivity
             if (Application.internetReachability == NetworkReachability.NotReachable) {
                 AuditLog.Log("Checkin: No network connectivity available");
                 return;
@@ -38,11 +28,11 @@ namespace CrossWords {
             isProcessing = true;
 
             try {
-                await PassportLogin.InitAndLogin();
+                (_, string player) = UserId.GetUserId();
                 uint gameDay = Timeline.GameDay();
                 AuditLog.Log("Checkin transaction");
-                var checkInSuccess = await contract.SubmitCheckIn(gameDay);
-                AuditLog.Log("Checkin: " + checkInSuccess.ToString());
+                CheckInResult result = await checkInProcessor.CheckIn((int)gameDay, player);
+                AuditLog.Log($"Checkin: days_played={result.DaysPlayed}, is_new_day={result.IsNewDay}");
             }
             catch (Exception ex) {
                 AuditLog.Log($"Exception in checkin process: {ex.Message}");

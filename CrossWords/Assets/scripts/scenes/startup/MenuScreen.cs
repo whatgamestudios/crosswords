@@ -50,10 +50,6 @@ namespace CrossWords {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("RulesScene", LoadSceneMode.Single);
             }
-            if (buttonText == "Passport") {
-                SceneStack.Instance().PushScene();
-                SceneManager.LoadScene("PassportScene", LoadSceneMode.Single);
-            }
             else if (buttonText == "Socials") {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("SocialsScene", LoadSceneMode.Single);

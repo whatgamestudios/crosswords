@@ -1,4 +1,4 @@
-// Copyright (c) Whatgame Studios 2024 - 2025
+// Copyright (c) Whatgame Studios 2024 - 2026
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -6,8 +6,6 @@ using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
-
-using CrossWords.WorcadianGameV1.ContractDefinition;
 
 namespace CrossWords {
 
@@ -33,7 +31,7 @@ namespace CrossWords {
         public TextMeshProUGUI bestSolutionScoreText;
         public TextMeshProUGUI bestPlayerText;
 
-        private GetResultsOutputDTO todaysResult = null;
+        private BoardResultsResult todaysResult = null;
 
         public void Start() {
             AuditLog.Log("Solutions screen");
@@ -76,12 +74,13 @@ namespace CrossWords {
                 showSolution(newIndex);
             }
             else if (buttonText == "Right") {
-                if (todaysResult == null) {
+                if (todaysResult == null || todaysResult.Submissions == null) {
                     return;
                 }
-                if (todaysResult.NumSubmissions > 0) {
+                int submissionCount = todaysResult.Submissions.Length;
+                if (submissionCount > 0) {
                     int newIndex = indexDisplaying + 1;
-                    if (newIndex == todaysResult.NumSubmissions - 1) {
+                    if (newIndex == submissionCount - 1) {
                         buttonRight.interactable = false;
                     }
                     buttonLeft.interactable = true;
@@ -117,12 +116,11 @@ namespace CrossWords {
         }
         async void GetResult()
         {
-
-            GameProcessor gameProcessor = new GameProcessor();
-            todaysResult = await gameProcessor.GetResults(gameDayDisplaying);
+            BoardServerProcessor boardProcessor = new BoardServerProcessor();
+            todaysResult = await boardProcessor.GetResults((int)gameDayDisplaying);
             showCached(gameDayDisplaying, indexDisplaying);
 
-            if (todaysResult.Submissions != null && todaysResult.Submissions.Count > 1)
+            if (todaysResult.Submissions != null && todaysResult.Submissions.Length > 1)
             {
                 buttonRight.interactable = true;
             }
@@ -141,7 +139,7 @@ namespace CrossWords {
             }
 
             var submissions = todaysResult.Submissions;
-            if (submissions == null || submissions.Count == 0) {
+            if (submissions == null || submissions.Length == 0) {
                 if (bestPlayerText != null) {
                     bestPlayerText.text = "";
                 }
@@ -154,12 +152,12 @@ namespace CrossWords {
                 return;
             }
 
-            if (index < 0 || index >= submissions.Count) {
-                AuditLog.Log($"ERROR: showCached: index {index} out of range (count {submissions.Count})");
+            if (index < 0 || index >= submissions.Length) {
+                AuditLog.Log($"ERROR: showCached: index {index} out of range (count {submissions.Length})");
                 return;
             }
 
-            Submission sub = submissions[index];
+            BoardSubmission sub = submissions[index];
             if (bestPlayerText != null) {
                 string player = sub.Player ?? "";
                 if (player.Length >= 10) {
@@ -176,7 +174,7 @@ namespace CrossWords {
             string starterWord = WordListSeed.GetSeedWord(gameDay);
             board.SetStarterWord(starterWord);
             board.BlockInteraction();
-            bestSolutionScoreText.text = $"Best Score: {todaysResult.BestScore}";
+            bestSolutionScoreText.text = $"Best Score: {todaysResult.BestScore?.ToString() ?? "?"}";
         }
 
         void DisplayMyResult(uint gameDay) {
