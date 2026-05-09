@@ -1,4 +1,4 @@
-// Copyright (c) Whatgame Studios 2024 - 2025
+// Copyright (c) Whatgame Studios 2024 - 2026
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,7 +6,6 @@ using TMPro;
 using System.Collections;
 using System.Threading.Tasks;
 using System;
-using System.Numerics;
 using System.Collections.Generic;
 
 namespace CrossWords {
@@ -19,7 +18,7 @@ namespace CrossWords {
         private const int TIME_PER_DOT = 1000;
         DateTime timeOfLastDot = DateTime.Now;
 
-        GameProcessor contract;
+        BoardServerProcessor boardProcessor;
 
         private bool isProcessing = false;
         private bool hasError = false;
@@ -46,7 +45,7 @@ namespace CrossWords {
 
         public void Start() {
             AuditLog.Log("Publishing screen");
-            contract = new GameProcessor();
+            boardProcessor = new BoardServerProcessor();
             timeOfLastDot = DateTime.Now;
             canvasRect = backgroundCanvas.GetComponent<RectTransform>();
             
@@ -155,7 +154,7 @@ namespace CrossWords {
             errorMessage = "";
 
             try {
-                AuditLog.Log("Publish transaction");
+                AuditLog.Log("Publish: starting");
                 GamePlayScene gamePlayScene = FindFirstObjectByType<GamePlayScene>();
                 if (gamePlayScene == null) {
                     return;
@@ -165,26 +164,21 @@ namespace CrossWords {
                 if (!available) {
                     return;
                 }
-                bool publishSuccess = false;
-                uint retry = 0;
-                while (!publishSuccess)
-                {
-                    publishSuccess = await contract.SubmitBoard(solution.GameDay, (int) solution.Score, solution.BoardString);
-                    if (publishSuccess)
-                    {
-                        Stats.SetPublished(solution.Score);
-                    }
-                    else
-                    {
-                        retry++;
-                        if (retry > 3)
-                        {
-                            AuditLog.Log("Failed to publish");
-                            hasError = true;
-                            errorMessage = "Failed to publish. Please try again later";
-                            break;
-                        }
-                    }
+
+                (_, string player) = UserId.GetUserId();
+                BoardSubmitResult result = await boardProcessor.SubmitBoard(
+                    (int)solution.GameDay, (int)solution.Score, solution.BoardString, player);
+
+                AuditLog.Log($"Publish: status={result.Status}, calculated={result.CalculatedScore}");
+                Stats.SetPublished(solution.Score);
+
+                if (result.Status == "not_competitive" || result.Status == "score_mismatch_not_competitive") {
+                    hasError = true;
+                    errorMessage = "Not competitive — a better solution exists!";
+                }
+                else if (result.Status == "seed_word_not_found") {
+                    hasError = true;
+                    errorMessage = "Submission rejected: seed word not found.";
                 }
             }
             catch (Exception ex) {

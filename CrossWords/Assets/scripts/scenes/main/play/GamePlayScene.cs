@@ -76,8 +76,6 @@ namespace CrossWords {
                 }
             }
 
-            await PassportLogin.InitAndLogin();
-
             Invoke("DelayedScoreUpdate", 0.1f);
         }
         

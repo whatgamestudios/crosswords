@@ -13,7 +13,7 @@ namespace CrossWords {
 
         public static bool LoadedBestScore { get; private set; }
 
-        private readonly GameProcessor gameProcessor = new GameProcessor();
+        private readonly BoardServerProcessor boardProcessor = new BoardServerProcessor();
         private Coroutine loadRoutine;
 
         public static void RestartLoadRoutine() {
@@ -56,12 +56,15 @@ namespace CrossWords {
 
         IEnumerator LoadRoutine() {
             uint gameDay = Timeline.GameDay();
-            Task<int> task = gameProcessor.GetBestScore(gameDay);
+            Task<BoardResultsResult> task = boardProcessor.GetResults((int)gameDay);
             yield return new WaitUntil(() => task.IsCompleted);
             if (task.IsFaulted) {
-                AuditLog.Log($"BestScoreLoader: GetBestScore failed: {task.Exception}");
+                AuditLog.Log($"BestScoreLoader: GetResults failed: {task.Exception}");
             } else {
-                BestScore = (uint)task.Result;
+                BoardResultsResult results = task.Result;
+                if (results.NumSubmissions > 0 && results.BestScore.HasValue) {
+                    BestScore = (uint)results.BestScore.Value;
+                }
             }
             LoadedBestScore = true;
         }
