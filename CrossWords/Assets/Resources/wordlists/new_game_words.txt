@@ -11,6 +11,7 @@ goji
 imao
 ip
 jp
+karens
 luv
 pdf
 podcast
@@ -26,3 +27,4 @@ vaper
 vapes
 vaping
 vlog
+wip

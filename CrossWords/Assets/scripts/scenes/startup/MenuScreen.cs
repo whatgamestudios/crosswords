@@ -7,13 +7,9 @@ using TMPro;
 namespace CrossWords {
 
     public class MenuScreen : MonoBehaviour {
-        public TextMeshProUGUI loggedIn;
-
 
         public void Start() {
             AuditLog.Log("Menu screen");
-            (bool justCreated, string account) = UserId.GetUserId();
-            loggedIn.text = "User Name: " + account;
         }
 
 
@@ -49,6 +45,11 @@ namespace CrossWords {
             {
                 SceneStack.Instance().PushScene();
                 SceneManager.LoadScene("RulesScene", LoadSceneMode.Single);
+            }
+            else if (buttonText == "Strategy")
+            {
+                SceneStack.Instance().PushScene();
+                SceneManager.LoadScene("StrategyScene", LoadSceneMode.Single);
             }
             else if (buttonText == "Socials") {
                 SceneStack.Instance().PushScene();

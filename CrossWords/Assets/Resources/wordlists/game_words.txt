@@ -30167,6 +30167,7 @@ karbi
 karch
 karel
 karen
+karens
 karez
 kari
 karite
@@ -64002,6 +64003,7 @@ wintry
 winy
 winze
 winzes
+wip
 wipe
 wiped
 wipeout

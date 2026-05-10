@@ -20,7 +20,7 @@ namespace CrossWords {
                 SunShineNativeShare.instance.ShareText(msg, msg);
             }
             else if (buttonText == "GoToGame") {
-                SceneManager.LoadScene("LoginScene", LoadSceneMode.Single);
+                SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
             }
             else {
                 AuditLog.Log($"Unexpected E Screen: Unknwon Button: {buttonText}");

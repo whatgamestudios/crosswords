@@ -29,7 +29,6 @@ namespace CrossWords {
         public TextMeshProUGUI mySolutionScoreText;
 
         public TextMeshProUGUI bestSolutionScoreText;
-        public TextMeshProUGUI bestPlayerText;
 
         private BoardResultsResult todaysResult = null;
 
@@ -140,9 +139,6 @@ namespace CrossWords {
 
             var submissions = todaysResult.Submissions;
             if (submissions == null || submissions.Length == 0) {
-                if (bestPlayerText != null) {
-                    bestPlayerText.text = "";
-                }
                 board.ResetAllCells();
                 string seedWord = WordListSeed.GetSeedWord(gameDay);
                 board.SetStarterWord(seedWord);
@@ -158,15 +154,6 @@ namespace CrossWords {
             }
 
             BoardSubmission sub = submissions[index];
-            if (bestPlayerText != null) {
-                string player = sub.Player ?? "";
-                if (player.Length >= 10) {
-                    bestPlayerText.text = player.Substring(0, 6) + "...." + player.Substring(player.Length - 4, 4);
-                } else {
-                    bestPlayerText.text = player;
-                }
-            }
-
             board.ResetAllCells();
             if (!string.IsNullOrEmpty(sub.Board)) {
                 board.SetCells(sub.Board);
