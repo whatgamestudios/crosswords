@@ -32,6 +32,8 @@ namespace CrossWords {
 
         private BoardResultsResult todaysResult = null;
 
+        private Coroutine loadingAnimation;
+
         public void Start() {
             AuditLog.Log("Solutions screen");
             uint gameDay = (uint) Timeline.GameDay();
@@ -113,10 +115,26 @@ namespace CrossWords {
             GetResult();
             yield return new WaitForSeconds(0f);
         }
+        IEnumerator LoadingAnimationRoutine() {
+            string[] frames = { "LOADING.", "LOADING..", "LOADING..." };
+            int i = 0;
+            while (true) {
+                bestSolutionScoreText.text = frames[i % 3];
+                i++;
+                yield return new WaitForSeconds(1f);
+            }
+        }
+
         async void GetResult()
         {
+            if (loadingAnimation != null) {
+                StopCoroutine(loadingAnimation);
+            }
+            loadingAnimation = StartCoroutine(LoadingAnimationRoutine());
             BoardServerProcessor boardProcessor = new BoardServerProcessor();
             todaysResult = await boardProcessor.GetResults((int)gameDayDisplaying);
+            StopCoroutine(loadingAnimation);
+            loadingAnimation = null;
             showCached(gameDayDisplaying, indexDisplaying);
 
             if (todaysResult.Submissions != null && todaysResult.Submissions.Length > 1)
