@@ -50,9 +50,15 @@ namespace CrossWords {
                 return;
             }
             uint score = gamePlayScene.Score;
-            if (!BestScoreLoader.LoadedBestScore ||
-                publishButtonPressed ||
-                score > BestScoreLoader.BestScore)
+            if (score != 0) {
+                if (!BestScoreLoader.LoadedBestScore ||
+                    score > BestScoreLoader.BestScore)
+                {
+                    panelPublish.SetActive(false);
+                    return;
+                }
+            }
+            if (publishButtonPressed)
             {
                 panelPublish.SetActive(false);
                 return;

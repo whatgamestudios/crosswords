@@ -13,6 +13,8 @@ namespace CrossWords {
 
         public static bool LoadedBestScore { get; private set; }
 
+        private const float CHECK_PERIOD = 1f;
+
         private readonly BoardServerProcessor boardProcessor = new BoardServerProcessor();
         private Coroutine loadRoutine;
 
@@ -56,17 +58,20 @@ namespace CrossWords {
 
         IEnumerator LoadRoutine() {
             uint gameDay = Timeline.GameDay();
-            Task<BoardResultsResult> task = boardProcessor.GetResults((int)gameDay);
-            yield return new WaitUntil(() => task.IsCompleted);
-            if (task.IsFaulted) {
-                AuditLog.Log($"BestScoreLoader: GetResults failed: {task.Exception}");
-            } else {
-                BoardResultsResult results = task.Result;
-                if (results.NumSubmissions > 0 && results.BestScore.HasValue) {
-                    BestScore = (uint)results.BestScore.Value;
+            while (!LoadedBestScore) {
+                Task<BoardResultsResult> task = boardProcessor.GetResults((int)gameDay);
+                yield return new WaitUntil(() => task.IsCompleted);
+                if (task.IsFaulted) {
+                    AuditLog.Log($"BestScoreLoader: GetResults failed: {task.Exception}");
+                    yield return new WaitForSeconds(CHECK_PERIOD);                      
+                } else {
+                    BoardResultsResult results = task.Result;
+                    if (results.NumSubmissions > 0 && results.BestScore.HasValue) {
+                        BestScore = (uint)results.BestScore.Value;
+                    }
+                    LoadedBestScore = true;
                 }
             }
-            LoadedBestScore = true;
         }
     }
 }

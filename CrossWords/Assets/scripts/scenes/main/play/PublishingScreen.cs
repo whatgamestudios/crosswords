@@ -27,6 +27,8 @@ namespace CrossWords {
         private TextMeshProUGUI infoText;
         private GameObject infoObj;
 
+        private bool NotRunYet;
+
 
         private List<FallingNumber> fallingNumbers = new List<FallingNumber>();
         private Color[] colors = new Color[] {
@@ -60,6 +62,8 @@ namespace CrossWords {
             if (backButton != null) {
                 backButton.transform.SetParent(backgroundCanvas.transform, false);
             }
+
+            NotRunYet = true;
         }
 
         private void InitializeFallingNumbers()
@@ -209,7 +213,10 @@ namespace CrossWords {
                     infoText.text = "Published your solution!";
                 }
                 // Get the best score for the day to be reloaded.
-                BestScoreLoader.RestartLoadRoutine();
+                if (NotRunYet) {
+                    BestScoreLoader.RestartLoadRoutine();
+                    NotRunYet = false;
+                }
             }
         }
 
