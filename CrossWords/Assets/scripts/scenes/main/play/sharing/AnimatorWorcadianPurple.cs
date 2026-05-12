@@ -22,7 +22,9 @@ namespace CrossWords {
         private const int TIME_FOR_START = 2000;
 
         private const int SIZE_X_BASE = 1000;
-        private const int SIZE_Y_BASE = 2000;
+        private const int SIZE_Y_BASE = 1200;
+
+        private const int SIZE_Y_OFS = 300;
 
 
         public void Start() {
@@ -69,10 +71,19 @@ namespace CrossWords {
             // Calculate animation progress
             RectTransform imageRect = floatingImage.GetComponent<RectTransform>();
             // Keep the image centered during size changes
-            imageRect.anchoredPosition = new Vector2(0, -150);
+            imageRect.anchoredPosition = new Vector2(0, SIZE_Y_OFS);
 
-            float transparency = Mathf.Lerp(0, 3, (float) animationProgress);
-            if (transparency > 1.0f) {
+            // Transparency changes:
+            // * First 20% of time goes from 0->1
+            // * Middle 60% stays at 1
+            // * Last 20% of time goes from 1->0.
+            float transparency = Mathf.Lerp(0, 5, (float) animationProgress);
+            if (transparency > 4.0f) 
+            {
+                transparency = 5.0f - transparency;
+            }
+            else if (transparency > 1.0f) 
+            {
                 transparency = 1.0f;
             }
 
