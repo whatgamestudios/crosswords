@@ -21,6 +21,10 @@ namespace CrossWords {
 
         private const int TIME_FOR_START = 2000;
 
+        private const int SIZE_X_BASE = 1000;
+        private const int SIZE_Y_BASE = 2000;
+
+
         public void Start() {
             started = false;
         }
@@ -64,9 +68,20 @@ namespace CrossWords {
 
             // Calculate animation progress
             RectTransform imageRect = floatingImage.GetComponent<RectTransform>();
-
             // Keep the image centered during size changes
-            imageRect.anchoredPosition = new Vector2(0 , 0);
+            imageRect.anchoredPosition = new Vector2(0, -150);
+
+            float transparency = Mathf.Lerp(0, 3, (float) animationProgress);
+            if (transparency > 1.0f) {
+                transparency = 1.0f;
+            }
+
+            Image img = floatingImage.GetComponent<Image>();
+            Color c = img.color;
+            c.a = transparency;
+            img.color = c;
+
+
             // float locationX = Mathf.Lerp(0, targetLocation, progress);
             // imageRect.anchoredPosition = new Vector2(locationX , 0);
 
@@ -82,7 +97,7 @@ namespace CrossWords {
             imageRect.anchorMin = new Vector2(0.5f, 0.5f);
             imageRect.anchorMax = new Vector2(0.5f, 0.5f);
             imageRect.anchoredPosition = Vector2.zero;
-            imageRect.sizeDelta = new Vector2(300, 300);
+            imageRect.sizeDelta = new Vector2(SIZE_X_BASE, SIZE_Y_BASE);
             
             imageGameObject.SetActive(false);
 

@@ -72,7 +72,7 @@ namespace CrossWords {
             yield return new WaitForSeconds(0.1f);
             BlockInteractionPanel.SetActive(true);
 
-            if (style == STYLE_LETTERS) {
+            if (style == STYLE_WORCADIAN_PURPLE) {
                 AnimatorWorcadianPurple animatorWorcadianPurple = FindFirstObjectByType<AnimatorWorcadianPurple>();
                 animatorWorcadianPurple.Init();
                 yield return new WaitForSeconds(3f);

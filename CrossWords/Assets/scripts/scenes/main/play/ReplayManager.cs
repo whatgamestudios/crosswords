@@ -61,7 +61,10 @@ namespace CrossWords {
 
         void Update()
         {
-            ReplayBlockInteractionPanel.SetActive(IsReplaying);
+            if (ReplayBlockInteractionPanel != null) 
+            {
+                ReplayBlockInteractionPanel.SetActive(IsReplaying);
+            }
 
             if (!IsReplaying) {
                 GamePlayScene gamePlay = FindFirstObjectByType<GamePlayScene>();

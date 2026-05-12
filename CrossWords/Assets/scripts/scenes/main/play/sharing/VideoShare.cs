@@ -34,7 +34,7 @@ namespace CrossWords {
             }
 
             SceneStack.Instance().PushScene();
-            SceneManager.LoadScene("GamePlayScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("ShareVideoScene", LoadSceneMode.Single);
 
 
             //SunShineNativeShare.instance.ShareText(msg, msg);
