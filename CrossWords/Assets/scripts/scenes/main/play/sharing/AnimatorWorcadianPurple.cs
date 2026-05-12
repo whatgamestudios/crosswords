@@ -12,6 +12,7 @@ namespace CrossWords {
         public GameObject titlePanel;
 
         private GameObject floatingImage;
+        private TextMeshProUGUI gameDayText;
 
         private double scale;
 
@@ -25,6 +26,7 @@ namespace CrossWords {
         private const int SIZE_Y_BASE = 1200;
 
         private const int SIZE_Y_OFS = 300;
+        private const int TEXT_Y_OFS = -120;
 
 
         public void Start() {
@@ -36,6 +38,9 @@ namespace CrossWords {
             
             floatingImage = new GameObject("FloatingImage");
             loadImage(floatingImage);
+
+            uint gameDay = Timeline.GameDay();
+            gameDayText = createGameDayText(floatingImage, gameDay);
 
             scale = 1.0;
 
@@ -92,6 +97,9 @@ namespace CrossWords {
             c.a = transparency;
             img.color = c;
 
+            Color tc = gameDayText.color;
+            tc.a = transparency;
+            gameDayText.color = tc;
 
             // float locationX = Mathf.Lerp(0, targetLocation, progress);
             // imageRect.anchoredPosition = new Vector2(locationX , 0);
@@ -101,13 +109,32 @@ namespace CrossWords {
         }
 
 
+        private TextMeshProUGUI createGameDayText(GameObject parent, uint gameDay) {
+            GameObject textObj = new GameObject("GameDayText");
+            textObj.transform.SetParent(parent.transform, false);
+
+            RectTransform textRect = textObj.AddComponent<RectTransform>();
+            textRect.anchorMin = new Vector2(0.5f, 0.5f);
+            textRect.anchorMax = new Vector2(0.5f, 0.5f);
+            textRect.anchoredPosition = new Vector2(0, TEXT_Y_OFS);
+            textRect.sizeDelta = new Vector2(SIZE_X_BASE, SIZE_Y_BASE);
+
+            TextMeshProUGUI tmp = textObj.AddComponent<TextMeshProUGUI>();
+            tmp.text = $"Game Day {gameDay}";
+            tmp.color = Color.black;
+            tmp.fontSize = 100;
+            tmp.alignment = TextAlignmentOptions.Center;
+
+            return tmp;
+        }
+
         private void loadImage(GameObject imageGameObject) {
             imageGameObject.transform.SetParent(titlePanel.transform, false);
             
             RectTransform imageRect = imageGameObject.AddComponent<RectTransform>();
             imageRect.anchorMin = new Vector2(0.5f, 0.5f);
             imageRect.anchorMax = new Vector2(0.5f, 0.5f);
-            imageRect.anchoredPosition = Vector2.zero;
+            imageRect.anchoredPosition = new Vector2(0, SIZE_Y_OFS);
             imageRect.sizeDelta = new Vector2(SIZE_X_BASE, SIZE_Y_BASE);
             
             imageGameObject.SetActive(false);
