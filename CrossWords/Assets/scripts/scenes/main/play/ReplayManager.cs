@@ -150,10 +150,6 @@ namespace CrossWords {
                 }
                 Score = ScoreCalculator.Score(inDictionary, words);
                 ScoreText.text = Score.ToString();
-
-                string b = board.GetCells();
-                uint gameDay = Timeline.GameDay();
-                Stats.SetCurrent(gameDay, Score, b);
             }
         }
 
