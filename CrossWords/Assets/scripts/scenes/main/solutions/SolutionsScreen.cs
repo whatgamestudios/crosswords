@@ -187,13 +187,17 @@ namespace CrossWords {
 
             board.ResetAllCells();
             (bool exists, Solution sol) = Stats.GetSolution(gameDay);
-            uint score = 21;
+            uint score;
+            string starterWord = WordListSeed.GetSeedWord(gameDay);
             if (exists)
             {
                 board.SetCells(sol.BoardString);
                 score = sol.Score;
             }
-            string starterWord = WordListSeed.GetSeedWord(gameDay);
+            else 
+            {
+                score = (uint)(26 - starterWord.Length);
+            }
             board.SetStarterWord(starterWord);
             board.BlockInteraction();
             mySolutionScoreText.text = $"My Score: {score}";
