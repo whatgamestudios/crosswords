@@ -65,7 +65,20 @@ namespace CrossWords {
             {
                 { "game day", gameDay }
             });            
-        }        
+        }    
+
+        public void LogPublishingError(string error) 
+        {
+            uint gameDay = Timeline.GameDay();
+            (bool available, Solution solution) = Stats.GetSolution(gameDay);
+            string avail = available ? solution.ToString() : "Not available";
+            PostHog.Capture("publish_error", new Dictionary<string, object>
+            {
+                { "game day", gameDay },
+                { "solution", avail},
+                { "error", error}
+            });
+        }    
 
    }
 }

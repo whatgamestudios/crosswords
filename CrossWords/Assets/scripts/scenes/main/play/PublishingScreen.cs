@@ -189,6 +189,7 @@ namespace CrossWords {
                 hasError = true;
                 errorMessage = "Error during publish process. Please try again later";
                 AuditLog.Log($"Exception in publish process: {ex.Message}");
+                PostHogStats.GetInstance().LogPublishingError(ex.Message);
             }
             finally {
                 isProcessing = false;
