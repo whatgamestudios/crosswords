@@ -80,5 +80,14 @@ namespace CrossWords {
             });
         }    
 
+        public void LogCheckinError(string error) 
+        {
+            uint gameDay = Timeline.GameDay();
+            PostHog.Capture("checkin_error", new Dictionary<string, object>
+            {
+                { "game day", gameDay },
+                { "error", error}
+            });
+        }    
    }
 }
