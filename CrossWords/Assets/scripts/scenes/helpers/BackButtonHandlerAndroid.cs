@@ -28,7 +28,7 @@ namespace CrossWords {
             yield return new WaitForSeconds(0.5f); // 500ms delay
             backAction.Enable();
             var currentScene = SceneManager.GetActiveScene().buildIndex;
-            AuditLog.Log($"Android Back button enabled in scene {currentScene} after delay");
+            // AuditLog.Log($"Android Back button enabled in scene {currentScene} after delay");
         }
 
         private void OnDisable()
@@ -40,7 +40,7 @@ namespace CrossWords {
             }
             backAction.Disable();
             var currentScene = SceneManager.GetActiveScene().buildIndex;
-            AuditLog.Log($"Android Back button disabled in scene {currentScene}");
+            // AuditLog.Log($"Android Back button disabled in scene {currentScene}");
         }
 
         private void OnBackPerformed(InputAction.CallbackContext context)
