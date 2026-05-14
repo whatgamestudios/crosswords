@@ -20,6 +20,7 @@ namespace CrossWords {
         public const string RPC_URL = "https://worcadian.vercel.app/rpc";
 
         private static readonly HttpClient _httpClient;
+        private static readonly Random _random = new Random();
         private static int _requestId = 0;
 
         static ServerClient() {
@@ -72,6 +73,9 @@ namespace CrossWords {
                 } catch (Exception ex) {
                     lastException = ex;
                     AuditLog.Log($"Server RPC attempt {attempt}/{maxAttempts} failed for {method}: {ex.Message}");
+                    if (attempt < maxAttempts) {
+                        await Task.Delay(100 + _random.Next(0, 101));
+                    }
                 }
             }
 
