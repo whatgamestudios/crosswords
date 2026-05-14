@@ -9,7 +9,7 @@ namespace CrossWords {
      * Screen shown when play presses on a scene in the scene selector screen, when the 
      * scene is already selected.
      */
-    public class CrossWords : MonoBehaviour {
+    public class SceneDetailScreen : MonoBehaviour {
 
         public TextMeshProUGUI sceneName;
         public TextMeshProUGUI sceneMetadata;
