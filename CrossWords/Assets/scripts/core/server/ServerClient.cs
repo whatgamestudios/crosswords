@@ -41,28 +41,41 @@ namespace CrossWords {
                 ["id"] = id
             };
 
-            var content = new StringContent(requestBody.ToString(), Encoding.UTF8, "application/json");
-
             AuditLog.Log($"Server RPC: {method}");
 
-            HttpResponseMessage response = await _httpClient.PostAsync(RPC_URL, content);
-            string responseString = await response.Content.ReadAsStringAsync();
+            const int maxAttempts = 3;
+            Exception lastException = null;
 
-            JObject responseJson = JObject.Parse(responseString);
+            for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    var content = new StringContent(requestBody.ToString(), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await _httpClient.PostAsync(RPC_URL, content);
+                    string responseString = await response.Content.ReadAsStringAsync();
 
-            if (responseJson["error"] != null) {
-                JToken error = responseJson["error"];
-                int code = (int)(error["code"] ?? -32603);
-                string message = (string)(error["message"] ?? "Unknown server error");
-                AuditLog.Log($"Server RPC error [{code}]: {message}");
-                throw new ServerException(code, message);
+                    JObject responseJson = JObject.Parse(responseString);
+
+                    if (responseJson["error"] != null) {
+                        JToken error = responseJson["error"];
+                        int code = (int)(error["code"] ?? -32603);
+                        string message = (string)(error["message"] ?? "Unknown server error");
+                        AuditLog.Log($"Server RPC error [{code}]: {message}");
+                        throw new ServerException(code, message);
+                    }
+
+                    JToken result = responseJson["result"];
+                    if (result == null || result.Type != JTokenType.Object) {
+                        throw new ServerException(-32603, $"Unexpected result format from {method}");
+                    }
+                    return (JObject)result;
+                } catch (ServerException) {
+                    throw;
+                } catch (Exception ex) {
+                    lastException = ex;
+                    AuditLog.Log($"Server RPC attempt {attempt}/{maxAttempts} failed for {method}: {ex.Message}");
+                }
             }
 
-            JToken result = responseJson["result"];
-            if (result == null || result.Type != JTokenType.Object) {
-                throw new ServerException(-32603, $"Unexpected result format from {method}");
-            }
-            return (JObject)result;
+            throw lastException;
         }
     }
 }
