@@ -44,7 +44,7 @@ namespace CrossWords {
 
             AuditLog.Log($"Server RPC: {method}");
 
-            const int maxAttempts = 3;
+            const int maxAttempts = 4;
             Exception lastException = null;
 
             for (int attempt = 1; attempt <= maxAttempts; attempt++) {
