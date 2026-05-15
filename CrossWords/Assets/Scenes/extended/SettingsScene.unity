@@ -615,7 +615,6 @@ GameObject:
   - component: {fileID: 289835296}
   - component: {fileID: 289835295}
   - component: {fileID: 289835297}
-  - component: {fileID: 289835298}
   - component: {fileID: 289835299}
   m_Layer: 5
   m_Name: Panel
@@ -725,21 +724,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
   panel: {fileID: 289835290}
---- !u!114 &289835298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c1a01df45f54df5af6fa00c039e5ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SettingsLogInOutScreen
-  LogInOutButtonText: {fileID: 0}
-  isLoginCoroutineRunning: 0
-  isLogoutCoroutineRunning: 0
 --- !u!114 &289835299
 MonoBehaviour:
   m_ObjectHideFlags: 0
