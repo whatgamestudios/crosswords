@@ -11,7 +11,7 @@ namespace CrossWords {
 
     public class SceneStack
     {
-        public const int MENU_SCENE = 2;
+        public const int MENU_SCENE = 1;
         private Stack<int> sceneStack = new Stack<int>();
 
         private static SceneStack instance;
@@ -23,7 +23,6 @@ namespace CrossWords {
             }
             return instance;
         }
-
 
         public void PushScene() {
             int sceneId = SceneManager.GetActiveScene().buildIndex;
