@@ -15,7 +15,8 @@ namespace CrossWords {
         static readonly Color StarterCellBorderColor = Color.white;
         static readonly Color StarterCellTextColor = Color.white;
         static readonly Color NotInDictionaryCellTextColor = Color.red;
-        static readonly Color NormalCellTextColor = Color.black;
+        static readonly Color InDictionaryCellTextColor = Color.black;
+        static readonly Color NormalCellTextColor = Color.blue;
         const float CellBorderPx = 3f;
         const float GridSpacingPx = 0f;
 
@@ -331,6 +332,37 @@ namespace CrossWords {
             }
         }
 
+        public void HighlightInDictionaryCells(int startX, int startY, int length, bool horizontal)
+        {
+            if (horizontal)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    if (_isStarterCell[startY, startX + i])
+                    {
+                        _cellViews[startY, startX + i].SetStarterWordAppearance();
+                    }
+                    else
+                    {
+                        _cellViews[startY, startX + i].SetDisplayedColourInDictionary();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    if (_isStarterCell[startY + i, startX])
+                    {
+                        _cellViews[startY + i, startX].SetStarterWordAppearance();
+                    }
+                    else
+                    {
+                        _cellViews[startY + i, startX].SetDisplayedColourInDictionary();
+                    }
+                }
+            }
+        }
 
         static bool IsEmptyChar(char c) => c == '\0' || char.IsWhiteSpace(c);
 
@@ -569,6 +601,11 @@ namespace CrossWords {
             public void SetDisplayedColourNotInDictionary()
             {
                 _text.color = NotInDictionaryCellTextColor;
+            }
+
+            public void SetDisplayedColourInDictionary()
+            {
+                _text.color = InDictionaryCellTextColor;
             }
 
             public void SetBackgroundColor(Color c)

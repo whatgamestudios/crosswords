@@ -136,6 +136,15 @@ namespace CrossWords {
             else
             {
                 board.RestoreAllCellsVisual();
+                bool first = true;
+                foreach (WordOnBoard word in words)
+                {
+                    if (!first)
+                    {
+                        board.HighlightInDictionaryCells(word.StartX, word.StartY, word.Length(), word.IsHorizontal());
+                    }
+                    first = false;
+                }
                 int i = 0;
                 bool[] inDictionary = new bool[100];
                 foreach (WordOnBoard word in words)
@@ -152,7 +161,6 @@ namespace CrossWords {
                 ScoreText.text = Score.ToString();
             }
         }
-
 
         void showStatus()
         {
