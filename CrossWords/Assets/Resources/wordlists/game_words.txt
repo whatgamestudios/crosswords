@@ -22435,6 +22435,7 @@ fuzing
 fv
 fw
 fwd
+fx
 fy
 fyce
 fyces
@@ -38825,6 +38826,7 @@ oink
 oinked
 oinks
 oint
+oj
 ojibwa
 ojibwas
 ojibway
@@ -42771,6 +42773,8 @@ pixels
 pixes
 pixy
 pize
+pj
+pjs
 pk
 pkg
 pkgs
@@ -62420,6 +62424,7 @@ vizor
 vizored
 vizors
 vizsla
+vj
 vl
 vlach
 vlei
