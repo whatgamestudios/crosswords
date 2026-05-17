@@ -1,5 +1,5 @@
 // Copyright (c) Whatgame Studios 2024 - 2026
-using PostHogUnity;
+// using PostHogUnity;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
@@ -24,70 +24,72 @@ namespace CrossWords {
         private PostHogStats()
         {
             AuditLog.Log("PostHogStats start");
-            PostHog.Setup(new PostHogConfig
-            {
-                ApiKey = "phc_CYyiYxpYf6rgE7DDWqSQajJ7mwxUT58bUHVJygfdAceV",
-                Host = "https://us.i.posthog.com" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-            });
+            // PostHog.Setup(new PostHogConfig
+            // {
+            //     ApiKey = "phc_CYyiYxpYf6rgE7DDWqSQajJ7mwxUT58bUHVJygfdAceV",
+            //     Host = "https://us.i.posthog.com" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+            // });
+//PostHog.Unregister("app_version");
+
 
             // Register a super property
-            bool firstTime;
-            string userId;
-            (firstTime, userId) = UserId.GetUserId();
-            PostHog.Register("user_id", userId);
-            if (firstTime)
-            {
-                LogFirstTime();
-            }
+//             bool firstTime;
+//             string userId;
+//             (firstTime, userId) = UserId.GetUserId();
+// //            PostHog.Register("user_id", userId);
+//             if (firstTime)
+//             {
+//                 LogFirstTime();
+//             }
         }
 
 
         private void LogFirstTime()
         {
-            string device = SystemInfo.deviceModel;
-            string operatingSystem = SystemInfo.operatingSystem;
-            string screenWidth = Screen.width.ToString();
-            string screenHeight = Screen.height.ToString();
+            // string device = SystemInfo.deviceModel;
+            // string operatingSystem = SystemInfo.operatingSystem;
+            // string screenWidth = Screen.width.ToString();
+            // string screenHeight = Screen.height.ToString();
             
-            PostHog.Capture("user_init");
+//            PostHog.Capture("user_init");
         }
 
         public void LogWelcome()
         {
-            PostHog.Capture("user_welcome");
+//            PostHog.Capture("user_welcome");
         }
 
         public void LogPlayingGame()
         {
-            uint gameDay = Timeline.GameDay();
+//            uint gameDay = Timeline.GameDay();
 
-            PostHog.Capture("user_play", new Dictionary<string, object>
-            {
-                { "game day", gameDay }
-            });            
+//            PostHog.Capture("user_play", new Dictionary<string, object>
+            // {
+            //     { "game day", gameDay }
+            // });            
         }    
 
         public void LogPublishingError(string error) 
         {
-            uint gameDay = Timeline.GameDay();
-            (bool available, Solution solution) = Stats.GetSolution(gameDay);
-            string avail = available ? solution.ToString() : "Not available";
-            PostHog.Capture("publish_error", new Dictionary<string, object>
-            {
-                { "game day", gameDay },
-                { "solution", avail},
-                { "error", error}
-            });
+            // uint gameDay = Timeline.GameDay();
+            // (bool available, Solution solution) = Stats.GetSolution(gameDay);
+            // string avail = available ? solution.ToString() : "Not available";
+            // PostHog.Capture("publish_error", new Dictionary<string, object>
+            // {
+            //     { "game day", gameDay },
+            //     { "solution", avail},
+            //     { "error", error}
+            // });
         }    
 
         public void LogCheckinError(string error) 
         {
-            uint gameDay = Timeline.GameDay();
-            PostHog.Capture("checkin_error", new Dictionary<string, object>
-            {
-                { "game day", gameDay },
-                { "error", error}
-            });
+//            uint gameDay = Timeline.GameDay();
+            // PostHog.Capture("checkin_error", new Dictionary<string, object>
+            // {
+            //     { "game day", gameDay },
+            //     { "error", error}
+            // });
         }    
    }
 }
