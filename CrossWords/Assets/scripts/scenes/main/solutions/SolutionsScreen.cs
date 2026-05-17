@@ -172,10 +172,10 @@ namespace CrossWords {
             }
 
             BoardSubmission sub = submissions[index];
-            board.ResetAllCells();
             if (!string.IsNullOrEmpty(sub.Board)) {
                 board.SetCells(sub.Board);
             }
+            board.SetAllCellsInDictionary();
             string starterWord = WordListSeed.GetSeedWord(gameDay);
             board.SetStarterWord(starterWord);
             board.BlockInteraction();
@@ -185,10 +185,9 @@ namespace CrossWords {
         void DisplayMyResult(uint gameDay) {
             MyBoard board = FindFirstObjectByType<MyBoard>();
 
-            board.ResetAllCells();
             (bool exists, Solution sol) = Stats.GetSolution(gameDay);
-            uint score;
             string starterWord = WordListSeed.GetSeedWord(gameDay);
+            uint score;
             if (exists)
             {
                 board.SetCells(sol.BoardString);
@@ -198,9 +197,11 @@ namespace CrossWords {
             {
                 score = (uint)(26 - starterWord.Length);
             }
+            board.SetAllCellsInDictionary();
             board.SetStarterWord(starterWord);
             board.BlockInteraction();
             mySolutionScoreText.text = $"My Score: {score}";
+            //board.DumpBoard();
         }
     }
 }

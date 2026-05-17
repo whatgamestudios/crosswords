@@ -16,7 +16,9 @@ namespace CrossWords {
         static readonly Color StarterCellTextColor = Color.white;
         static readonly Color NotInDictionaryCellTextColor = Color.red;
         static readonly Color InDictionaryCellTextColor = Color.black;
-        static readonly Color NormalCellTextColor = Color.blue;
+        //static readonly Color NormalCellTextColor = Color.blue;
+
+        static readonly Color NormalCellTextColor = Color.black;
         const float CellBorderPx = 3f;
         const float GridSpacingPx = 0f;
 
@@ -509,9 +511,13 @@ namespace CrossWords {
         void RestoreCellVisual(int x, int y)
         {
             if (_isStarterCell[y, x])
+            {
                 _cellViews[y, x].SetStarterWordAppearance();
+            }
             else
+            {
                 _cellViews[y, x].SetNormalAppearance();
+            }
         }
 
         public void RestoreAllCellsVisual()
@@ -523,6 +529,34 @@ namespace CrossWords {
                     RestoreCellVisual(x, y);
                 }
             }
+        }
+
+        public void SetAllCellsInDictionary()
+        {
+            for (int y = 0; y < BOARD_SIZE; y++)
+            {
+                for (int x = 0; x < BOARD_SIZE; x++)
+                {
+                    _cellViews[y, x].SetDisplayedColourInDictionary();
+                }
+            }
+        }
+
+        public void DumpBoard()
+        {
+            System.Text.StringBuilder logs = new System.Text.StringBuilder();
+            logs.Append("Board: ");
+            for (int y = 0; y < BOARD_SIZE; y++)
+            {
+                for (int x = 0; x < BOARD_SIZE; x++)
+                {
+                    (Color textC, Color backgroundC, Color boarderC, string txt) = _cellViews[y, x].GetAll();
+                    string cell = $"({x}, {y}: TextC: {textC.ToString()}, Text: {txt}), ";
+                    logs.Append(cell);
+                }
+                logs.AppendLine();
+            }
+            AuditLog.Log(logs.ToString());
         }
 
         public void UpdateBoard()
@@ -640,6 +674,11 @@ namespace CrossWords {
             public void OnPointerDown(PointerEventData eventData)
             {
                 _board.OnCellPointerDown(_gx, _gy);
+            }
+
+            public (Color, Color, Color, string) GetAll()
+            {
+                return (_text.color, _innerImage.color, _borderImage.color, _text.text);
             }
         }
     }
