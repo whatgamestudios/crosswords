@@ -14,9 +14,8 @@ namespace CrossWords {
             // AuditLog.Log("Words:");
             // foreach (WordOnBoard word in words)
             // {
-            //     AuditLog.Log(word.Word);
+            //     AuditLog.Log($"word: {word.Word}");
             // }
-
 
             WordListDictionary wordListDictionary = WordListDictionary.Instance;
             if (wordListDictionary == null)
@@ -30,17 +29,12 @@ namespace CrossWords {
                 return (false, 0);
             }
 
-            //board.RestoreAllCellsVisual();
+            board.SetAllCellsTextNormal();
             board.SetStarterWord(seedWord);
 
-            bool first = true;
             foreach (WordOnBoard word in words)
             {
-                if (!first)
-                {
-                    board.HighlightInDictionaryCells(word.StartX, word.StartY, word.Length(), word.IsHorizontal());
-                }
-                first = false;
+                board.HighlightInDictionaryCells(word.StartX, word.StartY, word.Length(), word.IsHorizontal());
             }
             int i = 0;
             bool[] inDictionary = new bool[100];

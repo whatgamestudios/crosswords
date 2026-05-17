@@ -531,13 +531,14 @@ namespace CrossWords {
             }
         }
 
-        public void SetAllCellsInDictionary()
+
+        public void SetAllCellsTextNormal()
         {
             for (int y = 0; y < BOARD_SIZE; y++)
             {
                 for (int x = 0; x < BOARD_SIZE; x++)
                 {
-                    _cellViews[y, x].SetDisplayedColourInDictionary();
+                    _cellViews[y, x].SetDisplayedColourNormal();
                 }
             }
         }
@@ -650,6 +651,11 @@ namespace CrossWords {
             public void SetNormalAppearance()
             {
                 SetNormalBackground();
+                _text.color = NormalCellTextColor;
+            }
+
+            public void SetDisplayedColourNormal()
+            {
                 _text.color = NormalCellTextColor;
             }
 
