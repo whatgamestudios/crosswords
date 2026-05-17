@@ -202,7 +202,7 @@ namespace CrossWords {
             }
             else 
             {
-                board.RestoreAllCellsVisual();
+                board.ResetAllCells();
                 score = (uint)(26 - starterWord.Length);
             }
 
