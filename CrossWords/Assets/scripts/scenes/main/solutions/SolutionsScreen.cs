@@ -202,6 +202,7 @@ namespace CrossWords {
             }
             else 
             {
+                board.RestoreAllCellsVisual();
                 score = (uint)(26 - starterWord.Length);
             }
 
