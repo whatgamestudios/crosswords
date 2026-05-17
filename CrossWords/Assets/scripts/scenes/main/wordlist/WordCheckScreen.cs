@@ -20,7 +20,7 @@ namespace CrossWords {
         
         void DelayedLoad()
         {
-            WordListDictionary wordListDictionary = GetComponent<WordListDictionary>();
+            WordListDictionary wordListDictionary = WordListDictionary.Instance;
             if (wordListDictionary == null)
             {
                 AuditLog.Log("Check Word screen: No dictionary");

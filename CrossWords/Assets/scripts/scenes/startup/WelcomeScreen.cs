@@ -10,7 +10,6 @@ namespace CrossWords {
         {
             AuditLog.Log("Welcome screen");
 
-            PostHogStats.GetInstance().LogWelcome();
             SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
         }
     }

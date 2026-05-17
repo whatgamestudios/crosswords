@@ -2,28 +2,46 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq; // Required for the .AsEnumerable() extension method
+using System.Threading.Tasks;
+using System.Collections;
 
 namespace CrossWords {
 
     public class WordListDictionary : MonoBehaviour
     {
+
+        public static WordListDictionary Instance { get; private set; }
+
         public TextAsset dictionaryFile; 
         private HashSet<string> dictionarySet = new HashSet<string>();
         public bool DictionaryLoaded;
 
-        void Start()
-        {
-            DictionaryLoaded = false;
-            if (dictionaryFile != null)
+        public void Start() {
+            if (Instance == null)
             {
-                LoadDictionary();
-                AuditLog.Log($"Loaded dictionary: {dictionarySet.Count} items.");
-                DictionaryLoaded = true;
+                Instance = this;
+
+                DictionaryLoaded = false;
+                if (dictionaryFile != null)
+                {
+                    StartCoroutine(LoadDictionaryRoutine());
+                }
+                else
+                {
+                    AuditLog.Log($"ERROR: Failed to load dictionary.");
+                }
+
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
-                AuditLog.Log($"ERROR: Failed to load dictionary.");
+                Destroy(gameObject);
             }
+        }
+
+        IEnumerator LoadDictionaryRoutine() {
+            LoadDictionary();
+            yield return new WaitForSeconds(0f);
         }
 
         void LoadDictionary()
@@ -45,6 +63,9 @@ namespace CrossWords {
                     dictionarySet.Add(trimmedLine);
                 }
             }
+
+            AuditLog.Log($"Loaded dictionary: {dictionarySet.Count} items.");
+            DictionaryLoaded = true;
         }
 
         public bool IsInDictionary(string word)

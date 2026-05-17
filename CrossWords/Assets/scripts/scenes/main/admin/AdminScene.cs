@@ -214,7 +214,7 @@ namespace CrossWords {
                 resetLog();
                 log("CheckWords: started");
 
-                WordListDictionary newWordsLoader = GetComponent<WordListDictionary>();
+                WordListDictionary newWordsLoader = WordListDictionary.Instance;
                 if (newWordsLoader == null) {
                     log("ERROR: No dictionary");
                     return;

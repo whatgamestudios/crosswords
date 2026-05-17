@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 289835296}
   - component: {fileID: 289835295}
   - component: {fileID: 289835297}
-  - component: {fileID: 289835299}
   - component: {fileID: 289835300}
   - component: {fileID: 289835301}
   m_Layer: 5
@@ -380,20 +379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.SetPanelBackground
   panel: {fileID: 289835290}
---- !u!114 &289835299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289835290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordListDictionary
-  dictionaryFile: {fileID: 4900000, guid: 7463b9393635548d6b8ba320577a3509, type: 3}
-  DictionaryLoaded: 0
 --- !u!114 &289835300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,6 +1218,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e1d1cf92e3c48c2b57127b5c61dbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.ScreenOrientationLock
+--- !u!1 &1933398799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933398801}
+  - component: {fileID: 1933398800}
+  m_Layer: 0
+  m_Name: LongLivedGameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1933398800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933398799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordListDictionary
+  dictionaryFile: {fileID: 4900000, guid: 7463b9393635548d6b8ba320577a3509, type: 3}
+  DictionaryLoaded: 0
+--- !u!4 &1933398801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933398799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1240,3 +1271,4 @@ SceneRoots:
   - {fileID: 294060459}
   - {fileID: 1911319769}
   - {fileID: 565246601}
+  - {fileID: 1933398801}

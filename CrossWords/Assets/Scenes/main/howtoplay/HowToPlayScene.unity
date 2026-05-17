@@ -5830,6 +5830,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302877214}
   m_CullTransparentMesh: 1
+--- !u!1 &1360735651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360735653}
+  - component: {fileID: 1360735652}
+  m_Layer: 0
+  m_Name: LongLivedGameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1360735652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360735651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordListDictionary
+  dictionaryFile: {fileID: 4900000, guid: 7463b9393635548d6b8ba320577a3509, type: 3}
+  DictionaryLoaded: 0
+--- !u!4 &1360735653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360735651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408262972
 GameObject:
   m_ObjectHideFlags: 0
@@ -9329,7 +9375,6 @@ GameObject:
   - component: {fileID: 2063394974}
   - component: {fileID: 2063394973}
   - component: {fileID: 2063394987}
-  - component: {fileID: 2063394988}
   - component: {fileID: 2063394990}
   - component: {fileID: 2063394991}
   - component: {fileID: 2063394992}
@@ -9417,20 +9462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a788a21060cf7451d8d9b98acc9e0989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossWords.BackButtonHandler
---- !u!114 &2063394988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063394970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4015d3a116a4436981bbc70b18ea41e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CrossWords.WordLists
-  dictionaryFile: {fileID: 4900000, guid: 7463b9393635548d6b8ba320577a3509, type: 3}
-  DictionaryLoaded: 0
 --- !u!114 &2063394990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11553,3 +11584,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 187544566}
   - {fileID: 1467518739}
+  - {fileID: 1360735653}

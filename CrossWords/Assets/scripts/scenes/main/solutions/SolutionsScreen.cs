@@ -38,11 +38,16 @@ namespace CrossWords {
             AuditLog.Log("Solutions screen");
             uint gameDay = (uint) Timeline.GameDay();
             gameDayToday = gameDay;
-            showNewDay(gameDay);
+            Invoke("DelayedInitialLoad", 0.1f);
             buttonUp.interactable = false;
-
             buttonRight.interactable = false;
             buttonLeft.interactable = false;
+        }
+
+        // Run the initial load slightly after the scene loads to give the dictionary long enough to load. 
+        private void DelayedInitialLoad()
+        {
+            showNewDay(gameDayToday);
         }
 
         public void OnButtonClick(string buttonText) {
@@ -175,21 +180,23 @@ namespace CrossWords {
             if (!string.IsNullOrEmpty(sub.Board)) {
                 board.SetCells(sub.Board);
             }
-            board.SetAllCellsInDictionary();
             string starterWord = WordListSeed.GetSeedWord(gameDay);
-            board.SetStarterWord(starterWord);
+            // Ignore return values.
+            BoardHighlighting.Highlight((Board)board, starterWord);
             board.BlockInteraction();
             bestSolutionScoreText.text = $"Best Score: {todaysResult.BestScore?.ToString() ?? "?"}";
         }
 
         void DisplayMyResult(uint gameDay) {
             MyBoard board = FindFirstObjectByType<MyBoard>();
-
-            (bool exists, Solution sol) = Stats.GetSolution(gameDay);
+            (bool exists, Solution sol) = Stats.GetSolution(gameDay);           
             string starterWord = WordListSeed.GetSeedWord(gameDay);
             uint score;
+            AuditLog.Log($"My result exists: {exists}");
+
             if (exists)
             {
+                AuditLog.Log($"My result: {sol.BoardString}");
                 board.SetCells(sol.BoardString);
                 score = sol.Score;
             }
@@ -197,11 +204,11 @@ namespace CrossWords {
             {
                 score = (uint)(26 - starterWord.Length);
             }
-            board.SetAllCellsInDictionary();
-            board.SetStarterWord(starterWord);
+
+            // Ignore return values.
+            BoardHighlighting.Highlight((Board)board, starterWord);
             board.BlockInteraction();
             mySolutionScoreText.text = $"My Score: {score}";
-            //board.DumpBoard();
         }
     }
 }

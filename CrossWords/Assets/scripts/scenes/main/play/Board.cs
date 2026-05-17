@@ -16,9 +16,9 @@ namespace CrossWords {
         static readonly Color StarterCellTextColor = Color.white;
         static readonly Color NotInDictionaryCellTextColor = Color.red;
         static readonly Color InDictionaryCellTextColor = Color.black;
-        //static readonly Color NormalCellTextColor = Color.blue;
+        static readonly Color NormalCellTextColor = Color.blue;
 
-        static readonly Color NormalCellTextColor = Color.black;
+        //static readonly Color NormalCellTextColor = Color.black;
         const float CellBorderPx = 3f;
         const float GridSpacingPx = 0f;
 
