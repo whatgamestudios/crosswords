@@ -74,7 +74,7 @@ namespace CrossWords {
                     lastException = ex;
                     AuditLog.Log($"Server RPC attempt {attempt}/{maxAttempts} failed for {method}: {ex.Message}");
                     if (attempt < maxAttempts) {
-                        await Task.Delay(100 + _random.Next(0, 101));
+                        await Task.Delay(500 + _random.Next(0, 501));
                     }
                 }
             }
