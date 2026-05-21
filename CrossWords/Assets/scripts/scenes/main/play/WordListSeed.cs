@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq; // Required for the .AsEnumerable() extension method
+using System;
 
 namespace CrossWords {
 
@@ -1382,8 +1383,7 @@ namespace CrossWords {
         public static string GetSeedWord(uint gameDay)
         {
             string word = seedWords[gameDay % seedWords.Length];
-
-            AuditLog.Log($"Game day: {gameDay}, Seed word: {word}");
+            // AuditLog.Log($"Game day: {gameDay}, Seed word: {word}.");
             return word.ToUpper();
         }
 

@@ -239,6 +239,7 @@ namespace CrossWords {
                 ScoreText.text = "?";
                 return;
             }
+            dictionaryLoaded = true;
             
             ScoreText.text = score.ToString();
             Score = score;
