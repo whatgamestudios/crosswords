@@ -24,6 +24,7 @@ namespace CrossWords {
         public GameObject panelGen2Type4;
         public GameObject panelGen2Type5;
         public GameObject panelGen2Type6;
+        public GameObject panelGen3Type0;
 
 
         public void Start()
@@ -95,6 +96,9 @@ namespace CrossWords {
                 case 206:
                     setCol(panelGen2Type6, false);
                     break;
+                case 300:
+                    setCol(panelGen3Type0, false);
+                    break;
             }
 
             switch (selected) {
@@ -139,6 +143,9 @@ namespace CrossWords {
                     break;
                 case 206:
                     setCol(panelGen2Type6, true);
+                    break;
+                case 300:
+                    setCol(panelGen3Type0, true);
                     break;
             }
         }

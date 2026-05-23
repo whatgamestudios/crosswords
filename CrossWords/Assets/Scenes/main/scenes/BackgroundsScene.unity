@@ -649,6 +649,7 @@ MonoBehaviour:
   panelGen2Type4: {fileID: 1529078136}
   panelGen2Type5: {fileID: 1950431915}
   panelGen2Type6: {fileID: 497295938}
+  panelGen3Type0: {fileID: 1072115176}
 --- !u!114 &289835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
