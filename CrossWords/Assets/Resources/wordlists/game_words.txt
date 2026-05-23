@@ -16038,6 +16038,8 @@ ditone
 ditrocha
 ditrochean
 dits
+ditsy
+ditzy
 diurn
 diurna
 diurnal
@@ -54899,6 +54901,7 @@ sutoria
 sutorial
 sutorian
 sutra
+suv
 suwandi
 suwe
 suyog
@@ -62425,6 +62428,7 @@ vizored
 vizors
 vizsla
 vj
+vjs
 vl
 vlach
 vlei

@@ -33,3 +33,7 @@ pjs
 fx
 vj
 oj
+suv
+ditzy
+ditsy
+vjs

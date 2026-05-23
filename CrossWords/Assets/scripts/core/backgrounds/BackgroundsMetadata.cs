@@ -25,16 +25,12 @@ namespace CrossWords {
                     return getGen1Info(type);
                 case 2:
                     return getGen2Info(type);
+                case 3:
+                    return getGen3Info(type);
                 default:
                     AuditLog.Log($"Unknown generation: {generation}");
                     return getDefaultInfo();
             }
-        }
-
-        public static int[] GetAllOwnedNftIds() {
-//            return new int[5] { 200, 201, 202, 203, 204, 205};
-            return new int[11] { 100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206};
-//            return new int[4] { 100, 101, 102, 103};
         }
 
 
@@ -133,6 +129,20 @@ namespace CrossWords {
             return info;
         }
 
+        public static SceneInfo getGen3Info(int type) {
+            SceneInfo info;
+            switch (type) {
+                case 0:
+                    info = new SceneInfo("scenes/gen3/gen3-type0-honeycomb", UnityEngine.Color.white, UnityEngine.Color.black);
+                    info.SetMetadata("Honeycomb", "Gen3", "Mythical", 20, "Bun Mihail");
+                    break;
+                default:
+                    AuditLog.Log($"Unknown gen3 type: {type}");
+                    info = getDefaultInfo();
+                    break;
+            }
+            return info;
+        }
 
         public static int ButtonTextToOption(string buttonText) {
             if (buttonText == "free1") {
@@ -176,6 +186,9 @@ namespace CrossWords {
             }
             else if (buttonText == "gen2_6") {
                 return 206;
+            }
+            else if (buttonText == "gen3_0") {
+                return 300;
             }
             else {
                 // Default
