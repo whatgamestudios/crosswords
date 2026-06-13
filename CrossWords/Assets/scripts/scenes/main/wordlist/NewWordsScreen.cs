@@ -16,6 +16,9 @@ namespace CrossWords {
             AuditLog.Log($"New Words screen");
             InfoText.text = 
                 "\n" +
+                "Words added in Worcadian version 2.6 (June 13, 2026):\n" +
+                "zine, throuple\n" +
+                "\n" +
                 "Words added in Worcadian version 2.5 (May 25, 2026):\n" +
                 "vjs, suv, ditsy, ditzy\n" +
                 "\n" +
