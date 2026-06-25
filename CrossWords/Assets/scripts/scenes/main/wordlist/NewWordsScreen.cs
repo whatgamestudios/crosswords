@@ -16,23 +16,12 @@ namespace CrossWords {
             AuditLog.Log($"New Words screen");
             InfoText.text = 
                 "\n" +
+                "Words added in Worcadian version 2.7 (June 25, 2026):\n" +
+                "bling\n" +
+                "\n" +
                 "Words added in Worcadian version 2.6 (June 13, 2026):\n" +
                 "zine, throuple\n" +
                 "\n" +
-                "Words added in Worcadian version 2.5 (May 25, 2026):\n" +
-                "vjs, suv, ditsy, ditzy\n" +
-                "\n" +
-                "Words added in Worcadian version 2.3 (May 18, 2026):\n" +
-                "pj, pjs, fx, vj, oj\n" +
-                "\n" +
-                "Words added in Worcadian version 2.0 (May 10, 2026):\n" +
-                "karens, unfriends, wip\n" +
-                "\n" +
-                "Words added in Worcadian version 1.4 (May 5, 2026):\n" +
-                "bluray, bromance, bromances, btw, csv, devops, dox, fatbergs, gf, " +
-                "goji, imao, ip, jp, luv, pdf, podcast, podcast, rofl, " +
-                "sexting, stablecoin, ty, uv, vape, vaped, vaper, vapes, " +
-                "vaping, vlog\n" +
                 "\n";
         }
     }
