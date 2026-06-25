@@ -19,7 +19,7 @@ namespace CrossWords {
         private Coroutine loadRoutine;
 
         public static void RestartLoadRoutine() {
-            BestScoreLoader loader = FindFirstObjectByType<BestScoreLoader>();
+            BestScoreLoader loader = FindAnyObjectByType <BestScoreLoader>();
             if (loader == null) {
                 AuditLog.Log("BestScoreLoader.RestartLoadRoutine: no instance found");
                 return;

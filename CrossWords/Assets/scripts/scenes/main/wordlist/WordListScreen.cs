@@ -41,7 +41,7 @@ namespace CrossWords {
 
         void WireLetterButtons()
         {
-            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;
@@ -202,7 +202,7 @@ namespace CrossWords {
 
         private void DisableLetterButtonsForUsedLetters(string str)
         {
-            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;

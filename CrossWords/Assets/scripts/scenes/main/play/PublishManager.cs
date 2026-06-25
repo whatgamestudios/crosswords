@@ -45,7 +45,7 @@ namespace CrossWords {
 
         public void Update()
         {
-            GamePlayScene gamePlayScene = FindFirstObjectByType<GamePlayScene>();
+            GamePlayScene gamePlayScene = FindAnyObjectByType <GamePlayScene>();
             if (gamePlayScene == null) {
                 return;
             }

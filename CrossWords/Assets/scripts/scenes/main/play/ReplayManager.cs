@@ -37,13 +37,13 @@ namespace CrossWords {
         {
             if (board == null)
             {
-                board = FindFirstObjectByType<Board>();
+                board = FindAnyObjectByType <Board>();
             }
         }
 
 
         public void OnReplayButtonPress() {
-            GamePlayScene gamePlay = FindFirstObjectByType<GamePlayScene>();
+            GamePlayScene gamePlay = FindAnyObjectByType <GamePlayScene>();
             StartReplay(gamePlay.moveStack);
             
         }
@@ -67,7 +67,7 @@ namespace CrossWords {
             }
 
             if (!IsReplaying) {
-                GamePlayScene gamePlay = FindFirstObjectByType<GamePlayScene>();
+                GamePlayScene gamePlay = FindAnyObjectByType <GamePlayScene>();
                 bool shouldBeActive = gamePlay.moveStack.Count > 2;
                 ReplayPanel.SetActive(shouldBeActive);
                 return;
@@ -247,7 +247,7 @@ namespace CrossWords {
 
             string letters = board.GetCells();
 
-            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;

@@ -73,20 +73,20 @@ namespace CrossWords {
             BlockInteractionPanel.SetActive(true);
 
             if (style == STYLE_WORCADIAN_PURPLE) {
-                AnimatorWorcadianPurple animatorWorcadianPurple = FindFirstObjectByType<AnimatorWorcadianPurple>();
+                AnimatorWorcadianPurple animatorWorcadianPurple = FindAnyObjectByType <AnimatorWorcadianPurple>();
                 animatorWorcadianPurple.Init();
                 yield return new WaitForSeconds(3f);
                 animatorWorcadianPurple.End();
             }
             else
             {
-                AnimatorTitle animatorTitle = FindFirstObjectByType<AnimatorTitle>();
+                AnimatorTitle animatorTitle = FindAnyObjectByType <AnimatorTitle>();
                 animatorTitle.Init();
                 yield return new WaitForSeconds(3f);
                 animatorTitle.End();
             }
 
-            ReplayManager replayManager = FindFirstObjectByType<ReplayManager>();
+            ReplayManager replayManager = FindAnyObjectByType <ReplayManager>();
             replayManager.OnReplayButtonPress();
             yield return new WaitForSeconds(0.1f);
             while (replayManager.IsReplaying)

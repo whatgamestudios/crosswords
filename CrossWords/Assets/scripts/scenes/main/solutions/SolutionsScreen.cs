@@ -154,7 +154,7 @@ namespace CrossWords {
                 return;
             }
 
-            BestBoard board = FindFirstObjectByType<BestBoard>();
+            BestBoard board = FindAnyObjectByType <BestBoard>();
             if (board == null) {
                 AuditLog.Log("BestBoard not found");
                 return;
@@ -188,7 +188,7 @@ namespace CrossWords {
         }
 
         void DisplayMyResult(uint gameDay) {
-            MyBoard board = FindFirstObjectByType<MyBoard>();
+            MyBoard board = FindAnyObjectByType <MyBoard>();
             (bool exists, Solution sol) = Stats.GetSolution(gameDay);           
             string starterWord = WordListSeed.GetSeedWord(gameDay);
             uint score;

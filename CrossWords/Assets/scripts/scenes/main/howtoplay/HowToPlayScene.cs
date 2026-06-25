@@ -41,7 +41,7 @@ namespace CrossWords {
         {
             if (board == null)
             {
-                board = FindFirstObjectByType<HowToPlayBoard>();
+                board = FindAnyObjectByType <HowToPlayBoard>();
             }
         }
 
@@ -385,7 +385,7 @@ namespace CrossWords {
 
             string letters = board.GetCells();
 
-            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;

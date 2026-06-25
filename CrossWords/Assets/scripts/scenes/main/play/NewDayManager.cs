@@ -27,7 +27,7 @@ namespace CrossWords {
             lastCheckTime = Time.time;
 
             uint today = Timeline.GameDay();
-            GamePlayScene gamePlayScene = FindFirstObjectByType<GamePlayScene>();
+            GamePlayScene gamePlayScene = FindAnyObjectByType <GamePlayScene>();
             if (gamePlayScene == null) {
                 return;
             }

@@ -35,7 +35,7 @@ namespace CrossWords {
         {
             if (board == null)
             {
-                board = FindFirstObjectByType<Board>();
+                board = FindAnyObjectByType <Board>();
             }
         }
 
@@ -88,7 +88,7 @@ namespace CrossWords {
 
         void WireLetterButtons()
         {
-            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;
@@ -112,7 +112,7 @@ namespace CrossWords {
 
             string letters = board.GetCells();
 
-            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var buttons = FindObjectsByType<Button>(FindObjectsInactive.Include);
             foreach (var button in buttons)
             {
                 string n = button.gameObject.name;

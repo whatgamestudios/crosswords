@@ -159,7 +159,7 @@ namespace CrossWords {
 
             try {
                 AuditLog.Log("Publish: starting");
-                GamePlayScene gamePlayScene = FindFirstObjectByType<GamePlayScene>();
+                GamePlayScene gamePlayScene = FindAnyObjectByType <GamePlayScene>();
                 if (gamePlayScene == null) {
                     return;
                 }
