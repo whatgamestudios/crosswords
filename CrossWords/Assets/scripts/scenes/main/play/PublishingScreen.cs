@@ -163,8 +163,7 @@ namespace CrossWords {
                 if (gamePlayScene == null) {
                     return;
                 }
-                uint gameDay = gamePlayScene.GameDayBeingPlayed;
-                (bool available, Solution solution) = Stats.GetSolution(gameDay);
+                (bool available, Solution solution) = Stats.GetCurrent();
                 if (!available) {
                     return;
                 }
