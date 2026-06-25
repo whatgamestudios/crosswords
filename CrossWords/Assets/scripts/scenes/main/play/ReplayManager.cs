@@ -20,7 +20,7 @@ namespace CrossWords {
         public GameObject ReplayPanel;
         public GameObject ReplayBlockInteractionPanel;
 
-        public uint Score = 26;
+        private uint _score = 26;
 
 
 
@@ -128,6 +128,7 @@ namespace CrossWords {
             }
             
             ScoreText.text = score.ToString();
+            _score = score;
         }
 
         void showStatus()
@@ -149,14 +150,14 @@ namespace CrossWords {
 
             string status1 = "";
             string status2 = "";
-            if (Score >= 20)
+            if (_score >= 20)
             {
                 status1 = "Start from the";
                 status2 = "seed word";
             }
             else
             {
-                switch (Score)
+                switch (_score)
                 {
                     // case 20:
                     //     status1 = "Good start";

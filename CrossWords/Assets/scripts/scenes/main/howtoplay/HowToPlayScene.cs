@@ -23,7 +23,7 @@ namespace CrossWords {
 
         private bool dictionaryLoaded = false;
 
-        public uint Score = 26;
+        public uint _score = 26;
 
 
         private uint TimeInShow;
@@ -450,6 +450,7 @@ namespace CrossWords {
             }
             
             ScoreText.text = score.ToString();
+            _score = score;
         }
 
 
@@ -472,14 +473,14 @@ namespace CrossWords {
 
             string status1 = "";
             string status2 = "";
-            if (Score >= 20)
+            if (_score >= 20)
             {
                 status1 = "Start from the";
                 status2 = "seed word";
             }
             else
             {
-                switch (Score)
+                switch (_score)
                 {
                     // case 20:
                     //     status1 = "Good start";
