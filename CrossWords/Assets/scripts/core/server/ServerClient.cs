@@ -68,13 +68,13 @@ namespace CrossWords {
                         throw new ServerException(-32603, $"Unexpected result format from {method}");
                     }
                     return (JObject)result;
-                } catch (ServerException) {
-                    throw;
+                // } catch (ServerException) {
+                //     throw;
                 } catch (Exception ex) {
                     lastException = ex;
                     AuditLog.Log($"Server RPC attempt {attempt}/{maxAttempts} failed for {method}: {ex.Message}");
                     if (attempt < maxAttempts) {
-                        await Task.Delay(1000 + _random.Next(0, 501));
+                        await Task.Delay(500 + _random.Next(0, 501));
                     }
                 }
             }
